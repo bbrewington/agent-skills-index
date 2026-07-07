@@ -1,0 +1,49 @@
+# tracked.yml
+# Two sections:
+#
+#   tracked  - repos explicitly mapped to a skill in this repo.
+#              Human-authored config fields; bot writes only under state:
+#
+#   stubs    - repos you've starred but not yet linked to a skill.
+#              Created automatically by discover mode; promote to tracked
+#              by moving the entry up and adding skill/notes/watch_paths.
+#
+# Config fields (human-authored):
+#   repo:        "owner/repo" on GitHub
+#   skill:       path to skill in this repo
+#   notes:       why this repo is tracked
+#   watch_paths: optional list of paths to scope SHA checks (default: whole repo)
+#
+# State fields (bot-written, under state:):
+#   latest_sha, pushed_at, indexed_at, last_changed_at
+
+tracked:
+  - repo: dbt-labs/dbt-core
+    skill: skills/dbt/core/SKILL.md
+    notes: dbt core framework - triggers skill refresh on major releases
+    watch_paths:
+      - core/dbt/
+      - CHANGELOG.md
+    state: {}
+
+  - repo: dbt-labs/dbt-utils
+    skill: skills/dbt/utils/SKILL.md
+    notes: dbt utility macros
+    watch_paths: null
+    state: {}
+
+  - repo: snowflakedb/snowflake-connector-python
+    skill: skills/snowflake/python-connector/SKILL.md
+    notes: Snowflake Python connector
+    watch_paths: null
+    state: {}
+
+  - repo: fivetran/fivetran_connector_sdk
+    skill: skills/fivetran/csdk/SKILL.md
+    notes: Fivetran Connector SDK - actively in use
+    watch_paths:
+      - examples/
+      - fivetran_connector_sdk/
+    state: {}
+
+stubs: []

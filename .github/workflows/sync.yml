@@ -1,0 +1,80 @@
+name: Skills Index Sync
+
+on:
+  schedule:
+    - cron: "0 8 * * 1" # Mon 08:00 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (skip writing tracked.yml and opening a PR)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.SKILLS_INDEX_TOKEN }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Run sync
+        id: sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.SKILLS_INDEX_TOKEN }}
+          GITHUB_USER: bbrewington
+        run: |
+          set +e
+          args="--mode all --output changes.yaml"
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            args="$args --dry-run"
+          fi
+          uv run python scripts/sync_stars.py $args
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Read change counts
+        id: counts
+        run: |
+          {
+            echo "changed_count=$(uv run python -c "import yaml; print(yaml.safe_load(open('changes.yaml'))['changed_count'])")"
+            echo "new_stars_count=$(uv run python -c "import yaml; print(yaml.safe_load(open('changes.yaml'))['new_stars_count'])")"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Upload changes.yaml (dry run)
+        if: github.event.inputs.dry_run == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: changes
+          path: changes.yaml
+
+      - name: Generate PR body
+        if: github.event.inputs.dry_run != 'true' && steps.sync.outputs.exit_code == '1'
+        run: uv run python scripts/gen_pr_body.py --input changes.yaml --output pr_body.md
+
+      - name: Open PR
+        if: github.event.inputs.dry_run != 'true' && steps.sync.outputs.exit_code == '1'
+        env:
+          GH_TOKEN: ${{ secrets.SKILLS_INDEX_TOKEN }}
+        run: |
+          set -e
+          branch="skills-index/update-$(date -u +%Y%m%dT%H%M%S)"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add tracked.yml
+          git commit -m "chore(index): skills index update $(date -u +%Y-%m-%d)"
+          git push origin "$branch"
+          title="chore(index): skills index update $(date -u +%Y-%m-%d) (${{ steps.counts.outputs.changed_count }} updated, ${{ steps.counts.outputs.new_stars_count }} new stars)"
+          gh pr create --title "$title" --body-file pr_body.md --label skills-index --head "$branch"
