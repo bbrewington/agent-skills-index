@@ -17,7 +17,29 @@
 # State fields (bot-written, under state:):
 #   latest_sha, pushed_at, indexed_at, last_changed_at
 
-tracked: []
+tracked:
+- repo: dbt-labs/dbt-core
+  skill: null
+  notes: 'TEMP: end-to-end workflow validation test entry, remove after confirming PR flow'
+  watch_paths: null
+  state:
+    latest_sha: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    pushed_at: '2026-07-07T00:53:09Z'
+    description: dbt enables data analysts and engineers to transform their data using
+      the same practices that software engineers use to build applications.
+    language: Rust
+    topics:
+    - analytics
+    - business-intelligence
+    - data-modeling
+    - dbt-viewpoint
+    - elt
+    - pypa
+    - slack
+    license: Apache-2.0
+    stargazers_count: 13375
+    indexed_at: '2026-07-07T03:31:11.325055+00:00'
+    last_changed_at: '2026-07-07T03:31:11.325070+00:00'
 stubs:
 - repo: bponzbro/swyft-sigma-skills
   skill: null
@@ -4145,28 +4167,6 @@ stubs:
     stargazers_count: 1673
     indexed_at: '2026-07-07T03:31:10.644460+00:00'
     last_changed_at: '2026-07-07T03:31:10.644480+00:00'
-- repo: dbt-labs/dbt-core
-  skill: null
-  notes: null
-  watch_paths: null
-  state:
-    latest_sha: 0166be26e85aa583457ca478d813902bab49a24a
-    pushed_at: '2026-07-07T00:53:09Z'
-    description: dbt enables data analysts and engineers to transform their data using
-      the same practices that software engineers use to build applications.
-    language: Rust
-    topics:
-    - analytics
-    - business-intelligence
-    - data-modeling
-    - dbt-viewpoint
-    - elt
-    - pypa
-    - slack
-    license: Apache-2.0
-    stargazers_count: 13375
-    indexed_at: '2026-07-07T03:31:11.325055+00:00'
-    last_changed_at: '2026-07-07T03:31:11.325070+00:00'
 - repo: data-engineering-community/data-engineering-wiki
   skill: null
   notes: null
