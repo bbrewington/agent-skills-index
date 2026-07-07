@@ -17,33 +17,5243 @@
 # State fields (bot-written, under state:):
 #   latest_sha, pushed_at, indexed_at, last_changed_at
 
-tracked:
-  - repo: dbt-labs/dbt-core
-    skill: skills/dbt/core/SKILL.md
-    notes: dbt core framework - triggers skill refresh on major releases
-    watch_paths:
-      - core/dbt/
-      - CHANGELOG.md
-    state: {}
-
-  - repo: dbt-labs/dbt-utils
-    skill: skills/dbt/utils/SKILL.md
-    notes: dbt utility macros
-    watch_paths: null
-    state: {}
-
-  - repo: snowflakedb/snowflake-connector-python
-    skill: skills/snowflake/python-connector/SKILL.md
-    notes: Snowflake Python connector
-    watch_paths: null
-    state: {}
-
-  - repo: fivetran/fivetran_connector_sdk
-    skill: skills/fivetran/csdk/SKILL.md
-    notes: Fivetran Connector SDK - actively in use
-    watch_paths:
-      - examples/
-      - fivetran_connector_sdk/
-    state: {}
-
-stubs: []
+tracked: []
+stubs:
+- repo: bponzbro/swyft-sigma-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: accd5ce41f60c4fc08bef2a1d8e884a8efbf5d7c
+    pushed_at: '2026-06-24T03:32:57Z'
+    description: 'Swyft''s working copy of Sigma''s workbooks-as-code skill: corrected
+      KPI sparkline recipe, verified chart gotchas, render-to-PNG. Fork of Sigma beta
+      + twells89/sigma-skills.'
+    language: Shell
+    topics: []
+    license: null
+    stargazers_count: 1
+    indexed_at: '2026-07-07T03:29:08.997218+00:00'
+    last_changed_at: '2026-07-07T03:29:09.002188+00:00'
+- repo: getnao/nao
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 12bf3fd013b993f40f676379cd46fe1d52266e67
+    pushed_at: '2026-07-06T15:45:10Z'
+    description: 👾 nao is an open source analytics agent. (1) Create context with
+      nao-core cli, (2) deploy nao chat interface for everyone
+    language: TypeScript
+    topics:
+    - agentic-analytics
+    - analytics
+    - analytics-engineering
+    - bigquery
+    - business-intelligence
+    - chat-with-your-data
+    - context-engineering
+    - data
+    - data-analysis
+    - data-analyst
+    - data-engineering
+    - databricks
+    - postgresql
+    - self-hosted
+    - slack-bot
+    - slackbot
+    - snowflake
+    - sql
+    - text-to-sql
+    license: NOASSERTION
+    stargazers_count: 1383
+    indexed_at: '2026-07-07T03:29:09.559892+00:00'
+    last_changed_at: '2026-07-07T03:29:09.559922+00:00'
+- repo: BuilderIO/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 3a7b1d98901fc8fabfaa1a387d9be4dea36e37b3
+    pushed_at: '2026-07-06T14:42:49Z'
+    description: Skills for coding agents
+    language: JavaScript
+    topics:
+    - skills
+    license: MIT
+    stargazers_count: 3495
+    indexed_at: '2026-07-07T03:29:10.142665+00:00'
+    last_changed_at: '2026-07-07T03:29:10.142682+00:00'
+- repo: dotnet/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 17bd25bec422a7c49badfc27c116d7d80e7d6dde
+    pushed_at: '2026-07-07T02:36:56Z'
+    description: Repository for skills to assist AI coding agents with .NET and C#
+    language: C#
+    topics:
+    - agent-skills
+    license: MIT
+    stargazers_count: 4180
+    indexed_at: '2026-07-07T03:29:10.763900+00:00'
+    last_changed_at: '2026-07-07T03:29:10.763917+00:00'
+- repo: gemini-cli-extensions/google-cloud-storage
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 4e29539e3ec8135bec48db4afd2a59c1dc4b3ff2
+    pushed_at: '2026-06-17T23:43:46Z'
+    description: Official Google Cloud Storage Skills Repo
+    language: Python
+    topics:
+    - antigravity
+    - claude-code
+    - codex
+    - gcs
+    - gemini-cli
+    - google
+    - google-cloud
+    - google-cloud-storage
+    - google-skills
+    - skills
+    license: Apache-2.0
+    stargazers_count: 14
+    indexed_at: '2026-07-07T03:29:11.518108+00:00'
+    last_changed_at: '2026-07-07T03:29:11.518131+00:00'
+- repo: google/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1e2062f5e83e49c8b842dbe9de0f9e592044e52c
+    pushed_at: '2026-07-06T22:23:28Z'
+    description: Agent Skills for Google products and technologies
+    language: Python
+    topics:
+    - google
+    - googlecloud
+    - skills
+    license: Apache-2.0
+    stargazers_count: 14420
+    indexed_at: '2026-07-07T03:29:12.142869+00:00'
+    last_changed_at: '2026-07-07T03:29:12.142903+00:00'
+- repo: oracle/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2f20ebeccc0785e68cefaa1fe352c4965d437359
+    pushed_at: '2026-07-01T16:48:56Z'
+    description: Oracle Skills is a curated, open-source collection of practical,
+      installable skills for working with Oracle technologies. It provides developers,
+      administrators, and AI agents with high-quality, source-backed guidance across
+      the entire Oracle ecosystem.
+    language: Python
+    topics: []
+    license: UPL-1.0
+    stargazers_count: 738
+    indexed_at: '2026-07-07T03:29:12.781862+00:00'
+    last_changed_at: '2026-07-07T03:29:12.781881+00:00'
+- repo: camelot-dev/camelot
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1a5275346732026223c709d0938a6d56f806b074
+    pushed_at: '2026-07-04T16:26:42Z'
+    description: A Python library to extract tabular data from PDFs
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 3772
+    indexed_at: '2026-07-07T03:29:13.343738+00:00'
+    last_changed_at: '2026-07-07T03:29:13.343757+00:00'
+- repo: CUPIDS-Lab/data-liberation-skill
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: acb59c9bf5439f06642768e42a619757314287fa
+    pushed_at: '2026-06-19T02:13:11Z'
+    description: Agent skill for orchestrating data liberation projects
+    language: Go Template
+    topics: []
+    license: MIT
+    stargazers_count: 10
+    indexed_at: '2026-07-07T03:29:13.899533+00:00'
+    last_changed_at: '2026-07-07T03:29:13.899549+00:00'
+- repo: getsentry/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5a64b36c62d042d3981b7937d9d6ca7bd1753b9a
+    pushed_at: '2026-06-30T20:52:20Z'
+    description: Agent Skills used by the Sentry team for development.
+    language: Python
+    topics:
+    - tag-production
+    license: Apache-2.0
+    stargazers_count: 847
+    indexed_at: '2026-07-07T03:29:14.560693+00:00'
+    last_changed_at: '2026-07-07T03:29:14.560722+00:00'
+- repo: confident-ai/deepeval
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1a1758c4ff7ab4b43f2b9b4b6e77cb74f4bd36cb
+    pushed_at: '2026-07-06T15:24:31Z'
+    description: The LLM Evaluation Framework
+    language: Python
+    topics:
+    - evaluation-framework
+    - evaluation-metrics
+    - llm-evaluation
+    - llm-evaluation-framework
+    - llm-evaluation-metrics
+    - python
+    license: Apache-2.0
+    stargazers_count: 16684
+    indexed_at: '2026-07-07T03:29:15.120322+00:00'
+    last_changed_at: '2026-07-07T03:29:15.120346+00:00'
+- repo: microsoft/markitdown
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: e144e0a2be95b34df17433bac904e635f2c5e551
+    pushed_at: '2026-06-24T15:32:46Z'
+    description: Python tool for converting files and office documents to Markdown.
+    language: Python
+    topics:
+    - autogen
+    - autogen-extension
+    - langchain
+    - markdown
+    - microsoft-office
+    - openai
+    - pdf
+    license: MIT
+    stargazers_count: 163500
+    indexed_at: '2026-07-07T03:29:15.793360+00:00'
+    last_changed_at: '2026-07-07T03:29:15.793378+00:00'
+- repo: EveryInc/compound-engineering-plugin
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1287b0985ce6a6a2a0b35e2302df5658b171cc6d
+    pushed_at: '2026-07-06T04:23:58Z'
+    description: Official Compound Engineering plugin for Claude Code, Codex, Cursor,
+      and more
+    language: TypeScript
+    topics:
+    - compound
+    - engineering
+    license: MIT
+    stargazers_count: 22745
+    indexed_at: '2026-07-07T03:29:16.384051+00:00'
+    last_changed_at: '2026-07-07T03:29:16.384081+00:00'
+- repo: microbiomedata/nmdc-schema
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1e86e5b382f6fabf0c31bd4e01ebd50ab1030e48
+    pushed_at: '2026-07-02T15:03:15Z'
+    description: National Microbiome Data Collaborative (NMDC) unified data model
+    language: Python
+    topics:
+    - ecoinformatics
+    - fair-data
+    - genomics
+    - linkml
+    - metabolomics
+    - metadata
+    - microbiome
+    - microbiomedata
+    - mixs
+    - nmdc
+    - proteomics
+    - samples
+    - schema
+    - standards
+    - transcriptomics
+    license: CC0-1.0
+    stargazers_count: 48
+    indexed_at: '2026-07-07T03:29:17.021061+00:00'
+    last_changed_at: '2026-07-07T03:29:17.021073+00:00'
+- repo: stripe/ai
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 423788e067d899f73f96a8466a7431074b210db1
+    pushed_at: '2026-07-07T00:57:21Z'
+    description: One-stop shop for building AI-powered products and businesses with
+      Stripe.
+    language: TypeScript
+    topics:
+    - ai
+    - llm
+    - llm-agents
+    - mcp
+    - python
+    - typescript
+    - workflows
+    license: MIT
+    stargazers_count: 1646
+    indexed_at: '2026-07-07T03:29:17.635108+00:00'
+    last_changed_at: '2026-07-07T03:29:17.635119+00:00'
+- repo: docglow/docglow
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 8b85ece41465514ea2769e52d0034b16f3ff6b23
+    pushed_at: '2026-06-30T04:29:06Z'
+    description: 'Modern documentation site generator for dbt Core — lineage explorer,
+      health scoring, full-text search. Live demo: https://demo.docglow.com'
+    language: Python
+    topics:
+    - analytics-engineering
+    - data-catalog
+    - data-engineering
+    - dbt
+    - dbt-core
+    - documentation
+    - lineage
+    license: MIT
+    stargazers_count: 118
+    indexed_at: '2026-07-07T03:29:18.239116+00:00'
+    last_changed_at: '2026-07-07T03:29:18.239139+00:00'
+- repo: Snowflake-Labs/coco-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 501fd3307cb2b1d70da53e8f4a90a647348eefd9
+    pushed_at: '2026-07-01T22:00:06Z'
+    description: This is a curated collection of Agent Skills for Cortex Code ("CoCo")
+      — Snowflake's CLI for building with AI.
+    language: Python
+    topics: []
+    license: null
+    stargazers_count: 51
+    indexed_at: '2026-07-07T03:29:18.828358+00:00'
+    last_changed_at: '2026-07-07T03:29:18.828371+00:00'
+- repo: CloudAI-X/threejs-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: b1c623076c661fc9b03dac19292e825a5d106823
+    pushed_at: '2026-01-19T21:15:32Z'
+    description: null
+    language: null
+    topics: []
+    license: null
+    stargazers_count: 2542
+    indexed_at: '2026-07-07T03:29:19.327305+00:00'
+    last_changed_at: '2026-07-07T03:29:19.327324+00:00'
+- repo: mattpocock/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 16a2a5cd00b4416f673f4ff38c7971a04dd708e7
+    pushed_at: '2026-07-06T15:17:23Z'
+    description: Skills for Real Engineers. Straight from my .claude directory.
+    language: Shell
+    topics: []
+    license: MIT
+    stargazers_count: 158860
+    indexed_at: '2026-07-07T03:29:19.839706+00:00'
+    last_changed_at: '2026-07-07T03:29:19.839722+00:00'
+- repo: jenna-jordan/git-novice-speedrun
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: f1eb5d4eacdb29ce3352772c108c470f9218efda
+    pushed_at: '2026-06-30T04:11:51Z'
+    description: Combines the SWC git novice lesson, Incubator git branches lesson,
+      and LC GitHub lesson for a 90 min lesson introducing learners to working with
+      git, GitHub, branches, and PRs
+    language: null
+    topics:
+    - english
+    - git
+    - github
+    - lesson
+    - pre-alpha
+    license: NOASSERTION
+    stargazers_count: 1
+    indexed_at: '2026-07-07T03:29:20.478513+00:00'
+    last_changed_at: '2026-07-07T03:29:20.478534+00:00'
+- repo: jenna-jordan/dbt-public-sector-resources
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 34596ef24c9af820955d5711ac1206182d16c80e
+    pushed_at: '2023-10-25T17:24:50Z'
+    description: A collection of resources around developing dbt projects in the public
+      sector, open for contributions
+    language: null
+    topics: []
+    license: null
+    stargazers_count: 12
+    indexed_at: '2026-07-07T03:29:21.034498+00:00'
+    last_changed_at: '2026-07-07T03:29:21.034522+00:00'
+- repo: anthropics/financial-services
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 4aa51ed3d379731f8f9beff498d749580372699c
+    pushed_at: '2026-06-26T21:55:15Z'
+    description: null
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 33185
+    indexed_at: '2026-07-07T03:29:21.690379+00:00'
+    last_changed_at: '2026-07-07T03:29:21.690397+00:00'
+- repo: addyosmani/agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 70b7506ce90e200cb47645ddb3f6b8e84fecc047
+    pushed_at: '2026-07-07T00:59:41Z'
+    description: Production-grade engineering skills for AI coding agents.
+    language: JavaScript
+    topics:
+    - agent-skills
+    - antigravity
+    - claude-code
+    - codex
+    - cursor
+    - skills
+    license: MIT
+    stargazers_count: 70988
+    indexed_at: '2026-07-07T03:29:22.170889+00:00'
+    last_changed_at: '2026-07-07T03:29:22.170903+00:00'
+- repo: addyosmani/web-quality-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 95d6e255afe1596b557d7a8498517884438f5b3a
+    pushed_at: '2026-06-14T09:08:35Z'
+    description: Agent Skills for optimizing web quality based on Lighthouse and Core
+      Web Vitals.
+    language: Shell
+    topics:
+    - accessibility
+    - agent-skills
+    - claude-skills
+    - core-web-vitals
+    - lighthouse
+    - skills
+    - testing
+    - web-performance
+    license: MIT
+    stargazers_count: 2467
+    indexed_at: '2026-07-07T03:29:22.662182+00:00'
+    last_changed_at: '2026-07-07T03:29:22.662203+00:00'
+- repo: dataders/fusion_issue_analysis
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: dbdd88d398f3823b8d850e1292cd31dd9bd1bf1d
+    pushed_at: '2026-06-24T17:44:15Z'
+    description: 'Agentic analytics bakeoff: static dashboard frameworks for dbt-fusion
+      issues. Live site: https://dashboard-bakeoff.anders.omg.lol/'
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 4
+    indexed_at: '2026-07-07T03:29:23.133746+00:00'
+    last_changed_at: '2026-07-07T03:29:23.133773+00:00'
+- repo: danielmiessler/LifeOS
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 58b270f6cef652e21599b6cbca3b48f6fb141442
+    pushed_at: '2026-07-07T03:01:57Z'
+    description: An AI-powered Life Operating System for Magnifying Human Capabilities
+    language: TypeScript
+    topics:
+    - ai
+    - augmentation
+    - humans
+    - productivity
+    license: MIT
+    stargazers_count: 16418
+    indexed_at: '2026-07-07T03:29:23.660754+00:00'
+    last_changed_at: '2026-07-07T03:29:23.660774+00:00'
+- repo: multica-ai/andrej-karpathy-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2c606141936f1eeef17fa3043a72095b4765b9c2
+    pushed_at: '2026-04-20T10:05:04Z'
+    description: A single CLAUDE.md file to improve Claude Code behavior, derived
+      from Andrej Karpathy's observations on LLM coding pitfalls.
+    language: null
+    topics: []
+    license: null
+    stargazers_count: 188626
+    indexed_at: '2026-07-07T03:29:24.244871+00:00'
+    last_changed_at: '2026-07-07T03:29:24.244892+00:00'
+- repo: ComposioHQ/awesome-claude-plugins
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 9ef49d0f2a270f569ec0baa987e64157b7d86858
+    pushed_at: '2026-05-01T07:08:01Z'
+    description: A curated list of Plugins that let you extend Claude Code with custom
+      commands, agents, hooks, and MCP servers through the plugin system.
+    language: JavaScript
+    topics:
+    - anthropic
+    - claude-ai
+    - claude-code
+    - claude-code-plugin
+    - claude-code-plugin-marketplace
+    - claude-code-plugins
+    - claude-code-plugins-marketplace
+    - claude-cowork
+    - claude-desktop
+    - claude-plugins
+    - claude-skills
+    - plugins
+    license: null
+    stargazers_count: 1810
+    indexed_at: '2026-07-07T03:29:24.856827+00:00'
+    last_changed_at: '2026-07-07T03:29:24.856847+00:00'
+- repo: ComposioHQ/awesome-codex-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 9c9da64cf1bbea611d43dd14a10788d55369b353
+    pushed_at: '2026-05-15T06:24:47Z'
+    description: A curated list of practical Codex skills for automating workflows
+      across the Codex CLI and API.
+    language: Python
+    topics:
+    - awesome
+    - awesome-lists
+    - awesome-resources
+    - codex
+    - codex-cli
+    - codex-skills
+    - coding-agent-skills
+    - coding-agents
+    - gpt-5-1-codex
+    - gpt-5-codex
+    - llm
+    - skills
+    license: null
+    stargazers_count: 14653
+    indexed_at: '2026-07-07T03:29:25.510356+00:00'
+    last_changed_at: '2026-07-07T03:29:25.510386+00:00'
+- repo: WordPress/agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: aecc4d6f6f1ffcc0b508cddc5c40f55bae324ad1
+    pushed_at: '2026-07-06T15:28:41Z'
+    description: Expert-level WordPress knowledge for AI coding assistants - blocks,
+      themes, plugins, and best practices
+    language: JavaScript
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 1833
+    indexed_at: '2026-07-07T03:29:26.148353+00:00'
+    last_changed_at: '2026-07-07T03:29:26.148385+00:00'
+- repo: dgokeeffe/opencode-databricks
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d0bc3ed73833b55da92f2a7a1b86499b966f3607
+    pushed_at: '2026-07-02T11:09:52Z'
+    description: The open source coding agent.
+    language: TypeScript
+    topics: []
+    license: MIT
+    stargazers_count: 11
+    indexed_at: '2026-07-07T03:29:26.705729+00:00'
+    last_changed_at: '2026-07-07T03:29:26.705744+00:00'
+- repo: hesreallyhim/awesome-claude-code
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: e50c7555ebeb8bfb9c163585711b5fc471a4dee5
+    pushed_at: '2026-07-07T00:41:13Z'
+    description: A hand-picked collection of the finest of resources for the most
+      awesome of agents, Claude Code, the undisputed champion of coding companions,
+      from the unstoppable team at Anthropic PBC. A delectable showcase of top tier
+      skills, ambidextrous agents, scintillating status lines, top notch developer
+      tooling, and also we have plugins
+    language: Python
+    topics:
+    - agent-skills
+    - agentic-code
+    - agentic-coding
+    - ai-workflow-optimization
+    - ai-workflows
+    - anthropic
+    - anthropic-claude
+    - awesome
+    - awesome-claude-code
+    - awesome-list
+    - awesome-lists
+    - awesome-resources
+    - claude
+    - claude-code
+    - coding-agent
+    - coding-agents
+    - coding-assistant
+    - coding-assistants
+    - llm
+    license: NOASSERTION
+    stargazers_count: 48744
+    indexed_at: '2026-07-07T03:29:27.213409+00:00'
+    last_changed_at: '2026-07-07T03:29:27.213426+00:00'
+- repo: entechlog/dbt-snow-mask
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: b9dd600e688b8b8c98fee4ad4042e3751770b461
+    pushed_at: '2026-03-15T06:31:52Z'
+    description: This repository contains source code for dbt package dbt_snow_mask.
+    language: null
+    topics: []
+    license: GPL-3.0
+    stargazers_count: 70
+    indexed_at: '2026-07-07T03:29:27.738053+00:00'
+    last_changed_at: '2026-07-07T03:29:27.738070+00:00'
+- repo: streamlit/agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 4b5aacdfb9b80d8215441c2500f7cb978b5e0881
+    pushed_at: '2026-06-19T07:58:14Z'
+    description: A collection of agent skills for development of Streamlit apps.
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 213
+    indexed_at: '2026-07-07T03:29:28.326071+00:00'
+    last_changed_at: '2026-07-07T03:29:28.326089+00:00'
+- repo: dbt-labs/ade-bench
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: df1e9e29d41607bcb9fffd3cd943b425d720db3f
+    pushed_at: '2026-05-28T14:45:36Z'
+    description: null
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 109
+    indexed_at: '2026-07-07T03:29:28.961346+00:00'
+    last_changed_at: '2026-07-07T03:29:28.961364+00:00'
+- repo: GeniusHTX/SWE-Skills-Bench
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 95b3ce519fcb58d0b19e90a5b6e5165211dc6dd1
+    pushed_at: '2026-06-17T10:52:46Z'
+    description: The official repo of our paper, "SWE-Skills-Bench:Do Agent Skills
+      Actually Help in Real-World Software Engineering?"
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 53
+    indexed_at: '2026-07-07T03:29:29.467402+00:00'
+    last_changed_at: '2026-07-07T03:29:29.467430+00:00'
+- repo: techwolf-ai/ai-first-toolkit
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 8b3107b1b7b7b7da7c0dcd88f8e56b75e8fe39ca
+    pushed_at: '2026-06-29T09:01:55Z'
+    description: Open-source Claude Code skills and Codex skills for AI-first work.
+      Audit, re-engineer, and bootstrap projects with AI-first design principles.
+    language: TypeScript
+    topics:
+    - agentskills
+    - ai-agents
+    - ai-coding
+    - ai-first
+    - ai-tools
+    - claude-code
+    - claude-plugin
+    - claude-skills
+    - codex
+    - developer-tools
+    - thought-leadership
+    license: MIT
+    stargazers_count: 89
+    indexed_at: '2026-07-07T03:29:30.019533+00:00'
+    last_changed_at: '2026-07-07T03:29:30.019544+00:00'
+- repo: neurofoo/agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0e7ac2aa4d094352a082ebeedf1dbb4c52b77782
+    pushed_at: '2026-01-19T13:00:05Z'
+    description: Agent Skills for Claude Code and OpenCode
+    language: null
+    topics: []
+    license: MIT
+    stargazers_count: 102
+    indexed_at: '2026-07-07T03:29:30.531776+00:00'
+    last_changed_at: '2026-07-07T03:29:30.531801+00:00'
+- repo: kfchou/wiki-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d9267ec9ccef1b43aa9f2a5f65c1fc56ac1701b0
+    pushed_at: '2026-07-03T20:04:57Z'
+    description: LLM-maintained personal wiki skills for Claude Code — implements
+      Karpathy's LLM Wiki pattern
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 164
+    indexed_at: '2026-07-07T03:29:31.013170+00:00'
+    last_changed_at: '2026-07-07T03:29:31.013184+00:00'
+- repo: duckdb/duckdb-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 7feda8e01e22bc0886c86123f3884947e36d8c69
+    pushed_at: '2026-04-23T13:56:22Z'
+    description: null
+    language: Shell
+    topics: []
+    license: MIT
+    stargazers_count: 506
+    indexed_at: '2026-07-07T03:29:31.619343+00:00'
+    last_changed_at: '2026-07-07T03:29:31.619368+00:00'
+- repo: simonw/research-llm-apis
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a9ec5292e73d0a4156d9fb0f83853e0dda2baf4d
+    pushed_at: '2026-04-05T06:10:30Z'
+    description: Research into the HTTP APIs from various LLM providers.
+    language: Shell
+    topics: []
+    license: null
+    stargazers_count: 29
+    indexed_at: '2026-07-07T03:29:32.084943+00:00'
+    last_changed_at: '2026-07-07T03:29:32.084963+00:00'
+- repo: mlflow/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5f561418262bdcaa9e705bdf7facc72f17b181fc
+    pushed_at: '2026-06-18T07:01:59Z'
+    description: null
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 58
+    indexed_at: '2026-07-07T03:29:32.686581+00:00'
+    last_changed_at: '2026-07-07T03:29:32.686600+00:00'
+- repo: coreyhaines31/marketingskills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 6c6017451dcd340f3aaab3e354e28eed8aa782aa
+    pushed_at: '2026-07-06T22:49:02Z'
+    description: Marketing skills for Claude Code and AI agents. CRO, copywriting,
+      SEO, analytics, and growth engineering.
+    language: JavaScript
+    topics:
+    - claude
+    - codex
+    - marketing
+    license: MIT
+    stargazers_count: 36869
+    indexed_at: '2026-07-07T03:29:33.212890+00:00'
+    last_changed_at: '2026-07-07T03:29:33.212929+00:00'
+- repo: kepano/obsidian-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a1dc48e68138490d522c04cbf5822214c6eb1202
+    pushed_at: '2026-06-08T16:12:01Z'
+    description: Agent skills for Obsidian. Teach your agent to use Obsidian CLI and
+      open formats including Markdown, Bases, JSON Canvas.
+    language: null
+    topics:
+    - agents
+    - agentskills
+    - bases
+    - claude
+    - clawdbot
+    - cli
+    - codex
+    - defuddle
+    - hermes
+    - jsoncanvas
+    - markdown
+    - md
+    - obsidian
+    - openclaw
+    - opencode
+    - skills
+    license: MIT
+    stargazers_count: 40035
+    indexed_at: '2026-07-07T03:29:33.705386+00:00'
+    last_changed_at: '2026-07-07T03:29:33.705405+00:00'
+- repo: googleworkspace/cli
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a3768d0e82ad83cca2da97724e46bea4ff0e6dbd
+    pushed_at: '2026-07-01T03:10:20Z'
+    description: Google Workspace CLI — one command-line tool for Drive, Gmail, Calendar,
+      Sheets, Docs, Chat, Admin, and more. Dynamically built from Google Discovery
+      Service. Includes AI agent skills.
+    language: Rust
+    topics:
+    - agent-skills
+    - ai-agent
+    - automation
+    - cli
+    - discovery-api
+    - gemini-cli-extension
+    - google-admin
+    - google-api
+    - google-calendar
+    - google-chat
+    - google-docs
+    - google-drive
+    - google-sheets
+    - google-workspace
+    - oauth2
+    - rust
+    license: Apache-2.0
+    stargazers_count: 29470
+    indexed_at: '2026-07-07T03:29:34.300351+00:00'
+    last_changed_at: '2026-07-07T03:29:34.300365+00:00'
+- repo: block/agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 329a55d1500748a0a48d64629757cbe2622e34bf
+    pushed_at: '2026-06-26T15:48:44Z'
+    description: A marketplace for agent skills
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 17
+    indexed_at: '2026-07-07T03:29:34.964905+00:00'
+    last_changed_at: '2026-07-07T03:29:34.964913+00:00'
+- repo: dlt-hub/dlthub-ai-workbench
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2a77e36ff7b17a87ce2dfc84fee00ad70b032d64
+    pushed_at: '2026-07-06T21:58:44Z'
+    description: null
+    language: Python
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 51
+    indexed_at: '2026-07-07T03:29:35.560151+00:00'
+    last_changed_at: '2026-07-07T03:29:35.560177+00:00'
+- repo: mlopscommunity/Coding-Agents-Conference-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: f6a336079dc84c02b100ccfdbea7dc5fe68bf27a
+    pushed_at: '2026-03-17T14:33:51Z'
+    description: 'list of skills that folks talked about on the stage at the coding
+      agent conference March 3rd '
+    language: null
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 37
+    indexed_at: '2026-07-07T03:29:36.116104+00:00'
+    last_changed_at: '2026-07-07T03:29:36.116123+00:00'
+- repo: BauplanLabs/bauplan-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: dc08166a9d1a6f0ef7c6926be0e37d6e5064dc6e
+    pushed_at: '2026-04-10T16:03:06Z'
+    description: Hosting Bauplan skills to be used with coding assistants and autonomous
+      AI agents.
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 13
+    indexed_at: '2026-07-07T03:29:36.709075+00:00'
+    last_changed_at: '2026-07-07T03:29:36.709093+00:00'
+- repo: davila7/claude-code-templates
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 31fc2b5d44ef60d5d0823f41da17fe23a33b942c
+    pushed_at: '2026-07-06T20:58:40Z'
+    description: CLI tool for configuring and monitoring Claude Code
+    language: Python
+    topics:
+    - anthropic
+    - anthropic-claude
+    - claude
+    - claude-code
+    license: MIT
+    stargazers_count: 28484
+    indexed_at: '2026-07-07T03:29:37.274360+00:00'
+    last_changed_at: '2026-07-07T03:29:37.274379+00:00'
+- repo: NTCoding/claude-skillz
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 21c61010e6081ced1eac8e45e3f788b2c4358bcf
+    pushed_at: '2026-03-24T16:19:26Z'
+    description: Random Claude skills for common, simple programming tasks
+    language: Python
+    topics: []
+    license: null
+    stargazers_count: 321
+    indexed_at: '2026-07-07T03:29:37.785915+00:00'
+    last_changed_at: '2026-07-07T03:29:37.785934+00:00'
+- repo: anthropics/claude-code-security-review
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0c6a49f1fa56a1d472575da86a94dbc1edb78eda
+    pushed_at: '2026-02-11T18:01:23Z'
+    description: An AI-powered security review GitHub Action using Claude to analyze
+      code changes for security vulnerabilities.
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 5487
+    indexed_at: '2026-07-07T03:29:38.395905+00:00'
+    last_changed_at: '2026-07-07T03:29:38.395929+00:00'
+- repo: caylent/tufte-data-viz
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: ae7ca0de7819db83241b24a2618810d5f1171145
+    pushed_at: '2026-02-19T05:25:40Z'
+    description: 'Agent skill: Edward Tufte''s data visualization principles for clean,
+      honest, high-data-ink-ratio charts. Recharts, ECharts, Chart.js, matplotlib,
+      Plotly, D3/SVG.'
+    language: Python
+    topics:
+    - agent-skills
+    - chartjs
+    - claude-code
+    - data-visualization
+    - echarts
+    - matplotlib
+    - plotly
+    - recharts
+    - tufte
+    license: MIT
+    stargazers_count: 180
+    indexed_at: '2026-07-07T03:29:39.014609+00:00'
+    last_changed_at: '2026-07-07T03:29:39.014634+00:00'
+- repo: INCATools/semantic-sql
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 16343077c1a8a80ebba2b8d04fcf9a1f75a08b41
+    pushed_at: '2026-07-02T14:20:31Z'
+    description: SQL and SQLite builds of OWL ontologies
+    language: Python
+    topics:
+    - ai4curation
+    - linkml
+    - monarchinitiative
+    - oaklib
+    - obofoundry
+    - ontologies
+    - owl
+    - relation-graph
+    - sparql
+    - sql
+    license: BSD-3-Clause
+    stargazers_count: 66
+    indexed_at: '2026-07-07T03:29:39.595375+00:00'
+    last_changed_at: '2026-07-07T03:29:39.595409+00:00'
+- repo: linkml/linkml-model
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 986c7881bae48055d3dbd9106205bc86c5215df4
+    pushed_at: '2026-07-03T12:30:10Z'
+    description: Link Modeling Language (LinkML) model
+    language: Python
+    topics:
+    - data-integration
+    - data-modeling
+    - graph-ql
+    - json
+    - json-schema
+    - linked-data
+    - linkml
+    - metadata
+    - metamodel
+    - schema-language
+    - semantic-web
+    - shacl
+    - shex
+    - uml
+    - yaml
+    license: CC0-1.0
+    stargazers_count: 77
+    indexed_at: '2026-07-07T03:29:40.206356+00:00'
+    last_changed_at: '2026-07-07T03:29:40.206371+00:00'
+- repo: mapping-commons/sssom
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 25857209004bb3f3d0d111501bb097752012ebcd
+    pushed_at: '2026-05-28T14:40:03Z'
+    description: Simple Standard for Sharing Ontology Mappings
+    language: Python
+    topics:
+    - linkml
+    - mapping
+    - mapping-commons
+    - mapping-standards
+    - mapping-tools
+    - metadata-elements
+    - monarchinitiative
+    - obofoundry
+    - owl
+    - sssom
+    - tsv
+    license: BSD-3-Clause
+    stargazers_count: 204
+    indexed_at: '2026-07-07T03:29:40.784912+00:00'
+    last_changed_at: '2026-07-07T03:29:40.784937+00:00'
+- repo: biolink/biolink-model
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 39fe46d151304a7878d66949379dfc2b7206886d
+    pushed_at: '2026-07-01T06:47:52Z'
+    description: Schema and generated objects for biolink data model and upper ontology
+    language: Python
+    topics:
+    - ai4curation
+    - biolink
+    - datamodel
+    - gene-ontology
+    - json-api
+    - knowledge-graphs
+    - linkml
+    - monarchinitiative
+    - ncats
+    - ncats-translator
+    - neo4j
+    - obofoundry
+    - owl
+    - rdf
+    - specification
+    - standard
+    - yaml
+    license: NOASSERTION
+    stargazers_count: 254
+    indexed_at: '2026-07-07T03:29:41.357160+00:00'
+    last_changed_at: '2026-07-07T03:29:41.357186+00:00'
+- repo: linkml/linkml
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 7414ab98c078a14c4d91f530f8c682ad8db4c4db
+    pushed_at: '2026-07-06T23:04:36Z'
+    description: Linked Open Data Modeling Language
+    language: Python
+    topics:
+    - data-dictionaries
+    - data-modeling
+    - hacktoberfest
+    - json-ld-context
+    - json-schema
+    - linked-data
+    - linkml
+    - linkml-schema
+    - modeling
+    - owl
+    - rdf
+    - schema
+    - semantic-web
+    - shacl
+    - shex
+    - standards
+    license: Apache-2.0
+    stargazers_count: 554
+    indexed_at: '2026-07-07T03:29:41.902227+00:00'
+    last_changed_at: '2026-07-07T03:29:41.902243+00:00'
+- repo: 3rd/tsdiagram
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 563c47daf47ee9586562ea84f4c21a1b7fc7279b
+    pushed_at: '2026-03-19T23:08:43Z'
+    description: Create diagrams and plan your code with TypeScript.
+    language: TypeScript
+    topics:
+    - data-modeling
+    - diagram
+    - diagrams
+    - typescript
+    license: GPL-3.0
+    stargazers_count: 574
+    indexed_at: '2026-07-07T03:29:42.427646+00:00'
+    last_changed_at: '2026-07-07T03:29:42.427674+00:00'
+- repo: INCATools/ontology-development-kit
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: bbaee1eebc6ce2d5ac915d8827ad8c31ffaf0ed4
+    pushed_at: '2026-06-30T15:14:23Z'
+    description: Ontology lifecycle management
+    language: Dockerfile
+    topics:
+    - continuous-integration
+    - monarchinitiative
+    - obo
+    - obofoundry
+    - ontology
+    - owl
+    - protege
+    - robot
+    - travis
+    license: BSD-3-Clause
+    stargazers_count: 341
+    indexed_at: '2026-07-07T03:29:42.983286+00:00'
+    last_changed_at: '2026-07-07T03:29:42.983303+00:00'
+- repo: pysemtec/semantic-python-overview
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: ed2d553d1a8a9844b9933611f076f6cb51fc0cbf
+    pushed_at: '2025-12-07T19:50:14Z'
+    description: (subjective) overview of projects which are related both to python
+      and semantic technologies (RDF, OWL, Reasoning, ...)
+    language: null
+    topics:
+    - collection
+    - community-driven
+    - datalog
+    - knowledge-graph
+    - ontology
+    - owl
+    - python
+    - rdf
+    - semantic-web
+    - semantics
+    - sparql
+    - swrl
+    license: CC0-1.0
+    stargazers_count: 551
+    indexed_at: '2026-07-07T03:29:43.527892+00:00'
+    last_changed_at: '2026-07-07T03:29:43.527915+00:00'
+- repo: monarch-initiative/ontogpt
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d55054b4e3f0365c05dfcc28341c326d6fc6541a
+    pushed_at: '2026-06-22T22:27:05Z'
+    description: LLM-based ontological extraction tools, including SPIRES
+    language: Jupyter Notebook
+    topics:
+    - ai
+    - chat-gpt
+    - data-modeling
+    - gpt-3
+    - information-extraction
+    - language-models
+    - large-language-models
+    - linkml
+    - llm
+    - monarchinitiative
+    - named-entity-recognition
+    - ner
+    - nlp
+    - oaklib
+    - obofoundry
+    - relation-extraction
+    license: BSD-3-Clause
+    stargazers_count: 920
+    indexed_at: '2026-07-07T03:29:44.085590+00:00'
+    last_changed_at: '2026-07-07T03:29:44.085613+00:00'
+- repo: monarch-initiative/mondo
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: b27386a47fda70042d2b03eb87e2da903c38891d
+    pushed_at: '2026-07-06T22:46:01Z'
+    description: Mondo Disease Ontology
+    language: Jupyter Notebook
+    topics:
+    - ai4curation
+    - disease
+    - disease-classification
+    - monarchinitiative
+    - mondo
+    - obofoundry
+    - ontology
+    - owl
+    license: CC-BY-4.0
+    stargazers_count: 310
+    indexed_at: '2026-07-07T03:29:44.637632+00:00'
+    last_changed_at: '2026-07-07T03:29:44.637663+00:00'
+- repo: fivetran/dbt_salesforce
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 7f67e7f8f63fb40e2a147c963fff00fea9875592
+    pushed_at: '2026-05-26T20:37:49Z'
+    description: Fivetran's Salesforce dbt package
+    language: null
+    topics:
+    - dbt
+    - dbt-packages
+    - fivetran
+    - salesforce
+    license: Apache-2.0
+    stargazers_count: 52
+    indexed_at: '2026-07-07T03:29:45.252023+00:00'
+    last_changed_at: '2026-07-07T03:29:45.252040+00:00'
+- repo: fivetran/dbt_jira
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 6b7d33392a306ae41a54b9a111c5d9f14a83dcb5
+    pushed_at: '2026-06-24T16:36:14Z'
+    description: Data models for Fivetran's Jira connector built using dbt.
+    language: null
+    topics:
+    - dbt
+    - dbt-packages
+    - fivetran
+    - jira
+    license: Apache-2.0
+    stargazers_count: 12
+    indexed_at: '2026-07-07T03:29:45.866411+00:00'
+    last_changed_at: '2026-07-07T03:29:45.866429+00:00'
+- repo: rittmananalytics/ra_data_warehouse
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d8dc7bd1c008ca79f9d09c909734e28a66ef6366
+    pushed_at: '2022-10-28T17:15:18Z'
+    description: This dbt package contains a set of pre-built, pre-integrated Load
+      and Transform dbt models for common SaaS applications.
+    language: null
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 270
+    indexed_at: '2026-07-07T03:29:46.444010+00:00'
+    last_changed_at: '2026-07-07T03:29:46.444039+00:00'
+- repo: fivetran/dbt_github
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: e913743f666165c4b14fc7976f420e59873e9426
+    pushed_at: '2026-06-23T16:17:16Z'
+    description: Fivetran's GitHub dbt package
+    language: null
+    topics:
+    - dbt
+    - dbt-packages
+    - fivetran
+    - github
+    license: Apache-2.0
+    stargazers_count: 22
+    indexed_at: '2026-07-07T03:29:47.074827+00:00'
+    last_changed_at: '2026-07-07T03:29:47.074842+00:00'
+- repo: fivetran/dbt_stripe
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 7a2d08e3a50dffdb91a3b0695601cac1387d09ac
+    pushed_at: '2026-06-23T18:44:00Z'
+    description: Data models for Stripe built using dbt.
+    language: null
+    topics:
+    - dbt
+    - dbt-packages
+    - fivetran
+    - stripe
+    license: Apache-2.0
+    stargazers_count: 60
+    indexed_at: '2026-07-07T03:29:47.761842+00:00'
+    last_changed_at: '2026-07-07T03:29:47.761858+00:00'
+- repo: ArvoanDev/growthcues-core
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2753ef07985d82435cb55d68d9b5fb0a442a9170
+    pushed_at: '2026-03-18T13:26:18Z'
+    description: The Open Source Semantic Layer for B2B SaaS. A dbt project to calculate
+      B2B and account-level metrics (DAA, Stickiness, Account Health, etc.) from Segment/Rudderstack
+      data. Includes AI-ready schema context.
+    language: Makefile
+    topics: []
+    license: MIT
+    stargazers_count: 10
+    indexed_at: '2026-07-07T03:29:48.293368+00:00'
+    last_changed_at: '2026-07-07T03:29:48.293389+00:00'
+- repo: chartdb/chartdb
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: c24936a402bb3e24b4858f05282d69a04fcfe25b
+    pushed_at: '2026-06-20T07:22:12Z'
+    description: Database diagrams editor that allows you to visualize and design
+      your DB with a single query.
+    language: TypeScript
+    topics:
+    - database
+    - db
+    - db-migration
+    - editor
+    - erd
+    - mariadb
+    - mssql
+    - mysql
+    - postgresql
+    - react
+    - react-flow
+    - schema-migrations
+    - sql
+    - sqlite
+    - typescript
+    - visualization
+    - xyflow
+    license: AGPL-3.0
+    stargazers_count: 22550
+    indexed_at: '2026-07-07T03:29:48.839301+00:00'
+    last_changed_at: '2026-07-07T03:29:48.839318+00:00'
+- repo: data-diving/metadv
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 79432f098b631d0b5b6ed0ebd1df718a984ac406
+    pushed_at: '2026-01-24T19:43:19Z'
+    description: Metadata-Driven Model Generator
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 5
+    indexed_at: '2026-07-07T03:29:49.435348+00:00'
+    last_changed_at: '2026-07-07T03:29:49.435370+00:00'
+- repo: tuva-health/tuva
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a1f660d9f7361bc3c6356d95f3d3f1c8addad14e
+    pushed_at: '2026-07-07T01:13:09Z'
+    description: Main repo including core data model, data marts, data quality tests,
+      and terminology sets.
+    language: JavaScript
+    topics:
+    - analytics-engineering
+    - bigquery
+    - data-analytics
+    - data-governance
+    - data-lineage
+    - data-pipelines
+    - data-warehouse
+    - dbt
+    - dbt-packages
+    - healthcare
+    - healthcare-analysis
+    - healthcare-data
+    - open-source
+    - redshift
+    - snowflake
+    - sql
+    - terminology
+    license: null
+    stargazers_count: 319
+    indexed_at: '2026-07-07T03:29:50.039373+00:00'
+    last_changed_at: '2026-07-07T03:29:50.039398+00:00'
+- repo: ActivitySchema/ActivitySchema
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5bf1078aad1a9282a13d9ab6caf46750c2141541
+    pushed_at: '2022-12-20T01:02:48Z'
+    description: Repository for the ActivitySchema spec and supporting materials
+    language: null
+    topics:
+    - analysis
+    - data
+    - data-analytics
+    - data-modeling
+    - data-science
+    license: Apache-2.0
+    stargazers_count: 444
+    indexed_at: '2026-07-07T03:29:50.625532+00:00'
+    last_changed_at: '2026-07-07T03:29:50.625559+00:00'
+- repo: astrafy/data-modeling-example
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: ec72836e836b08346118c74904b2761a49f8f371
+    pushed_at: '2026-03-17T14:53:13Z'
+    description: null
+    language: null
+    topics: []
+    license: null
+    stargazers_count: 6
+    indexed_at: '2026-07-07T03:29:51.169202+00:00'
+    last_changed_at: '2026-07-07T03:29:51.169231+00:00'
+- repo: n8n-io/n8n
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0cc00f3436477ac8a1411b403c21c04e114327ed
+    pushed_at: '2026-07-07T01:01:08Z'
+    description: Fair-code workflow automation platform with native AI capabilities.
+      Combine visual building with custom code, self-host or cloud, 400+ integrations.
+    language: TypeScript
+    topics:
+    - ai
+    - apis
+    - automation
+    - cli
+    - data-flow
+    - development
+    - integration-framework
+    - integrations
+    - ipaas
+    - low-code
+    - low-code-platform
+    - mcp
+    - mcp-client
+    - mcp-server
+    - n8n
+    - no-code
+    - self-hosted
+    - typescript
+    - workflow
+    - workflow-automation
+    license: NOASSERTION
+    stargazers_count: 195470
+    indexed_at: '2026-07-07T03:29:51.735382+00:00'
+    last_changed_at: '2026-07-07T03:29:51.735397+00:00'
+- repo: humansintheloop-dev/humansintheloop-dev-workflow-and-tools
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d24e20ada973d6c04b970fe306e79d04244cafda
+    pushed_at: '2026-06-24T16:18:10Z'
+    description: null
+    language: Python
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 35
+    indexed_at: '2026-07-07T03:29:52.301946+00:00'
+    last_changed_at: '2026-07-07T03:29:52.301962+00:00'
+- repo: AltimateAI/data-engineering-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a13847e205cb61ece8d613b19fbbe1cd0ac2bfcd
+    pushed_at: '2026-06-24T10:49:52Z'
+    description: Skills related to Data Engineering Work for Claude Code
+    language: null
+    topics:
+    - claude
+    - claude-code
+    - claude-skills
+    - data-engineering
+    - dbt
+    license: MIT
+    stargazers_count: 107
+    indexed_at: '2026-07-07T03:29:52.902601+00:00'
+    last_changed_at: '2026-07-07T03:29:52.902614+00:00'
+- repo: AltimateAI/altimate-code
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: bf90e189a391d9a602b34de4417ddab534b31e6b
+    pushed_at: '2026-07-06T02:40:35Z'
+    description: Open-source agentic data engineering harness for dbt, SQL, and cloud
+      warehouses. 100+ tools, 10 warehouses, AI-powered.
+    language: TypeScript
+    topics:
+    - agent
+    - agentic-data-engineering
+    - ai
+    - analytics-engineering
+    - bigquery
+    - cli
+    - data-engineering
+    - databricks
+    - dbt
+    - finops
+    - harness-engineering
+    - lineage
+    - llm
+    - opencode
+    - postgresql
+    - snowflake
+    - sql
+    - workflow-automation-ai
+    license: MIT
+    stargazers_count: 741
+    indexed_at: '2026-07-07T03:29:53.544536+00:00'
+    last_changed_at: '2026-07-07T03:29:53.544557+00:00'
+- repo: data-liberation-project/banned-books
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a54b310342e69f27bc9e3b259360997da35ed8b5
+    pushed_at: '2026-06-08T19:38:29Z'
+    description: null
+    language: R
+    topics: []
+    license: null
+    stargazers_count: 3
+    indexed_at: '2026-07-07T03:29:54.119694+00:00'
+    last_changed_at: '2026-07-07T03:29:54.119719+00:00'
+- repo: mossblaser/recipe_grid
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 9c1690b03f604f4e0272e7013268d0c0b06bf80a
+    pushed_at: '2025-10-21T09:21:09Z'
+    description: A tool for describing recipes in an easy to read tabular fashion
+    language: Python
+    topics: []
+    license: GPL-3.0
+    stargazers_count: 27
+    indexed_at: '2026-07-07T03:29:54.629084+00:00'
+    last_changed_at: '2026-07-07T03:29:54.629112+00:00'
+- repo: diggerhq/digger
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 6baf84cd9cd7c6522b98504f4a2258474d6c2de3
+    pushed_at: '2026-06-28T22:23:57Z'
+    description: 'Digger is an open source IaC orchestration tool. Digger allows you
+      to run IaC in your existing CI pipeline ⚡️  '
+    language: Go
+    topics:
+    - github-actions
+    - hacktoberfest
+    - infrastructure-as-code
+    - tacos
+    - terraform
+    - terraform-aws
+    - terraform-gcp
+    - terraform-github-actions
+    - terraformcloud
+    license: MIT
+    stargazers_count: 4987
+    indexed_at: '2026-07-07T03:29:55.214453+00:00'
+    last_changed_at: '2026-07-07T03:29:55.214468+00:00'
+- repo: shuaibiyy/awesome-tf
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: b175cbdbec8dae5be5422c5b70708d984f5b9552
+    pushed_at: '2026-06-29T07:32:15Z'
+    description: Curated list of resources on HashiCorp's Terraform and OpenTofu
+    language: null
+    topics:
+    - awesome
+    - awesome-list
+    - devops
+    - hashicorp-terraform
+    - infrastructure-as-code
+    - opentofu
+    - terraform
+    - terraform-modules
+    license: CC0-1.0
+    stargazers_count: 6540
+    indexed_at: '2026-07-07T03:29:55.706252+00:00'
+    last_changed_at: '2026-07-07T03:29:55.706270+00:00'
+- repo: ansible/ansible
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0e69d86c0c6cbbf239c6f9301c31458608503d8a
+    pushed_at: '2026-07-06T18:32:45Z'
+    description: Ansible is a radically simple IT automation platform that makes your
+      applications and systems easier to deploy and maintain. Automate everything
+      from code deployment to network configuration to cloud management, in a language
+      that approaches plain English, using SSH, with no agents to install on remote
+      systems. https://docs.ansible.com.
+    language: Python
+    topics:
+    - ansible
+    - python
+    license: GPL-3.0
+    stargazers_count: 69326
+    indexed_at: '2026-07-07T03:29:56.318888+00:00'
+    last_changed_at: '2026-07-07T03:29:56.318908+00:00'
+- repo: littleK0i/SnowDDL
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: e3d39d4082b8886d59d1deaadb66d5a937a0e85b
+    pushed_at: '2026-07-06T20:03:16Z'
+    description: Declarative database change management tool for Snowflake
+    language: Python
+    topics:
+    - alter
+    - change
+    - create
+    - database
+    - dcm
+    - ddl
+    - drop
+    - grant
+    - object
+    - python
+    - schema
+    - snowflake
+    - snowflakedb
+    - sql
+    license: Apache-2.0
+    stargazers_count: 151
+    indexed_at: '2026-07-07T03:29:56.807868+00:00'
+    last_changed_at: '2026-07-07T03:29:56.807886+00:00'
+- repo: gruntwork-io/terragrunt
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d2921580f473b41dd8fd4db7c66d957bc7a9419b
+    pushed_at: '2026-07-06T23:10:39Z'
+    description: Terragrunt is a flexible orchestration tool that allows Infrastructure
+      as Code written in OpenTofu/Terraform to scale.
+    language: Go
+    topics:
+    - aws
+    - cli
+    - developer-tools
+    - devops
+    - opentofu
+    - terraform
+    license: MIT
+    stargazers_count: 9697
+    indexed_at: '2026-07-07T03:29:57.327369+00:00'
+    last_changed_at: '2026-07-07T03:29:57.327384+00:00'
+- repo: aquasecurity/trivy
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 69da7331bb11f5f18e237aad3950aef52224ebf9
+    pushed_at: '2026-07-06T10:02:51Z'
+    description: Find vulnerabilities, misconfigurations, secrets, SBOM in containers,
+      Kubernetes, code repositories, clouds and more
+    language: Go
+    topics:
+    - containers
+    - devsecops
+    - docker
+    - go
+    - golang
+    - hacktoberfest
+    - iac
+    - infrastructure-as-code
+    - kubernetes
+    - misconfiguration
+    - security
+    - security-tools
+    - vulnerability
+    - vulnerability-detection
+    - vulnerability-scanners
+    license: Apache-2.0
+    stargazers_count: 36764
+    indexed_at: '2026-07-07T03:29:57.937920+00:00'
+    last_changed_at: '2026-07-07T03:29:57.937944+00:00'
+- repo: infracost/infracost
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 3d24c757f5e4e60c7259f1b89ad7ceaabcfca86f
+    pushed_at: '2026-07-03T09:39:16Z'
+    description: Cloud cost intelligence for engineers, AI coding agents, and CI/CD
+      💰📉 Shift FinOps Left!
+    language: Go
+    topics:
+    - aws
+    - azure
+    - cdk
+    - cloud
+    - cloud-cost-estimates
+    - cloud-formation
+    - cost-estimation
+    - cost-management
+    - cost-optimization
+    - devops
+    - finops
+    - gcp
+    - google
+    - infrastructure-as-code
+    - monthly-costs
+    - terraform
+    - terraform-cost-estimation
+    license: Apache-2.0
+    stargazers_count: 12398
+    indexed_at: '2026-07-07T03:29:58.516664+00:00'
+    last_changed_at: '2026-07-07T03:29:58.516673+00:00'
+- repo: aws/aws-cdk
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 75893d9fb827b7d1c27073ab2a3018b2e7edccbd
+    pushed_at: '2026-07-06T14:44:33Z'
+    description: The AWS Cloud Development Kit is a framework for defining cloud infrastructure
+      in code
+    language: TypeScript
+    topics:
+    - aws
+    - cloud-infrastructure
+    - hacktoberfest
+    - infrastructure-as-code
+    - typescript
+    license: Apache-2.0
+    stargazers_count: 12830
+    indexed_at: '2026-07-07T03:29:59.130279+00:00'
+    last_changed_at: '2026-07-07T03:29:59.130303+00:00'
+- repo: GoogleCloudPlatform/terraformer
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1807affdde9e392b8b8749932d8cd1daa5e4986e
+    pushed_at: '2026-03-16T20:12:11Z'
+    description: CLI tool to generate terraform files from existing infrastructure
+      (reverse Terraform). Infrastructure to Code
+    language: Go
+    topics:
+    - aws
+    - cloud
+    - gcp
+    - golang
+    - google-cloud
+    - hcl
+    - infrastructure-as-code
+    - kubernetes
+    - terraform
+    - terraform-configurations
+    license: Apache-2.0
+    stargazers_count: 14560
+    indexed_at: '2026-07-07T03:29:59.697247+00:00'
+    last_changed_at: '2026-07-07T03:29:59.697264+00:00'
+- repo: hashicorp/terraform
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 144d42f23d8b4fedd787724ae7ff50fbfba5ea04
+    pushed_at: '2026-07-06T21:54:37Z'
+    description: Terraform enables you to safely and predictably create, change, and
+      improve infrastructure. It is a source-available tool that codifies APIs into
+      declarative configuration files that can be shared amongst team members, treated
+      as code, edited, reviewed, and versioned.
+    language: Go
+    topics:
+    - cloud
+    - cloud-management
+    - graph
+    - infrastructure-as-code
+    - terraform
+    license: NOASSERTION
+    stargazers_count: 48837
+    indexed_at: '2026-07-07T03:30:00.366142+00:00'
+    last_changed_at: '2026-07-07T03:30:00.366158+00:00'
+- repo: pulumi/pulumi
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 3ea5eb44d42a2f173d8a0df17c4bde24c0690b42
+    pushed_at: '2026-07-06T20:33:31Z'
+    description: Pulumi - Infrastructure as Code in any programming language 🚀
+    language: Go
+    topics:
+    - aws
+    - azure
+    - cloud
+    - cloud-computing
+    - containers
+    - csharp
+    - dotnet
+    - fsharp
+    - gcp
+    - go
+    - golang
+    - iac
+    - infrastructure-as-code
+    - javascript
+    - kubernetes
+    - python
+    - serverless
+    - typescript
+    license: Apache-2.0
+    stargazers_count: 25406
+    indexed_at: '2026-07-07T03:30:01.014283+00:00'
+    last_changed_at: '2026-07-07T03:30:01.014299+00:00'
+- repo: anomalyco/sst
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 8bfe1c1bddd2e935d3b174460302a60ce25789e2
+    pushed_at: '2026-06-26T07:39:09Z'
+    description: Build full-stack apps on your own infrastructure.
+    language: TypeScript
+    topics: []
+    license: MIT
+    stargazers_count: 26137
+    indexed_at: '2026-07-07T03:30:01.606383+00:00'
+    last_changed_at: '2026-07-07T03:30:01.606408+00:00'
+- repo: MicrosoftDocs/Agent-Skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 3b52fb07698cd50c371c4d81e3d091cb7b5cdcc1
+    pushed_at: '2026-07-06T13:41:36Z'
+    description: Curated Agent Skills for Microsoft & Azure – giving AI coding assistants
+      structured, real-time expertise from Microsoft Learn docs.
+    language: null
+    topics:
+    - agent
+    - agent-skills
+    - agentic-skills
+    - agentskill
+    - ai
+    - ai-agents
+    - ai-coding
+    - azure
+    - azure-functions
+    - azure-kubernetes-service
+    - azure-openai
+    - azure-sql-database
+    - azure-storage
+    - azure-virtual-machine
+    - claude-code
+    - github-copilot
+    - microsoft-learn
+    - openai-codex
+    - skills
+    license: CC-BY-4.0
+    stargazers_count: 630
+    indexed_at: '2026-07-07T03:30:02.303737+00:00'
+    last_changed_at: '2026-07-07T03:30:02.303752+00:00'
+- repo: OneWave-AI/claude-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 4d09aaeeb87dc07701d8bcbd199d81b58c31c6ad
+    pushed_at: '2026-07-04T18:52:56Z'
+    description: 172 production-ready Claude Code skills for sales, marketing, design,
+      engineering, and AI agent architecture. Built and maintained by OneWave AI.
+    language: null
+    topics:
+    - agent-skills
+    - ai-agents
+    - anthropic
+    - claude
+    - claude-code
+    - claude-skills
+    - developer-tools
+    - llm
+    - prompt-engineering
+    - sales-automation
+    license: MIT
+    stargazers_count: 210
+    indexed_at: '2026-07-07T03:30:02.873626+00:00'
+    last_changed_at: '2026-07-07T03:30:02.873642+00:00'
+- repo: MarioLazo/rag-production-guide
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0b22437aebb81822dbfac4df45930efbc31191b8
+    pushed_at: '2026-06-06T23:52:25Z'
+    description: Key findings on Retrieval Augmented Generation Best Practices, Horror
+      Stories and Lessons Learned
+    language: null
+    topics: []
+    license: MIT
+    stargazers_count: 16
+    indexed_at: '2026-07-07T03:30:03.380854+00:00'
+    last_changed_at: '2026-07-07T03:30:03.380884+00:00'
+- repo: sean-zhang-dbx/prompt-to-genie
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: f360937c9784e6c02e92590641bcebf038cae644
+    pushed_at: '2026-04-10T17:03:46Z'
+    description: Leverage Databricks Assistant Agent skills to build Genie spaces
+    language: Python
+    topics: []
+    license: null
+    stargazers_count: 6
+    indexed_at: '2026-07-07T03:30:03.914187+00:00'
+    last_changed_at: '2026-07-07T03:30:03.914209+00:00'
+- repo: sfc-gh-dflippo/snowflake-dbt-demo
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: f9db05e235299610e53a0dd98982b89da590efd1
+    pushed_at: '2026-02-09T20:28:06Z'
+    description: This project demonstrates many of dbt's features when used with the
+      Snowflake Data Cloud
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 33
+    indexed_at: '2026-07-07T03:30:04.404877+00:00'
+    last_changed_at: '2026-07-07T03:30:04.404899+00:00'
+- repo: airbytehq/airbyte-agent-sdk
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1ac8056af32b6a2336a8e5234c53f9f001bfda9f
+    pushed_at: '2026-07-06T22:36:57Z'
+    description: 🐙 Drop-in tools that give AI agents reliable, permission-aware access
+      to external systems.
+    language: Python
+    topics:
+    - ai
+    - ai-agents
+    - airbyte
+    - anthropic
+    - connectors
+    - data
+    - enterprise
+    - gemini
+    - integrations
+    - langchain
+    - llm
+    - mcp
+    - open-source
+    - openai
+    - pydantic-ai
+    - rag
+    license: NOASSERTION
+    stargazers_count: 128
+    indexed_at: '2026-07-07T03:30:05.068970+00:00'
+    last_changed_at: '2026-07-07T03:30:05.068992+00:00'
+- repo: fivetran/connector_sdk
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 19ef01adfa88443da1cffb08a09989d8306db10b
+    pushed_at: '2026-07-06T06:11:56Z'
+    description: Build custom connectors on Fivetran's platform
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 71
+    indexed_at: '2026-07-07T03:30:05.635723+00:00'
+    last_changed_at: '2026-07-07T03:30:05.635754+00:00'
+- repo: astronomer/agents
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 03c2377aaad9ee3a5f7db4e5ba9938f61edd6d76
+    pushed_at: '2026-07-06T18:50:38Z'
+    description: AI agent tooling for data engineering workflows.
+    language: Python
+    topics:
+    - agentic-workflow
+    - agents
+    - ai
+    - ai-agents
+    - airflow
+    - apache-airflow
+    - claude
+    - cursor
+    - dag
+    - data-engineering
+    - data-pipelines
+    - dbt
+    - llm
+    - mcp
+    - orchestrator
+    - skills
+    - workflow-automation
+    - workflow-management
+    - workflow-orchestration
+    - workflows
+    license: Apache-2.0
+    stargazers_count: 397
+    indexed_at: '2026-07-07T03:30:06.274679+00:00'
+    last_changed_at: '2026-07-07T03:30:06.274692+00:00'
+- repo: dagster-io/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: fa3d023d6700767d3950f94ebe8ea73b5abbd015
+    pushed_at: '2026-07-02T16:21:11Z'
+    description: A collection of AI skills for working with Dagster
+    language: Python
+    topics:
+    - ai-tools
+    - claude-code
+    - dagster
+    - data-engineering
+    - data-orchestration
+    - marketplace
+    license: Apache-2.0
+    stargazers_count: 181
+    indexed_at: '2026-07-07T03:30:06.851133+00:00'
+    last_changed_at: '2026-07-07T03:30:06.851152+00:00'
+- repo: pulumi/agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 592e4da33a779ad780788c5a22f91f0d5bcb401c
+    pushed_at: '2026-06-29T18:38:42Z'
+    description: null
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 61
+    indexed_at: '2026-07-07T03:30:07.437576+00:00'
+    last_changed_at: '2026-07-07T03:30:07.437601+00:00'
+- repo: hashicorp/agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 339a113935812ad75c6ff90d418b739a021826d1
+    pushed_at: '2026-05-28T15:48:31Z'
+    description: A collection of Agent skills and Claude Code plugins for HashiCorp
+      products.
+    language: Shell
+    topics:
+    - doormat-managed
+    license: MPL-2.0
+    stargazers_count: 699
+    indexed_at: '2026-07-07T03:30:08.078509+00:00'
+    last_changed_at: '2026-07-07T03:30:08.078527+00:00'
+- repo: databricks/databricks-agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5be3080ae386e9c96412d082a188080dd64b7f8a
+    pushed_at: '2026-07-04T04:20:48Z'
+    description: null
+    language: Python
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 194
+    indexed_at: '2026-07-07T03:30:08.698246+00:00'
+    last_changed_at: '2026-07-07T03:30:08.698266+00:00'
+- repo: databricks-solutions/ai-dev-kit
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5b4b26c31262c08349d5ee726815f5b2e89cb53c
+    pushed_at: '2026-07-06T09:33:06Z'
+    description: Databricks Toolkit for Coding Agents provided by Field Engineering
+    language: Python
+    topics:
+    - agents
+    - claude
+    - cursor
+    - databricks
+    - vibecoding
+    license: NOASSERTION
+    stargazers_count: 1751
+    indexed_at: '2026-07-07T03:30:09.337402+00:00'
+    last_changed_at: '2026-07-07T03:30:09.337419+00:00'
+- repo: awslabs/agent-plugins
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 23dc619d35f848fd03b12d45d0e16c191d40d1e6
+    pushed_at: '2026-07-07T02:40:12Z'
+    description: Agent Plugins for AWS equip AI coding agents with the skills to help
+      you architect, deploy, and operate on AWS.
+    language: Shell
+    topics:
+    - agent-plugins
+    - agent-skills
+    - agents
+    - aws
+    - coding-agent-skills
+    - coding-agents
+    license: Apache-2.0
+    stargazers_count: 825
+    indexed_at: '2026-07-07T03:30:10.120201+00:00'
+    last_changed_at: '2026-07-07T03:30:10.120227+00:00'
+- repo: microsoft/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 079ddaabb53a3f6b6d622bfb02d2e1497f85883e
+    pushed_at: '2026-07-06T16:26:57Z'
+    description: Skills, MCP servers, Custom Agents, Agents.md for SDKs to ground
+      Coding Agents
+    language: TypeScript
+    topics:
+    - agent-skills
+    - agents
+    - azure
+    - foundry
+    - mcp
+    - sdk
+    - skills
+    license: MIT
+    stargazers_count: 2690
+    indexed_at: '2026-07-07T03:30:10.782240+00:00'
+    last_changed_at: '2026-07-07T03:30:10.782257+00:00'
+- repo: thiswillbeyourgithub/wdoc
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 4f72563f5c9cd9900f55880705dc94261907c9e3
+    pushed_at: '2026-07-03T23:10:02Z'
+    description: Summarize and query from a lot of heterogeneous documents. Any LLM
+      provider, any filetype, advanced RAG, advanced summaries, scriptable, etc
+    language: Python
+    topics:
+    - langchain
+    - llm
+    - news
+    - parser
+    - pdf
+    - python
+    - question-answering
+    - rag
+    - summarizer
+    license: AGPL-3.0
+    stargazers_count: 517
+    indexed_at: '2026-07-07T03:30:11.316827+00:00'
+    last_changed_at: '2026-07-07T03:30:11.316846+00:00'
+- repo: anthropics/claude-code
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 7930e1c82d997b013af28673501f3b95569a71cb
+    pushed_at: '2026-07-06T22:51:16Z'
+    description: Claude Code is an agentic coding tool that lives in your terminal,
+      understands your codebase, and helps you code faster by executing routine tasks,
+      explaining complex code, and handling git workflows - all through natural language
+      commands.
+    language: Python
+    topics: []
+    license: null
+    stargazers_count: 136577
+    indexed_at: '2026-07-07T03:30:12.027875+00:00'
+    last_changed_at: '2026-07-07T03:30:12.027894+00:00'
+- repo: meleantonio/ChernyCode
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 8a74a2ada2f0762ca78fa7da6c16fb23e318f407
+    pushed_at: '2026-02-11T18:12:30Z'
+    description: null
+    language: null
+    topics: []
+    license: null
+    stargazers_count: 506
+    indexed_at: '2026-07-07T03:30:12.527052+00:00'
+    last_changed_at: '2026-07-07T03:30:12.527072+00:00'
+- repo: K-Dense-AI/scientific-agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 4d97e293dc6f604fb6b63dcd49b9028df413d65b
+    pushed_at: '2026-07-06T11:52:50Z'
+    description: 'Turn any AI agent into an AI Scientist. The #1 Agent Skills library
+      for science, used by 160,000+ scientists worldwide. 140 ready-to-use skills
+      plus 100+ scientific databases covering biology, chemistry, medicine, and drug
+      discovery. Compatible with Cursor, Claude Code, Codex, Pi, Antigravity, and
+      the open Agent Skills standard.'
+    language: Python
+    topics:
+    - agent-skills
+    - ai-scientist
+    - bioinformatics
+    - chemoinformatics
+    - claude
+    - claude-skills
+    - claudecode
+    - clinical-research
+    - computational-biology
+    - data-analysis
+    - drug-discovery
+    - genomics
+    - materials-science
+    - metabolomics
+    - proteomics
+    - scientific-computing
+    - scientific-visualization
+    license: MIT
+    stargazers_count: 30342
+    indexed_at: '2026-07-07T03:30:13.110085+00:00'
+    last_changed_at: '2026-07-07T03:30:13.110105+00:00'
+- repo: github/awesome-copilot
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1f92908fa89f9f0fc6aca97006b3bfd6c0ca01ab
+    pushed_at: '2026-07-07T02:06:48Z'
+    description: Community-contributed instructions, agents, skills, and configurations
+      to help you make the most of GitHub Copilot.
+    language: Python
+    topics:
+    - agent-skills
+    - agents
+    - ai
+    - awesome
+    - custom-agents
+    - github-copilot
+    - hacktoberfest
+    - prompt-engineering
+    license: MIT
+    stargazers_count: 36251
+    indexed_at: '2026-07-07T03:30:13.819177+00:00'
+    last_changed_at: '2026-07-07T03:30:13.819207+00:00'
+- repo: VoltAgent/awesome-openclaw-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 34a20c3862fb17800da122f98f559be33b374114
+    pushed_at: '2026-06-24T05:50:01Z'
+    description: The awesome collection of OpenClaw skills. 5,400+ skills filtered
+      and categorized from the official OpenClaw Skills Registry.🦞
+    language: null
+    topics:
+    - agent-skills
+    - awesome
+    - awesome-list
+    - awesome-lists
+    - clawd
+    - clawdbot
+    - clawdbot-skill
+    - clawdhub
+    - moltbot
+    - moltbot-skills
+    - openclaw
+    - openclaw-skills
+    license: MIT
+    stargazers_count: 50988
+    indexed_at: '2026-07-07T03:30:14.337199+00:00'
+    last_changed_at: '2026-07-07T03:30:14.337213+00:00'
+- repo: lawve-ai/awesome-legal-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 7f58aaf1fbc7b12904b15b622edb1f8ac0742f5a
+    pushed_at: '2026-06-22T13:34:18Z'
+    description: A curated list of awesome Agent Skills for automating legal work
+    language: Python
+    topics:
+    - agent-skills
+    - automation
+    - law
+    - legal-work
+    - workflows
+    license: NOASSERTION
+    stargazers_count: 556
+    indexed_at: '2026-07-07T03:30:14.856348+00:00'
+    last_changed_at: '2026-07-07T03:30:14.856381+00:00'
+- repo: databricks/cli
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: f5640af4a243b7ac6c594bd384924e99f5b2afa2
+    pushed_at: '2026-07-07T02:52:26Z'
+    description: Databricks CLI
+    language: Go
+    topics:
+    - command-line-interface
+    - databricks
+    license: NOASSERTION
+    stargazers_count: 361
+    indexed_at: '2026-07-07T03:30:15.514077+00:00'
+    last_changed_at: '2026-07-07T03:30:15.514101+00:00'
+- repo: anthropics/knowledge-work-plugins
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 3f16f5c901158e4dc90faa9877d74d0a98ce592b
+    pushed_at: '2026-07-07T00:15:13Z'
+    description: Open source repository of plugins primarily intended for knowledge
+      workers to use in Claude Cowork
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 22414
+    indexed_at: '2026-07-07T03:30:16.175448+00:00'
+    last_changed_at: '2026-07-07T03:30:16.175465+00:00'
+- repo: agentskills/agentskills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0c0c5673846d0a1c983d910b189e329ef3ab8f2a
+    pushed_at: '2026-07-01T21:37:32Z'
+    description: Specification and documentation for Agent Skills
+    language: Python
+    topics:
+    - agent-skills
+    license: Apache-2.0
+    stargazers_count: 22586
+    indexed_at: '2026-07-07T03:30:16.843011+00:00'
+    last_changed_at: '2026-07-07T03:30:16.843036+00:00'
+- repo: matsonj/nba-box-scores
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 74af916dfe2c8b49739e01e8cd34db4930dc6d87
+    pushed_at: '2026-06-03T22:01:31Z'
+    description: nba box score generator
+    language: TypeScript
+    topics: []
+    license: null
+    stargazers_count: 24
+    indexed_at: '2026-07-07T03:30:17.419158+00:00'
+    last_changed_at: '2026-07-07T03:30:17.419187+00:00'
+- repo: CodeWithAsheville/court-notifications
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 70df601f0c0df12ad2a57e2d46ef73f6ac452b87
+    pushed_at: '2026-04-15T11:16:01Z'
+    description: null
+    language: JavaScript
+    topics: []
+    license: GPL-3.0
+    stargazers_count: 13
+    indexed_at: '2026-07-07T03:30:17.963637+00:00'
+    last_changed_at: '2026-07-07T03:30:17.963659+00:00'
+- repo: diet103/claude-code-infrastructure-showcase
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a5818cb99f54f360303feacdeebe2ded291fdf71
+    pushed_at: '2026-04-17T04:22:53Z'
+    description: Examples of my Claude Code infrastructure with skill auto-activation,
+      hooks, and agents
+    language: Shell
+    topics: []
+    license: MIT
+    stargazers_count: 9739
+    indexed_at: '2026-07-07T03:30:18.463889+00:00'
+    last_changed_at: '2026-07-07T03:30:18.463915+00:00'
+- repo: open-semantic-interchange/OSI
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 056b5aadc555c0af123af26720324e940a7ee92d
+    pushed_at: '2026-06-26T00:39:33Z'
+    description: null
+    language: Java
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 588
+    indexed_at: '2026-07-07T03:30:19.025441+00:00'
+    last_changed_at: '2026-07-07T03:30:19.025470+00:00'
+- repo: google/langextract
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0dff5479aa51934c7d5833a7c38e2a5abba4e0c2
+    pushed_at: '2026-07-02T07:59:47Z'
+    description: A Python library for extracting structured information from unstructured
+      text using LLMs with precise source grounding and interactive visualization.
+    language: Python
+    topics:
+    - gemini
+    - gemini-ai
+    - gemini-api
+    - gemini-flash
+    - gemini-pro
+    - information-extration
+    - large-language-models
+    - llm
+    - nlp
+    - python
+    - structured-data
+    license: Apache-2.0
+    stargazers_count: 37015
+    indexed_at: '2026-07-07T03:30:19.713609+00:00'
+    last_changed_at: '2026-07-07T03:30:19.713627+00:00'
+- repo: dbt-labs/dbt-agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 9eee2733ed63bb26edb8fcd0237d8c4589a773e6
+    pushed_at: '2026-07-06T01:13:43Z'
+    description: A curated collection of Agent Skills for working with dbt, to help
+      AI agents understand and execute dbt workflows more effectively.
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 611
+    indexed_at: '2026-07-07T03:30:20.455684+00:00'
+    last_changed_at: '2026-07-07T03:30:20.455714+00:00'
+- repo: lexler/skill-factory
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 06a17c808a32aebb454ebae99f6d2e12049afb38
+    pushed_at: '2026-07-06T17:44:29Z'
+    description: null
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 219
+    indexed_at: '2026-07-07T03:30:20.957266+00:00'
+    last_changed_at: '2026-07-07T03:30:20.957291+00:00'
+- repo: openai/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 49f948faa9258a0c61caceaf225e179651397431
+    pushed_at: '2026-06-24T02:36:15Z'
+    description: Skills Catalog for Codex
+    language: Python
+    topics: []
+    license: null
+    stargazers_count: 23318
+    indexed_at: '2026-07-07T03:30:21.584535+00:00'
+    last_changed_at: '2026-07-07T03:30:21.584567+00:00'
+- repo: zebbern/claude-code-guide
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 82a1370363fb50d35ded966ffaa3bea6ec74cf50
+    pushed_at: '2026-07-07T01:02:56Z'
+    description: Claude Code Guide - Setup, Commands, workflows, agents, skills &
+      tips-n-tricks go from beginner to power user!
+    language: Python
+    topics:
+    - ai
+    - ai-agent
+    - ai-agent-tools
+    - anthropic-claude
+    - claude
+    - claude-ai
+    - claude-api
+    - claude-code
+    - claude-code-communication
+    - claude-code-guide
+    - claude-code-skills
+    - claude-commands
+    - claude-desktop
+    - claude-mcp
+    - claude-sonnet
+    - code
+    - mcp
+    - mcp-agents
+    - mcp-tools
+    - vscode-extension
+    license: MIT
+    stargazers_count: 4368
+    indexed_at: '2026-07-07T03:30:22.101342+00:00'
+    last_changed_at: '2026-07-07T03:30:22.101361+00:00'
+- repo: jpoutrin/product-forge
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0ebe7aea08747cb1c121bc77652d458b9e8ee782
+    pushed_at: '2026-03-01T13:57:15Z'
+    description: Claude Code Marketplace Plugin to dev like a pro in a multi-agent
+      fashion
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 14
+    indexed_at: '2026-07-07T03:30:22.591168+00:00'
+    last_changed_at: '2026-07-07T03:30:22.591194+00:00'
+- repo: Dammyjay93/interface-design
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2f9be3206855bcb2d1d0af262c8bae25cba6658d
+    pushed_at: '2026-06-20T11:32:45Z'
+    description: Design engineering for Claude Code. Craft, memory, and enforcement
+      for consistent UI.
+    language: Shell
+    topics: []
+    license: MIT
+    stargazers_count: 5212
+    indexed_at: '2026-07-07T03:30:23.100773+00:00'
+    last_changed_at: '2026-07-07T03:30:23.100789+00:00'
+- repo: matsonj/mviz
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: c65cd8a8e2d983cf2cf5aa7246a5e3e57588509e
+    pushed_at: '2026-05-28T21:51:27Z'
+    description: A chart & report builder designed for use by AI.
+    language: null
+    topics: []
+    license: null
+    stargazers_count: 218
+    indexed_at: '2026-07-07T03:30:23.605610+00:00'
+    last_changed_at: '2026-07-07T03:30:23.605634+00:00'
+- repo: jdepoix/youtube-transcript-api
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 72d79711ec4db95262660029b4d63298b0820502
+    pushed_at: '2026-05-19T18:17:07Z'
+    description: This is a python API which allows you to get the transcript/subtitles
+      for a given YouTube video. It also works for automatically generated subtitles
+      and it does not require an API key nor a headless browser, like other selenium
+      based solutions do!
+    language: Python
+    topics:
+    - asr
+    - captions
+    - cli
+    - python
+    - subtitle
+    - subtitles
+    - transcript
+    - transcripts
+    - translating-transcripts
+    - youtube
+    - youtube-api
+    - youtube-asr
+    - youtube-captions
+    - youtube-subtitles
+    - youtube-transcript
+    - youtube-transcripts
+    - youtube-video
+    license: MIT
+    stargazers_count: 7849
+    indexed_at: '2026-07-07T03:30:24.172327+00:00'
+    last_changed_at: '2026-07-07T03:30:24.172345+00:00'
+- repo: bbrewington/down-detector-down-detector
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 7098592b69473cfa8b271173ac077a266f6211d8
+    pushed_at: '2025-11-18T15:30:43Z'
+    description: Pinging downdetector.com to confirm it's available - created this
+      in response to the 2025-11-18 Cloudflare outage, causing www.downdetector.com
+      to go down
+    language: null
+    topics: []
+    license: MIT
+    stargazers_count: 1
+    indexed_at: '2026-07-07T03:30:24.672245+00:00'
+    last_changed_at: '2026-07-07T03:30:24.672265+00:00'
+- repo: astral-sh/ty
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d171a7806bbfc13512d7e4f73cd6ca73c69d4983
+    pushed_at: '2026-07-06T22:50:47Z'
+    description: An extremely fast Python type checker and language server, written
+      in Rust.
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 19110
+    indexed_at: '2026-07-07T03:30:25.252814+00:00'
+    last_changed_at: '2026-07-07T03:30:25.252839+00:00'
+- repo: stravu/crystal
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1e18e0bc981225f75b5226f82a300fa741970c6f
+    pushed_at: '2026-02-26T21:48:10Z'
+    description: (Crystal is now Nimbalyst) Run multiple Codex and Claude Code AI
+      sessions in parallel git worktrees. Test, compare approaches & manage AI-assisted
+      development workflows in one desktop app.
+    language: TypeScript
+    topics:
+    - agentic-ai
+    - ai
+    - ai-coding
+    - anthropic
+    - claude
+    - claude-code
+    - codex
+    - cursor
+    - development-environment
+    - ide
+    - llm-coding
+    - openai-codex
+    - vibe-coding
+    license: MIT
+    stargazers_count: 3098
+    indexed_at: '2026-07-07T03:30:25.824999+00:00'
+    last_changed_at: '2026-07-07T03:30:25.825014+00:00'
+- repo: coffeefuelbump/csv-data-summarizer-claude-skill
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 9b3affd270f85aaf1c8a7a457f510034d5736cde
+    pushed_at: '2025-10-16T20:20:06Z'
+    description: A Claude Skill that automatically analyzes uploaded CSV files — generating
+      summary statistics, detecting missing data, and creating quick visualizations
+      using Python and pandas.
+    language: Python
+    topics:
+    - claude-skills
+    license: null
+    stargazers_count: 421
+    indexed_at: '2026-07-07T03:30:26.376949+00:00'
+    last_changed_at: '2026-07-07T03:30:26.376974+00:00'
+- repo: yusufkaraaslan/Skill_Seekers
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: ea7324eea96a414e06ae1dd3673a086725502d6c
+    pushed_at: '2026-07-02T21:50:59Z'
+    description: Convert documentation websites, GitHub repositories, and PDFs into
+      Claude AI skills with automatic conflict detection
+    language: Python
+    topics:
+    - ai-tools
+    - ast-parser
+    - automation
+    - claude-ai
+    - claude-skills
+    - code-analysis
+    - conflict-detection
+    - documentation
+    - documentation-generator
+    - github
+    - github-scraper
+    - mcp
+    - mcp-server
+    - multi-source
+    - ocr
+    - pdf
+    - python
+    - web-scraping
+    license: MIT
+    stargazers_count: 14382
+    indexed_at: '2026-07-07T03:30:26.870120+00:00'
+    last_changed_at: '2026-07-07T03:30:26.870136+00:00'
+- repo: omkamal/pypict-claude-skill
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: fbda212bca79dfa7611be12527b102c89cc8faeb
+    pushed_at: '2026-03-22T20:31:42Z'
+    description: A claude skill that generate test cases using N-wise test cases using
+      the pypict library
+    language: Python
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 86
+    indexed_at: '2026-07-07T03:30:27.396035+00:00'
+    last_changed_at: '2026-07-07T03:30:27.396060+00:00'
+- repo: lackeyjb/playwright-skill
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: bb7e920d376022958214e349ef25498a2644e189
+    pushed_at: '2025-12-19T16:23:38Z'
+    description: Claude Code Skill for browser automation with Playwright. Model-invoked
+      - Claude autonomously writes and executes custom automation for testing and
+      validation.
+    language: JavaScript
+    topics:
+    - ai-tools
+    - automation
+    - browser-automation
+    - claude
+    - claude-code
+    - claude-plugin
+    - claude-skills
+    - developer-tools
+    - e2e-testing
+    - model-invoked
+    - nodejs
+    - playwright
+    - web-testing
+    license: MIT
+    stargazers_count: 2875
+    indexed_at: '2026-07-07T03:30:27.990150+00:00'
+    last_changed_at: '2026-07-07T03:30:27.990173+00:00'
+- repo: obra/superpowers
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d884ae04edebef577e82ff7c4e143debd0bbec99
+    pushed_at: '2026-07-06T21:53:36Z'
+    description: An agentic skills framework & software development methodology that
+      works.
+    language: Shell
+    topics:
+    - ai
+    - brainstorming
+    - coding
+    - obra
+    - sdlc
+    - skills
+    - subagent-driven-development
+    - superpowers
+    license: MIT
+    stargazers_count: 247868
+    indexed_at: '2026-07-07T03:30:28.515982+00:00'
+    last_changed_at: '2026-07-07T03:30:28.516012+00:00'
+- repo: anthropics/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 9d2f1ae187231d8199c64b5b762e1bdf2244733d
+    pushed_at: '2026-07-01T18:11:25Z'
+    description: Public repository for Agent Skills
+    language: Python
+    topics:
+    - agent-skills
+    license: null
+    stargazers_count: 158887
+    indexed_at: '2026-07-07T03:30:29.217320+00:00'
+    last_changed_at: '2026-07-07T03:30:29.217337+00:00'
+- repo: comppolicylab/court-reminders
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2e6c69fa0d365f484d857dc5c9ed6f4e43a8d658
+    pushed_at: '2025-10-01T12:30:29Z'
+    description: Replication materials for "Automated Reminders Reduce Incarceration
+      for Missed Court Dates" (2025)
+    language: R
+    topics: []
+    license: MIT
+    stargazers_count: 1
+    indexed_at: '2026-07-07T03:30:29.797356+00:00'
+    last_changed_at: '2026-07-07T03:30:29.797376+00:00'
+- repo: codeforboston/maple
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: e6c3fb339a9ba950a711a34b4d4f58e5ace99693
+    pushed_at: '2026-07-02T19:44:54Z'
+    description: MAPLE makes it easy for anyone to view and submit testimony to the
+      Massachusetts Legislature about the bills that will shape our future.
+    language: TypeScript
+    topics: []
+    license: MIT
+    stargazers_count: 56
+    indexed_at: '2026-07-07T03:30:30.356743+00:00'
+    last_changed_at: '2026-07-07T03:30:30.356772+00:00'
+- repo: tconbeer/harlequin
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: f7cd6d6d77fd2436be0982c7634d83ecbc2215f0
+    pushed_at: '2026-07-06T21:54:43Z'
+    description: The SQL IDE for Your Terminal.
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 6240
+    indexed_at: '2026-07-07T03:30:30.925185+00:00'
+    last_changed_at: '2026-07-07T03:30:30.925201+00:00'
+- repo: cal-itp/data-infra
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 8d5cae57d84d0ec0d4ed7031b449cc659e85b1e3
+    pushed_at: '2026-07-06T22:57:14Z'
+    description: Cal-ITP data infrastructure
+    language: Python
+    topics:
+    - caltrans
+    - government
+    - gtfs
+    - kubernetes
+    - open-data
+    - python
+    license: AGPL-3.0
+    stargazers_count: 69
+    indexed_at: '2026-07-07T03:30:31.557397+00:00'
+    last_changed_at: '2026-07-07T03:30:31.557425+00:00'
+- repo: has2k1/plotnine
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: bb608204a9fe7daaac2b6faa5e191600f7f90ff8
+    pushed_at: '2026-07-03T13:04:26Z'
+    description: A Grammar of Graphics for Python
+    language: Python
+    topics:
+    - data-analysis
+    - grammar
+    - graphics
+    - plotting
+    - python
+    license: MIT
+    stargazers_count: 4726
+    indexed_at: '2026-07-07T03:30:32.067722+00:00'
+    last_changed_at: '2026-07-07T03:30:32.067743+00:00'
+- repo: trisxcj1/tradesocial
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: ceec80324cc5ab299b56936dc30bab73134672c3
+    pushed_at: '2024-08-31T21:04:47Z'
+    description: The idea of TradeSocial is to create a personalized stock trading
+      app that combines investment insights with social networking features. Discover,
+      connect, and invest smarter with a community-driven approach to stock trading.
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 1
+    indexed_at: '2026-07-07T03:30:32.591807+00:00'
+    last_changed_at: '2026-07-07T03:30:32.591834+00:00'
+- repo: brmodeloweb/brmodelo-app
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: b6138fef3c5870db4e34e6a3abe5849c2edcb979
+    pushed_at: '2026-06-30T11:21:43Z'
+    description: BRMW is a free open source entity-relationship database modeling
+      tool. We're working to make learning database modeling simple and accessible
+      for everyone.
+    language: JavaScript
+    topics:
+    - angularjs
+    - database
+    - database-modeling
+    - entity-relationship-diagram
+    - javascript
+    - modeling
+    - nodejs
+    - relational-databases
+    license: Apache-2.0
+    stargazers_count: 1689
+    indexed_at: '2026-07-07T03:30:33.182514+00:00'
+    last_changed_at: '2026-07-07T03:30:33.182533+00:00'
+- repo: dbt-labs/dbt-fusion
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 9977b6cbb1b761065536300037560d8e3c037011
+    pushed_at: '2026-06-26T17:16:36Z'
+    description: 'ARCHIVE: code & issue tracking in dbt-core'
+    language: Rust
+    topics: []
+    license: null
+    stargazers_count: 725
+    indexed_at: '2026-07-07T03:30:33.896792+00:00'
+    last_changed_at: '2026-07-07T03:30:33.896808+00:00'
+- repo: dbt-labs/dbt-autofix
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5319828a81852ea0f488ebde5d79226b20eaf351
+    pushed_at: '2026-07-03T17:37:24Z'
+    description: CLI to help users refactor dbt projects by automatically fixing deprecations
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 80
+    indexed_at: '2026-07-07T03:30:34.694638+00:00'
+    last_changed_at: '2026-07-07T03:30:34.694655+00:00'
+- repo: databricks/bundle-examples
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 745481430dcdd6fbd88df9812333ae7724b58328
+    pushed_at: '2026-07-01T20:05:07Z'
+    description: Examples of Databricks Asset Bundles
+    language: Python
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 337
+    indexed_at: '2026-07-07T03:30:35.304718+00:00'
+    last_changed_at: '2026-07-07T03:30:35.304745+00:00'
+- repo: dpguthrie/dbt-semantic-layer-voice-agent
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: f33ecd45e4e0be9ff3293e05da34ca34e388c0da
+    pushed_at: '2025-06-20T22:44:25Z'
+    description: Talk to your data!
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 13
+    indexed_at: '2026-07-07T03:30:35.899560+00:00'
+    last_changed_at: '2026-07-07T03:30:35.899575+00:00'
+- repo: astral-sh/uv
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 8ee34679302e73145b8a48ac26eb97343c0c56c9
+    pushed_at: '2026-07-07T03:13:58Z'
+    description: An extremely fast Python package and project manager, written in
+      Rust.
+    language: Rust
+    topics:
+    - packaging
+    - python
+    - resolver
+    - uv
+    license: Apache-2.0
+    stargazers_count: 87151
+    indexed_at: '2026-07-07T03:30:36.473737+00:00'
+    last_changed_at: '2026-07-07T03:30:36.473772+00:00'
+- repo: gitroomhq/postiz-app
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 84edda5b02ea4a0aa31263a6aa52bc02b50f109f
+    pushed_at: '2026-07-07T01:21:35Z'
+    description: 📨 The ultimate agentic social media scheduling tool 🤖
+    language: TypeScript
+    topics:
+    - nextjs
+    - open-source
+    - open-source-social-media-scheduling-tool
+    - oss
+    - redis
+    - scheduling-tool
+    - social-media-scheduling-tool
+    - typescript
+    license: AGPL-3.0
+    stargazers_count: 32786
+    indexed_at: '2026-07-07T03:30:37.024130+00:00'
+    last_changed_at: '2026-07-07T03:30:37.024153+00:00'
+- repo: DevOpsHiveHQ/dynamic-devops-roadmap
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 8d624d06b34711971a5a1cda3549d018c24cafe3
+    pushed_at: '2026-03-09T02:56:34Z'
+    description: A FREE pragmatic DevOps learning to kickstart your DevOps career
+      and knowledge in the Cloud Native era following the Agile MVP style! ⭐ (2026
+      plans for DevOps, Cloud, Platform, SRE, SWE)
+    language: TypeScript
+    topics:
+    - agile
+    - bootcamp
+    - career
+    - cloud
+    - devops
+    - devsecops
+    - mentorship
+    - roadmap
+    - sre
+    license: CC-BY-SA-4.0
+    stargazers_count: 2439
+    indexed_at: '2026-07-07T03:30:37.582152+00:00'
+    last_changed_at: '2026-07-07T03:30:37.582177+00:00'
+- repo: posit-dev/positron
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: baa6ce88c799565554ba44e7d97b928fe84fbc23
+    pushed_at: '2026-07-07T03:27:48Z'
+    description: Positron, a next-generation data science IDE
+    language: TypeScript
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 4186
+    indexed_at: '2026-07-07T03:30:38.219579+00:00'
+    last_changed_at: '2026-07-07T03:30:38.219600+00:00'
+- repo: DataKitchen/data-observability-installer
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 6be5e378f08f959f80ce0a4d1372584b7bd501c1
+    pushed_at: '2026-05-15T22:09:36Z'
+    description: Installer for DataKitchen's Open Source Data Observability Products.
+      Data breaks. Servers break. Your toolchain breaks. Ensure your team is the first
+      to know and the first to solve with visibility across and down your data estate.
+      Save time with simple, fast data quality test generation and execution. Trust
+      your data, tools, and systems end to end.
+    language: Python
+    topics:
+    - data
+    - data-engineering
+    - data-observability
+    - data-profiling
+    - data-quality
+    - data-reliability
+    - data-science
+    - datachecker
+    - datacleaner
+    - datacleaning
+    - dataops
+    - dataquality
+    - datatesting
+    - datavalidation
+    - mssql
+    - pipeline-tests
+    - postgresql
+    - redshift
+    - self-hosted
+    - snowflake
+    license: Apache-2.0
+    stargazers_count: 139
+    indexed_at: '2026-07-07T03:30:38.802189+00:00'
+    last_changed_at: '2026-07-07T03:30:38.802208+00:00'
+- repo: MishaKav/pytest-coverage-comment
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: fd9adbdca9fdfbe2b9bfa44a7340e6a83346ce6c
+    pushed_at: '2026-07-05T10:15:43Z'
+    description: Comments a pull request with the pytest code coverage badge and full
+      report
+    language: TypeScript
+    topics:
+    - coverage
+    - github-actions
+    - test
+    - testing
+    license: MIT
+    stargazers_count: 262
+    indexed_at: '2026-07-07T03:30:39.311226+00:00'
+    last_changed_at: '2026-07-07T03:30:39.311243+00:00'
+- repo: kitao/pyxel
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 79ebc1447e464f1c81bee73eae1d19c1487bb216
+    pushed_at: '2026-07-06T05:06:32Z'
+    description: A retro game engine for Python
+    language: Rust
+    topics:
+    - game
+    - game-development
+    - game-engine
+    - gamedev
+    - graphics
+    - html
+    - opengl
+    - pico-8
+    - pixel-art
+    - python
+    - pyxel
+    - retro-game
+    - rust
+    - tic-80
+    - wasm
+    - webgl
+    license: NOASSERTION
+    stargazers_count: 17575
+    indexed_at: '2026-07-07T03:30:39.853994+00:00'
+    last_changed_at: '2026-07-07T03:30:39.854007+00:00'
+- repo: pretzelai/pretzelai
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 95e7592af35e4c0ed9f80cc4defdf16818f5f1ce
+    pushed_at: '2024-12-01T10:36:53Z'
+    description: The modern replacement for Jupyter Notebooks
+    language: TypeScript
+    topics:
+    - analytics
+    - artificial-intelligence
+    - business-intelligence
+    - businessintelligence
+    - dashboard
+    - data
+    - data-analysis
+    - data-analytics
+    - data-science
+    - data-visualization
+    - duckdb
+    - notebooks
+    - open-source
+    - prql
+    - reporting
+    - sql
+    - sql-editor
+    - sql-editor-online
+    - visualization
+    - wasm
+    license: NOASSERTION
+    stargazers_count: 2186
+    indexed_at: '2026-07-07T03:30:40.400577+00:00'
+    last_changed_at: '2026-07-07T03:30:40.400601+00:00'
+- repo: cagov/data-infrastructure
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 50f6a0b31ac468941c0b525b5653e0fbf28f1bb1
+    pushed_at: '2026-05-12T07:36:49Z'
+    description: CalData infrastructure
+    language: HCL
+    topics: []
+    license: MIT
+    stargazers_count: 24
+    indexed_at: '2026-07-07T03:30:41.026409+00:00'
+    last_changed_at: '2026-07-07T03:30:41.026425+00:00'
+- repo: Hiflylabs/awesome-dbt
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: e0d112f72be038adc2ca454049c80b3346627d0a
+    pushed_at: '2026-05-12T06:46:52Z'
+    description: 'A curated list of awesome dbt resources '
+    language: null
+    topics:
+    - analytics-engineering
+    - awesome
+    - awesome-list
+    - data-engineering
+    - dbt
+    license: GPL-3.0
+    stargazers_count: 1705
+    indexed_at: '2026-07-07T03:30:41.605006+00:00'
+    last_changed_at: '2026-07-07T03:30:41.605039+00:00'
+- repo: buremba/universql
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 4618227732018ce9d0aecdebf0029d155954976b
+    pushed_at: '2025-10-20T22:30:45Z'
+    description: Pushdown compute from Snowflake to DuckDB running on your infrastructure
+    language: Jupyter Notebook
+    topics:
+    - databricks
+    - dbt
+    - duckdb
+    - proxy-server
+    - snowflake
+    - sql
+    - sql-proxy
+    - sqlglot
+    license: Apache-2.0
+    stargazers_count: 206
+    indexed_at: '2026-07-07T03:30:42.113699+00:00'
+    last_changed_at: '2026-07-07T03:30:42.113715+00:00'
+- repo: shospodarets/awesome-platform-engineering
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 82580d8f7da72c8fcbcc10aa88ac1bda755c0841
+    pushed_at: '2026-06-27T16:20:54Z'
+    description: Curated list of tools and resources for Platform Engineering
+    language: Shell
+    topics:
+    - awesome
+    - awesome-list
+    - devops
+    - platform-engineering
+    license: CC0-1.0
+    stargazers_count: 502
+    indexed_at: '2026-07-07T03:30:42.678369+00:00'
+    last_changed_at: '2026-07-07T03:30:42.678388+00:00'
+- repo: bruno-szdl/dbt-ci-cd
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 792b59cad6e5eece5e100bd9f0015ce874d48aeb
+    pushed_at: '2025-08-24T00:45:23Z'
+    description: null
+    language: null
+    topics: []
+    license: null
+    stargazers_count: 185
+    indexed_at: '2026-07-07T03:30:43.173281+00:00'
+    last_changed_at: '2026-07-07T03:30:43.173304+00:00'
+- repo: openbao/openbao
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 35731cd1a3f670747b7ec22ac906eeb3068c5295
+    pushed_at: '2026-07-03T08:59:20Z'
+    description: OpenBao is a software solution to manage, store, and distribute sensitive
+      data including secrets, certificates, and keys.
+    language: Go
+    topics:
+    - go
+    - secret-management
+    - security
+    license: MPL-2.0
+    stargazers_count: 6561
+    indexed_at: '2026-07-07T03:30:43.845951+00:00'
+    last_changed_at: '2026-07-07T03:30:43.845971+00:00'
+- repo: apache/polaris
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 123d40c7090b2ffdf8d4956ddab16f2c10eb1686
+    pushed_at: '2026-07-06T17:37:14Z'
+    description: Apache Polaris, the interoperable, open source catalog for Apache
+      Iceberg
+    language: Java
+    topics:
+    - apache
+    - catalog
+    - iceberg
+    - lakehouse
+    - metadata
+    - opencatalog
+    - polaris
+    license: Apache-2.0
+    stargazers_count: 2000
+    indexed_at: '2026-07-07T03:30:44.455363+00:00'
+    last_changed_at: '2026-07-07T03:30:44.455384+00:00'
+- repo: ibis-project/ibis
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 4556dad2c2a9f04468b12237ade271c2e708db4a
+    pushed_at: '2026-07-06T23:15:22Z'
+    description: the portable Python dataframe library
+    language: Python
+    topics:
+    - bigquery
+    - clickhouse
+    - database
+    - datafusion
+    - duckdb
+    - impala
+    - mssql
+    - mysql
+    - pandas
+    - polars
+    - postgresql
+    - pyarrow
+    - pyspark
+    - python
+    - snowflake
+    - sql
+    - sqlite
+    - trino
+    license: Apache-2.0
+    stargazers_count: 6587
+    indexed_at: '2026-07-07T03:30:45.013143+00:00'
+    last_changed_at: '2026-07-07T03:30:45.013163+00:00'
+- repo: duckdb/community-extensions
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 38662caed28b830573dc4be689808a45dba4d978
+    pushed_at: '2026-07-06T10:40:12Z'
+    description: null
+    language: Shell
+    topics: []
+    license: null
+    stargazers_count: 329
+    indexed_at: '2026-07-07T03:30:45.624141+00:00'
+    last_changed_at: '2026-07-07T03:30:45.624165+00:00'
+- repo: DataTalksClub/llm-zoomcamp
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: aceb9b5f77da52a097faa4d3b1cf6c8d1ef62cad
+    pushed_at: '2026-07-06T13:45:04Z'
+    description: LLM Zoomcamp - a free online course about real-life applications
+      of LLMs. In 10 weeks you will learn how to build an AI system that answers questions
+      about your knowledge base.
+    language: Jupyter Notebook
+    topics: []
+    license: null
+    stargazers_count: 6730
+    indexed_at: '2026-07-07T03:30:46.168964+00:00'
+    last_changed_at: '2026-07-07T03:30:46.168983+00:00'
+- repo: dbt-labs/dbt-labs-experimental-features
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a42bbfc53a3c3f9864484397cd5cf9989357eed3
+    pushed_at: '2025-12-17T17:18:07Z'
+    description: dbt support for database features which are not yet supported natively
+      in dbt-core
+    language: Makefile
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 161
+    indexed_at: '2026-07-07T03:30:46.827278+00:00'
+    last_changed_at: '2026-07-07T03:30:46.827302+00:00'
+- repo: Snowflake-Labs/sf-samples
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 9ac798d0d04fa58e2379043d7822e54b14c58de9
+    pushed_at: '2026-07-06T19:14:52Z'
+    description: Sample files, code snippets and downloads for Snowflake labs and
+      tutorials.
+    language: null
+    topics:
+    - samples
+    - snowflake
+    - tutorials
+    license: Apache-2.0
+    stargazers_count: 277
+    indexed_at: '2026-07-07T03:30:47.470494+00:00'
+    last_changed_at: '2026-07-07T03:30:47.470521+00:00'
+- repo: UrbaneD0ge/NPU-Attendance-Project
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2371a6e0882d3c434698df8ec07406af4572b8be
+    pushed_at: '2024-05-29T00:12:58Z'
+    description: null
+    language: Python
+    topics: []
+    license: null
+    stargazers_count: 1
+    indexed_at: '2026-07-07T03:30:47.963063+00:00'
+    last_changed_at: '2026-07-07T03:30:47.963080+00:00'
+- repo: Snowflake-Labs/snowflake-demo-notebooks
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: b9b7cc24338c0750d20dfad57031ccb86457d5fe
+    pushed_at: '2026-06-24T02:15:37Z'
+    description: Collection of Snowflake Notebook demos, tutorials, and examples
+    language: Jupyter Notebook
+    topics:
+    - data-engineering
+    - data-science
+    - machine-learning
+    - notebook
+    - python
+    - sql
+    license: Apache-2.0
+    stargazers_count: 371
+    indexed_at: '2026-07-07T03:30:48.571012+00:00'
+    last_changed_at: '2026-07-07T03:30:48.571042+00:00'
+- repo: UrbaneD0ge/NPU-SVG
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5185392dd0c4c9ce61b5326eeae3571b07e816d3
+    pushed_at: '2024-06-26T00:02:20Z'
+    description: null
+    language: Svelte
+    topics: []
+    license: null
+    stargazers_count: 1
+    indexed_at: '2026-07-07T03:30:49.140277+00:00'
+    last_changed_at: '2026-07-07T03:30:49.140294+00:00'
+- repo: Jieyab89/OSINT-Cheat-sheet
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 9e402f9def100c374933f1f4ff9bb1658840c0b6
+    pushed_at: '2026-07-06T18:13:59Z'
+    description: OSINT cheat sheet, list OSINT tools, wiki, dataset, article, book
+      , red team OSINT for hackers and OSINT tips and OSINT branch. This repository
+      will grow every time will research, there is a research, science and technology,
+      tutorial. Please use it wisely.
+    language: Python
+    topics:
+    - cheatsheet
+    - cybersecurity
+    - datasets
+    - education
+    - hacking
+    - imint
+    - information-gathering
+    - information-security
+    - journalism
+    - masint
+    - osint
+    - osint-tool
+    - osintwiki
+    - reconnaissance
+    - red-team
+    - science
+    - scraping
+    - socmint
+    - tools
+    - wiki
+    license: MIT
+    stargazers_count: 2048
+    indexed_at: '2026-07-07T03:30:49.668040+00:00'
+    last_changed_at: '2026-07-07T03:30:49.668059+00:00'
+- repo: Snowflake-Labs/snowflake-arctic
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: eadfba3b3a895e7fe0555fa6b67d2fd96d26b8ce
+    pushed_at: '2024-08-16T16:42:50Z'
+    description: null
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 559
+    indexed_at: '2026-07-07T03:30:50.274961+00:00'
+    last_changed_at: '2026-07-07T03:30:50.274974+00:00'
+- repo: InfuseAI/awesome-public-dbt-projects
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a048642b874917729781852c1b7115bc854bcd88
+    pushed_at: '2023-12-28T02:55:36Z'
+    description: A curated list of awesome public DBT projects
+    language: null
+    topics:
+    - data-pipeline
+    - dbt
+    - transformation
+    license: CC0-1.0
+    stargazers_count: 207
+    indexed_at: '2026-07-07T03:30:50.849500+00:00'
+    last_changed_at: '2026-07-07T03:30:50.849519+00:00'
+- repo: treeverse/dvc
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: b5dede14f232197e4e265dcb199ae1666895a2be
+    pushed_at: '2026-07-04T12:31:35Z'
+    description: 🦉 Data Versioning and ML Experiments
+    language: Python
+    topics:
+    - ai
+    - data-science
+    - data-version-control
+    - developer-tools
+    - machine-learning
+    - reproducibility
+    - unstructured-data
+    license: Apache-2.0
+    stargazers_count: 15724
+    indexed_at: '2026-07-07T03:30:51.487972+00:00'
+    last_changed_at: '2026-07-07T03:30:51.487992+00:00'
+- repo: City-Bureau/city-scrapers
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5e4018a970498b2a4ee69fa6339c7ef247e3cbdc
+    pushed_at: '2026-05-13T04:49:40Z'
+    description: Scrape, standardize and share public meetings from local government
+      websites
+    language: HTML
+    topics:
+    - city-scrapers
+    - open-data
+    - python
+    - scrapy
+    - web-scraping
+    license: MIT
+    stargazers_count: 379
+    indexed_at: '2026-07-07T03:30:52.079185+00:00'
+    last_changed_at: '2026-07-07T03:30:52.079203+00:00'
+- repo: apache/answer
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2746bf5b455fa67f1bec6178c75121397a3816f5
+    pushed_at: '2026-07-06T14:31:16Z'
+    description: A Q&A platform software for teams at any scales. Whether it's a community
+      forum, help center, or knowledge management platform, you can always count on
+      Apache Answer.
+    language: Go
+    topics:
+    - community
+    - forum
+    - go
+    - golang
+    - hacktoberfest
+    - q-and-a
+    - question
+    - react
+    - typescript
+    license: Apache-2.0
+    stargazers_count: 15589
+    indexed_at: '2026-07-07T03:30:52.727734+00:00'
+    last_changed_at: '2026-07-07T03:30:52.727758+00:00'
+- repo: Levers-Labs/SOMA-B2B-SaaS
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 48bbd5c27bfd92f85a02b1b716fda17f60030967
+    pushed_at: '2024-01-24T11:19:18Z'
+    description: null
+    language: Python
+    topics: []
+    license: null
+    stargazers_count: 385
+    indexed_at: '2026-07-07T03:30:53.291291+00:00'
+    last_changed_at: '2026-07-07T03:30:53.291304+00:00'
+- repo: dbt-labs/dbt-proserv
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: fcc408500697259eb8953e05dff459220f5b5695
+    pushed_at: '2026-03-20T01:05:48Z'
+    description: This is a public repository that the dbt proserv team uses for collective
+      demos.
+    language: Python
+    topics: []
+    license: null
+    stargazers_count: 15
+    indexed_at: '2026-07-07T03:30:53.945045+00:00'
+    last_changed_at: '2026-07-07T03:30:53.945060+00:00'
+- repo: datnguye/dbterd
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 09e942f959bd36c257cee7f84de5c17ba1b64d2a
+    pushed_at: '2026-06-29T03:05:32Z'
+    description: Generate the ERD as a code from dbt artifacts
+    language: Python
+    topics:
+    - cli
+    - d2
+    - dbml
+    - dbt-cloud
+    - dbt-core
+    - drawdb
+    - erd
+    - graphviz
+    - json
+    - json-schema
+    - mermaid
+    - plantuml
+    - python-api
+    license: MIT
+    stargazers_count: 338
+    indexed_at: '2026-07-07T03:30:54.537173+00:00'
+    last_changed_at: '2026-07-07T03:30:54.537195+00:00'
+- repo: dbt-labs/dbtcloud-terraforming
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 68c98a4ccd1a55834b654d931a99ccb2b224e9d7
+    pushed_at: '2026-03-11T01:46:40Z'
+    description: CLI tool to help importing existing dbt Cloud config to Terraform
+    language: Go
+    topics:
+    - dbt
+    - dbt-cloud
+    - terraform
+    license: MPL-2.0
+    stargazers_count: 31
+    indexed_at: '2026-07-07T03:30:55.160561+00:00'
+    last_changed_at: '2026-07-07T03:30:55.160594+00:00'
+- repo: dpguthrie/dbt-cloud-downstream-ci-action
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: cee6f2b1ac6e0ce0b7d0bc5b574641e96f362599
+    pushed_at: '2024-04-15T18:20:15Z'
+    description: A Github action that will run dbt Cloud CI jobs, taking into account
+      downstream dependencies from projects set up with dbt Mesh
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 4
+    indexed_at: '2026-07-07T03:30:55.689735+00:00'
+    last_changed_at: '2026-07-07T03:30:55.689758+00:00'
+- repo: tobymao/sqlglot
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: faf15e65e9059248c82564ab29de2bd4c492392e
+    pushed_at: '2026-07-06T23:09:13Z'
+    description: Python SQL Parser and Transpiler
+    language: Python
+    topics:
+    - bigquery
+    - clickhouse
+    - databricks
+    - duckdb
+    - hive
+    - mysql
+    - optimizer
+    - parser
+    - postgres
+    - presto
+    - python
+    - redshift
+    - snowflake
+    - spark
+    - sql
+    - sqlite
+    - sqlparser
+    - transpiler
+    - trino
+    - tsql
+    license: MIT
+    stargazers_count: 9390
+    indexed_at: '2026-07-07T03:30:56.225586+00:00'
+    last_changed_at: '2026-07-07T03:30:56.225612+00:00'
+- repo: dbt-labs/dbt-snowflake
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 986d31db890580f04d92a17feca6291c410b9629
+    pushed_at: '2025-03-08T12:01:32Z'
+    description: This repository has moved into https://github.com/dbt-labs/dbt-adapters
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 341
+    indexed_at: '2026-07-07T03:30:56.934425+00:00'
+    last_changed_at: '2026-07-07T03:30:56.934447+00:00'
+- repo: bloomberg/memray
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5b58e317a65ee12aa7e25573a73504552306842f
+    pushed_at: '2026-06-30T00:23:00Z'
+    description: Memray is a memory profiler for Python
+    language: Python
+    topics:
+    - hacktoberfest
+    - memory
+    - memory-leak
+    - memory-leak-detection
+    - memory-profiler
+    - profiler
+    - python
+    - python3
+    license: Apache-2.0
+    stargazers_count: 15146
+    indexed_at: '2026-07-07T03:30:57.548316+00:00'
+    last_changed_at: '2026-07-07T03:30:57.548344+00:00'
+- repo: brooklyn-data/dbt_artifacts
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 8ef32a4d0b015accf3f4107d27f32d13fbfe954f
+    pushed_at: '2026-06-08T11:35:24Z'
+    description: A dbt package for modelling dbt metadata. https://brooklyn-data.github.io/dbt_artifacts
+    language: Shell
+    topics:
+    - dbt
+    license: Apache-2.0
+    stargazers_count: 399
+    indexed_at: '2026-07-07T03:30:58.123358+00:00'
+    last_changed_at: '2026-07-07T03:30:58.123376+00:00'
+- repo: dlt-hub/dlt
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 3985a797266fa946bc1a1a30996fdf6521c27513
+    pushed_at: '2026-07-06T16:25:42Z'
+    description: 'data load tool (dlt) is an open source Python library that makes
+      data loading easy 🛠️ '
+    language: Python
+    topics:
+    - data
+    - data-engineering
+    - data-lake
+    - data-loading
+    - data-warehouse
+    - elt
+    - extract
+    - load
+    - python
+    - transform
+    license: Apache-2.0
+    stargazers_count: 5566
+    indexed_at: '2026-07-07T03:30:58.738716+00:00'
+    last_changed_at: '2026-07-07T03:30:58.738738+00:00'
+- repo: Titan-Systems/titan
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a2679a578038dce65bed4af355ac5bf692d815ca
+    pushed_at: '2025-03-13T03:21:47Z'
+    description: Titan Core - Snowflake infrastructure-as-code. Provision environments,
+      automate deploys, CI/CD. Manage RBAC, users, roles, and data access. Declarative
+      Python Resource API. Change Management tool for the Snowflake data warehouse.
+    language: Python
+    topics:
+    - compliance-as-code
+    - data-engineering
+    - data-governance
+    - data-warehouse
+    - dataops
+    - devops
+    - rbac
+    - secops
+    - snowflake
+    license: Apache-2.0
+    stargazers_count: 484
+    indexed_at: '2026-07-07T03:30:59.321611+00:00'
+    last_changed_at: '2026-07-07T03:30:59.321629+00:00'
+- repo: dbt-labs/dbt-docs
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 6a7610bce41bc941c012feff20c864a1b3756ebc
+    pushed_at: '2026-03-19T17:43:00Z'
+    description: Auto-generated data documentation site for dbt projects
+    language: JavaScript
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 160
+    indexed_at: '2026-07-07T03:30:59.967561+00:00'
+    last_changed_at: '2026-07-07T03:30:59.967582+00:00'
+- repo: EqualExperts/dbt-unit-testing
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: fbfd8967ddd9b6c919e2ba487e9f37f75950c4e0
+    pushed_at: '2026-05-13T16:11:44Z'
+    description: This dbt package contains macros to support unit testing that can
+      be (re)used across dbt projects.
+    language: Shell
+    topics: []
+    license: MIT
+    stargazers_count: 448
+    indexed_at: '2026-07-07T03:31:00.542338+00:00'
+    last_changed_at: '2026-07-07T03:31:00.542365+00:00'
+- repo: calogica/dbt-date
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: b79aaaea0420453b8a298520027c10ca5a3c5466
+    pushed_at: '2024-12-16T16:32:34Z'
+    description: Date-related macros for dbt
+    language: Shell
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 267
+    indexed_at: '2026-07-07T03:31:01.139149+00:00'
+    last_changed_at: '2026-07-07T03:31:01.139173+00:00'
+- repo: dagster-io/dagster
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5086e2d4392bd3e2db4d1f2671595140f2471d63
+    pushed_at: '2026-07-06T18:56:58Z'
+    description: An orchestration platform for the development, production, and observation
+      of data assets.
+    language: Python
+    topics:
+    - analytics
+    - dagster
+    - data-engineering
+    - data-integration
+    - data-orchestrator
+    - data-pipelines
+    - data-science
+    - etl
+    - metadata
+    - mlops
+    - orchestration
+    - python
+    - scheduler
+    - workflow
+    - workflow-automation
+    license: Apache-2.0
+    stargazers_count: 15795
+    indexed_at: '2026-07-07T03:31:01.754197+00:00'
+    last_changed_at: '2026-07-07T03:31:01.754221+00:00'
+- repo: edx/snowflake_timetravel_table
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 83489417bfb0b9430d0905c9d4bbccd2327fa931
+    pushed_at: '2026-01-12T06:31:00Z'
+    description: A table-type dbt materialization for Snowflake to enable Time Travel
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 22
+    indexed_at: '2026-07-07T03:31:02.388389+00:00'
+    last_changed_at: '2026-07-07T03:31:02.388401+00:00'
+- repo: Montreal-Analytics/dbt-snowflake-utils
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0ac3d18222e1d0e28bf1de3ad3535135c43cc2ff
+    pushed_at: '2024-06-24T13:32:26Z'
+    description: Snowflake-specific utility macros for dbt projects.
+    language: null
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 116
+    indexed_at: '2026-07-07T03:31:02.956047+00:00'
+    last_changed_at: '2026-07-07T03:31:02.956063+00:00'
+- repo: ByteByteGoHq/system-design-101
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: b28380a4710c5ec9638ec037d4168e288f334cba
+    pushed_at: '2025-04-04T17:30:30Z'
+    description: Explain complex systems using visuals and simple terms. Help you
+      prepare for system design interviews.
+    language: null
+    topics:
+    - aws
+    - cloud-computing
+    - coding-interviews
+    - computer-science
+    - interview-questions
+    - software-architecture
+    - software-development
+    - software-engineering
+    - system-design
+    - system-design-interview
+    license: NOASSERTION
+    stargazers_count: 85202
+    indexed_at: '2026-07-07T03:31:03.533928+00:00'
+    last_changed_at: '2026-07-07T03:31:03.533959+00:00'
+- repo: dbt-labs/dbt-audit-helper
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 71817f0a7fa3df9f63adb90db0cf28f7423f720b
+    pushed_at: '2026-05-19T12:18:10Z'
+    description: Useful macros when performing data audits
+    language: null
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 412
+    indexed_at: '2026-07-07T03:31:04.351193+00:00'
+    last_changed_at: '2026-07-07T03:31:04.351221+00:00'
+- repo: vinta/awesome-python
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0c992c59a6ad8ed825a6a2a02cea415dd57cd62f
+    pushed_at: '2026-07-05T16:07:08Z'
+    description: An opinionated list of Python frameworks, libraries, tools, and resources
+    language: Python
+    topics:
+    - awesome
+    - collections
+    - python
+    - python-frameworks
+    - python-libraries
+    - python-tools
+    license: NOASSERTION
+    stargazers_count: 306723
+    indexed_at: '2026-07-07T03:31:04.890188+00:00'
+    last_changed_at: '2026-07-07T03:31:04.890204+00:00'
+- repo: dbt-labs/dbt-codegen
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 526cb1f0e8464d88b931e0249b4198039f15d641
+    pushed_at: '2026-05-07T12:42:37Z'
+    description: Macros that generate dbt code
+    language: Makefile
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 662
+    indexed_at: '2026-07-07T03:31:05.591754+00:00'
+    last_changed_at: '2026-07-07T03:31:05.591785+00:00'
+- repo: UrbaneD0ge/Agendenator
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 84738de6798f339e55d538c20327d0743e385f6b
+    pushed_at: '2024-11-20T21:15:32Z'
+    description: A one-stop-shop for the Atlanta Department of City Planning's Neighborhood
+      Planning Units team.
+    language: EJS
+    topics: []
+    license: MIT
+    stargazers_count: 3
+    indexed_at: '2026-07-07T03:31:06.182660+00:00'
+    last_changed_at: '2026-07-07T03:31:06.182675+00:00'
+- repo: saffronh/ccai
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 3ff5dce9a1299d6035f1dd9e2f95be995311cb6e
+    pushed_at: '2023-10-17T18:43:57Z'
+    description: Data processing for the Collective Constitutional AI project (a collaboration
+      between The Collective Intelligence Project & Anthropic)
+    language: Jupyter Notebook
+    topics: []
+    license: null
+    stargazers_count: 26
+    indexed_at: '2026-07-07T03:31:06.728911+00:00'
+    last_changed_at: '2026-07-07T03:31:06.728927+00:00'
+- repo: dagster-io/dagster-open-platform
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: b085f425dff80d1a5032a3cc358dc8919fe7f52f
+    pushed_at: '2026-07-02T17:12:45Z'
+    description: Dagster Labs' open-source data platform, built with Dagster.
+    language: Python
+    topics:
+    - dagster
+    - data-engineering
+    - python
+    license: null
+    stargazers_count: 463
+    indexed_at: '2026-07-07T03:31:07.292405+00:00'
+    last_changed_at: '2026-07-07T03:31:07.292435+00:00'
+- repo: doccano/doccano
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: ab6b765ea326d07b2b806a4280cd097565e62321
+    pushed_at: '2026-04-14T21:16:25Z'
+    description: Open source annotation tool for machine learning practitioners.
+    language: Python
+    topics:
+    - annotation-tool
+    - data-labeling
+    - dataset
+    - datasets
+    - machine-learning
+    - natural-language-processing
+    - nuxt
+    - nuxtjs
+    - python
+    - text-annotation
+    - vue
+    - vuejs
+    license: MIT
+    stargazers_count: 10694
+    indexed_at: '2026-07-07T03:31:08.676218+00:00'
+    last_changed_at: '2026-07-07T03:31:08.676248+00:00'
+- repo: sqlfluff/sqlfluff
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: ecc35c6acd11f2ac89c604bd06634f3958f05a78
+    pushed_at: '2026-07-07T03:12:37Z'
+    description: A modular SQL linter and auto-formatter with support for multiple
+      dialects and templated code.
+    language: Python
+    topics:
+    - hacktoberfest
+    - pypi
+    - sql
+    - sql-linter
+    license: MIT
+    stargazers_count: 9795
+    indexed_at: '2026-07-07T03:31:09.205704+00:00'
+    last_changed_at: '2026-07-07T03:31:09.205721+00:00'
+- repo: dbt-labs/dbt-project-evaluator
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 927abbd523b627f4f1595e2fb93ebf2244314bd6
+    pushed_at: '2026-06-24T07:19:08Z'
+    description: This package contains macros and models to find DAG issues automatically
+    language: Shell
+    topics:
+    - dbt-packages
+    license: Apache-2.0
+    stargazers_count: 565
+    indexed_at: '2026-07-07T03:31:09.913022+00:00'
+    last_changed_at: '2026-07-07T03:31:09.913039+00:00'
+- repo: dbt-labs/metricflow
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 37438be7db3840ff904e477c0a6d78de2f347b18
+    pushed_at: '2026-06-29T22:33:51Z'
+    description: MetricFlow allows you to define, build, and maintain metrics in code.
+    language: Python
+    topics:
+    - analytics
+    - business-intelligence
+    - data
+    - data-modeling
+    - metrics
+    - pypi
+    - semantic-layer
+    license: Apache-2.0
+    stargazers_count: 1673
+    indexed_at: '2026-07-07T03:31:10.644460+00:00'
+    last_changed_at: '2026-07-07T03:31:10.644480+00:00'
+- repo: dbt-labs/dbt-core
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0166be26e85aa583457ca478d813902bab49a24a
+    pushed_at: '2026-07-07T00:53:09Z'
+    description: dbt enables data analysts and engineers to transform their data using
+      the same practices that software engineers use to build applications.
+    language: Rust
+    topics:
+    - analytics
+    - business-intelligence
+    - data-modeling
+    - dbt-viewpoint
+    - elt
+    - pypa
+    - slack
+    license: Apache-2.0
+    stargazers_count: 13375
+    indexed_at: '2026-07-07T03:31:11.325055+00:00'
+    last_changed_at: '2026-07-07T03:31:11.325070+00:00'
+- repo: data-engineering-community/data-engineering-wiki
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 92550c91c9a04cf18a9bfb01294c10713fca4a15
+    pushed_at: '2026-05-28T14:39:07Z'
+    description: The best place to learn data engineering. Built and maintained by
+      the data engineering community.
+    language: CSS
+    topics:
+    - data
+    - data-engineer
+    - data-engineering
+    - data-modeling
+    - data-pipelines
+    - database
+    - etl
+    - sql
+    license: CC0-1.0
+    stargazers_count: 1996
+    indexed_at: '2026-07-07T03:31:11.851948+00:00'
+    last_changed_at: '2026-07-07T03:31:11.851973+00:00'
+- repo: Fozan-Talat/divvy-bikeshare-de-project
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: df15f22b60fcd1c4c2c6fea5f4768df9c0dfb8e7
+    pushed_at: '2023-04-29T16:42:41Z'
+    description: An end-to-end data pipeline which extracts divvy bikeshare data from
+      web loads it into data lake and datawarehouse transforms it using dbt and finally
+      , a dashboard to visualize the data using looker studio, the pipeline is orchestrated
+      using prefect
+    language: Python
+    topics:
+    - bigquery
+    - data-engineering
+    - data-modeling
+    - data-pipeline
+    - data-visualization
+    - data-warehouse
+    - dbt
+    - dezoomcamp
+    - divvy-bikes
+    - elt-pipeline
+    - gcp
+    - gcs-bucket
+    - google-cloud-platform
+    - google-cloud-storage
+    - looker-studio
+    - orchestration
+    - prefect
+    - python
+    - terrafrom
+    license: null
+    stargazers_count: 36
+    indexed_at: '2026-07-07T03:31:12.356428+00:00'
+    last_changed_at: '2026-07-07T03:31:12.356447+00:00'
+- repo: Renumics/awesome-open-data-centric-ai
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 485450706433c12591dac9339f934e28e17cafc3
+    pushed_at: '2023-11-15T11:02:12Z'
+    description: 'Curated list of open source tooling for data-centric AI on unstructured
+      data. '
+    language: null
+    topics:
+    - active-learning
+    - awesome-list
+    - bias-detection
+    - computer-vision
+    - data-centric-ai
+    - data-curation
+    - data-drift
+    - data-versioning
+    - data-visualization
+    - deep-learning
+    - documentation-only
+    - explainable-ai
+    - feature-vector
+    - machine-learning
+    - nlp
+    - noisy-labels
+    - outlier-detection
+    - robust-machine-learning
+    - synthetic-data
+    - uncertainty-estimation
+    license: CC-BY-4.0
+    stargazers_count: 733
+    indexed_at: '2026-07-07T03:31:13.005580+00:00'
+    last_changed_at: '2026-07-07T03:31:13.005602+00:00'
+- repo: danielazamorah/visual-learning
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 7804e3711f6a93d9496194831fbd3dc8f7eaf5ff
+    pushed_at: '2022-09-19T04:09:16Z'
+    description: This repo contains graphics for different ML/probability/math subjects.
+      Visuals can help you better understand and learn topics!
+    language: null
+    topics:
+    - graphics
+    - learning
+    - machine-learning
+    license: null
+    stargazers_count: 1
+    indexed_at: '2026-07-07T03:31:13.523916+00:00'
+    last_changed_at: '2026-07-07T03:31:13.523940+00:00'
+- repo: Datavault-UK/automate-dv
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0aa71153fbb233c630de07e3bb2a8ea3801880e1
+    pushed_at: '2026-02-05T11:49:30Z'
+    description: A free to use dbt package for creating and loading Data Vault 2.0
+      compliant Data Warehouses (powered by dbt, an open source data engineering tool,  registered
+      trademark of dbt Labs)
+    language: null
+    topics:
+    - data-vault
+    - dataengineering
+    - datalake
+    - datavault
+    - datavault20
+    - datawarehouse
+    - datawarehousing
+    - dbt
+    - elt
+    - etl
+    - metadata
+    - snowflake
+    - sql
+    license: Apache-2.0
+    stargazers_count: 593
+    indexed_at: '2026-07-07T03:31:14.103988+00:00'
+    last_changed_at: '2026-07-07T03:31:14.104005+00:00'
+- repo: calogica/dbt-expectations
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: db3dc81dada4bf987a3beee375978421568a240a
+    pushed_at: '2024-12-16T16:31:42Z'
+    description: Port(ish) of Great Expectations to dbt test macros
+    language: Shell
+    topics:
+    - dbt
+    license: Apache-2.0
+    stargazers_count: 1230
+    indexed_at: '2026-07-07T03:31:14.661243+00:00'
+    last_changed_at: '2026-07-07T03:31:14.661258+00:00'
+- repo: fal-ai/dbt-fal
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: cb816240028d9279077e789bd930a003208672a1
+    pushed_at: '2024-04-05T23:29:06Z'
+    description: do more with dbt. dbt-fal helps you run Python alongside dbt, so
+      you can send Slack alerts, detect anomalies and build machine learning models.
+    language: Python
+    topics:
+    - analytics
+    - data-modeling
+    - dbt
+    - machine-learning
+    - machinelearning
+    - pandas
+    - python
+    license: Apache-2.0
+    stargazers_count: 853
+    indexed_at: '2026-07-07T03:31:15.195226+00:00'
+    last_changed_at: '2026-07-07T03:31:15.195241+00:00'
+- repo: re-data/re-data
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d43f6b1c369e667bb9b469b3a691e5050f278f9b
+    pushed_at: '2024-04-30T02:49:55Z'
+    description: re_data - fix data issues before your users & CEO would discover
+      them 😊
+    language: HTML
+    topics:
+    - data-analysis
+    - data-monitoring
+    - data-observability
+    - data-quality
+    - data-quality-checks
+    - data-quality-monitoring
+    - data-reliability
+    - data-testing
+    - dataquality
+    - dbt
+    - dbt-packages
+    - open-source-tooling
+    license: NOASSERTION
+    stargazers_count: 1566
+    indexed_at: '2026-07-07T03:31:15.823004+00:00'
+    last_changed_at: '2026-07-07T03:31:15.823025+00:00'
+- repo: datafold/data-diff
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1410c6cd0b915ae24a15e03a7de15ff41beebaf0
+    pushed_at: '2024-05-17T13:45:03Z'
+    description: Compare tables within or across databases
+    language: Python
+    topics:
+    - data
+    - data-diffing
+    - data-engineering
+    - data-quality
+    - data-quality-monitoring
+    - data-science
+    - database
+    - databricks-sql
+    - dataengineering
+    - dataquality
+    - dbt
+    - mysql
+    - oracle-database
+    - postgres
+    - postgresql
+    - python
+    - rdbms
+    - snowflake
+    - sql
+    - trino
+    license: MIT
+    stargazers_count: 2990
+    indexed_at: '2026-07-07T03:31:16.405785+00:00'
+    last_changed_at: '2026-07-07T03:31:16.405812+00:00'
+- repo: dbt-checkpoint/dbt-checkpoint
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2537c7bd9d64af06ed3c1f023e995d081f205da6
+    pushed_at: '2026-06-18T13:04:24Z'
+    description: ':fishing_pole_and_fish: List of `pre-commit` hooks to ensure the
+      quality of your `dbt` projects.'
+    language: Python
+    topics:
+    - bigquery
+    - business-intelligence
+    - dbt
+    - pre-commit
+    - pre-commit-hook
+    - quality-assurance
+    - snowflake
+    - sql
+    license: MIT
+    stargazers_count: 749
+    indexed_at: '2026-07-07T03:31:16.987944+00:00'
+    last_changed_at: '2026-07-07T03:31:16.987959+00:00'
+- repo: elementary-data/elementary
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 252252786ecf5eb750b69d13d575158a75d6f784
+    pushed_at: '2026-07-05T09:00:19Z'
+    description: The dbt-native data observability solution for data & analytics engineers.
+      Monitor your data pipelines in minutes. Available as self-hosted or cloud service
+      with premium features.
+    language: HTML
+    topics:
+    - analytics-engineer
+    - bigquery
+    - data-analysis
+    - data-governance
+    - data-lineage
+    - data-observability
+    - data-pipeline
+    - data-pipelines
+    - data-reliability
+    - data-warehouse
+    - dataops
+    - dbt
+    - dbt-artifacts
+    - dbt-packages
+    - lineage
+    - redshift
+    - snowflake
+    license: Apache-2.0
+    stargazers_count: 2378
+    indexed_at: '2026-07-07T03:31:17.533623+00:00'
+    last_changed_at: '2026-07-07T03:31:17.533654+00:00'
+- repo: DataTalksClub/data-engineering-zoomcamp
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5cd686a16ee3bb982a0eb67ea73773271a20b51a
+    pushed_at: '2026-06-10T09:34:17Z'
+    description: Data Engineering Zoomcamp is a free 9-week course on building production-ready
+      data pipelines. The next cohort starts in January 2026. Join the course here
+      👇🏼
+    language: Jupyter Notebook
+    topics:
+    - course
+    - data-engineering
+    - dbt
+    - docker
+    - free
+    - kafka
+    - kestra
+    - spark
+    license: null
+    stargazers_count: 43197
+    indexed_at: '2026-07-07T03:31:18.184654+00:00'
+    last_changed_at: '2026-07-07T03:31:18.184671+00:00'
+- repo: visenger/awesome-mlops
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: ef2638bd6262ca1830c7c04cc71c996e3adfc6f3
+    pushed_at: '2024-11-21T14:45:11Z'
+    description: 'A curated list of references for MLOps '
+    language: null
+    topics:
+    - ai
+    - data-science
+    - devops
+    - engineering
+    - federated-learning
+    - machine-learning
+    - ml
+    - mlops
+    - software-engineering
+    license: null
+    stargazers_count: 13952
+    indexed_at: '2026-07-07T03:31:18.700343+00:00'
+    last_changed_at: '2026-07-07T03:31:18.700365+00:00'
+- repo: flawiddsouza/Restfox
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: e8e158e8de297a2fec0259169e45e647fb989446
+    pushed_at: '2026-07-03T22:18:31Z'
+    description: Offline-First Minimalistic HTTP & Socket Testing Client for the Web
+      & Desktop
+    language: Vue
+    topics:
+    - api-client
+    - api-testing
+    - developer-tools
+    - graphql-client
+    - hacktoberfest
+    - http
+    - http-client
+    - pwa
+    - rest-api
+    - rest-client
+    - testing-tools
+    - vue
+    - websocket
+    license: MIT
+    stargazers_count: 2726
+    indexed_at: '2026-07-07T03:31:19.184746+00:00'
+    last_changed_at: '2026-07-07T03:31:19.184766+00:00'
+- repo: flexanalytics/dbt-business-intelligence
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 413f2ca4b48a3894f190493f0f9a986eeb2dcd63
+    pushed_at: '2026-04-30T20:47:16Z'
+    description: null
+    language: Python
+    topics: []
+    license: null
+    stargazers_count: 160
+    indexed_at: '2026-07-07T03:31:19.723043+00:00'
+    last_changed_at: '2026-07-07T03:31:19.723060+00:00'
+- repo: clausherther/nfl-dbt
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 4d67b0056ee4d0cf02f953752d7f998a3c334ab1
+    pushed_at: '2023-12-26T21:24:54Z'
+    description: This repo contains dbt models to transform NFL Play-by-Play (pbp)
+      data sourced from https://github.com/nflverse/nflverse-data into analytical
+      models
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 24
+    indexed_at: '2026-07-07T03:31:20.237629+00:00'
+    last_changed_at: '2026-07-07T03:31:20.237644+00:00'
+- repo: randypitcherii/dbt_workspace
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 6f9ba7645b44a012e74621240bd39d2a29637989
+    pushed_at: '2023-05-17T20:17:19Z'
+    description: Workspace for dbt demos
+    language: PLpgSQL
+    topics: []
+    license: null
+    stargazers_count: 61
+    indexed_at: '2026-07-07T03:31:20.756225+00:00'
+    last_changed_at: '2026-07-07T03:31:20.756244+00:00'
+- repo: CivicTechAtlanta/georgia-court-reminders-2022
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d565116ebf1085340f17f777c52c8c870ba4c227
+    pushed_at: '2025-12-18T01:23:40Z'
+    description: Helping people remember to attend court to help break the cycle of
+      fines and jail time (see Wiki for more docs)
+    language: Python
+    topics:
+    - atlanta
+    - civictechindex
+    - court
+    - criminal-justice
+    - gcp
+    - sms
+    - twilio
+    license: null
+    stargazers_count: 7
+    indexed_at: '2026-07-07T03:31:21.308817+00:00'
+    last_changed_at: '2026-07-07T03:31:21.308850+00:00'
+- repo: engineersCode/EngComp4_landlinear
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a73c9e4fe2ad590118865354df82bb9cd10ba189
+    pushed_at: '2025-04-17T20:39:58Z'
+    description: Using computational thinking to get deep insights on the foundations
+      of linear algebra
+    language: Jupyter Notebook
+    topics:
+    - engineering-computations
+    - jupyter
+    - linear-algebra
+    - python
+    license: null
+    stargazers_count: 121
+    indexed_at: '2026-07-07T03:31:21.870723+00:00'
+    last_changed_at: '2026-07-07T03:31:21.870740+00:00'
+- repo: ciannabp/inauguration
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5d79ad74c8ddcda8fefd0b901c5283392b13dfd0
+    pushed_at: '2021-03-24T04:30:25Z'
+    description: A color palette inspired by the 2021 inauguration
+    language: R
+    topics: []
+    license: MIT
+    stargazers_count: 96
+    indexed_at: '2026-07-07T03:31:22.370218+00:00'
+    last_changed_at: '2026-07-07T03:31:22.370245+00:00'
+- repo: priyankavergadia/google-cloud-4-words
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 6944032502c3f3bad4274352679c313f9f166263
+    pushed_at: '2024-04-06T10:56:15Z'
+    description: The Google Cloud Developer's Cheat Sheet
+    language: null
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 8224
+    indexed_at: '2026-07-07T03:31:22.882586+00:00'
+    last_changed_at: '2026-07-07T03:31:22.882604+00:00'
+- repo: tirthajyoti/Stats-Maths-with-Python
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1417888aca0cfadf3ca5a61dedc27d7c7dadd094
+    pushed_at: '2022-09-18T16:57:57Z'
+    description: General statistics, mathematical programming, and numerical/scientific
+      computing scripts and notebooks in Python
+    language: Jupyter Notebook
+    topics:
+    - analytics
+    - anova
+    - bayesian-statistics
+    - clustering
+    - data-science
+    - hypothesis-testing
+    - inferential-statistics
+    - machine-learning
+    - mathematical-programming
+    - mathematics
+    - matplotlib
+    - normal-distribution
+    - numerical-analysis
+    - numpy
+    - pandas
+    - probability
+    - python
+    - scipy
+    - statistics
+    - statsmodels
+    license: MIT
+    stargazers_count: 1029
+    indexed_at: '2026-07-07T03:31:23.394615+00:00'
+    last_changed_at: '2026-07-07T03:31:23.394642+00:00'
+- repo: rfordatascience/tidytuesday
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 107ff6c70de02dd807169e13aee7dc9d86ff88b6
+    pushed_at: '2026-07-06T15:59:13Z'
+    description: 'Official repo for the #tidytuesday project'
+    language: HTML
+    topics: []
+    license: CC0-1.0
+    stargazers_count: 8250
+    indexed_at: '2026-07-07T03:31:23.999593+00:00'
+    last_changed_at: '2026-07-07T03:31:23.999608+00:00'
+- repo: itaidagan/FranchiseRevenueComparison
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2b9e05aacae928be000cc00d964a2970178c1545
+    pushed_at: '2019-04-22T17:17:50Z'
+    description: null
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 40
+    indexed_at: '2026-07-07T03:31:24.509007+00:00'
+    last_changed_at: '2026-07-07T03:31:24.509038+00:00'
+- repo: kenithgrey/ggQC
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 75bb5b0d47d4d9b87a5fda85171fe1acf1ab471e
+    pushed_at: '2020-10-01T11:31:33Z'
+    description: ggQC
+    language: R
+    topics:
+    - ggplot2
+    - qcc
+    - quality-control
+    - r
+    - xmr
+    license: GPL-3.0
+    stargazers_count: 48
+    indexed_at: '2026-07-07T03:31:25.015669+00:00'
+    last_changed_at: '2026-07-07T03:31:25.015687+00:00'
+- repo: wschroder/NewGeorgia-ElectionFinance
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 3f766e006f1a4d31392b955bd48b7adf0f24f79b
+    pushed_at: '2018-11-24T18:32:33Z'
+    description: New Georgia Project -Election Finance Open Access Project
+    language: null
+    topics: []
+    license: null
+    stargazers_count: 4
+    indexed_at: '2026-07-07T03:31:25.492077+00:00'
+    last_changed_at: '2026-07-07T03:31:25.492109+00:00'
+- repo: m-wrzr/populartimes
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 989f66b63dd1b6a144c5ad4a7c3a200f7f8649ee
+    pushed_at: '2024-05-22T22:45:05Z'
+    description: null
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 904
+    indexed_at: '2026-07-07T03:31:25.974500+00:00'
+    last_changed_at: '2026-07-07T03:31:25.974516+00:00'
+- repo: ml874/Data-Science-Cheatsheet
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: ec13ff999fddd9a1a88a285cb8e1d00649bba5d9
+    pushed_at: '2022-09-18T14:59:37Z'
+    description: null
+    language: TeX
+    topics: []
+    license: null
+    stargazers_count: 2571
+    indexed_at: '2026-07-07T03:31:26.481922+00:00'
+    last_changed_at: '2026-07-07T03:31:26.481945+00:00'
+- repo: tmasjc/atl-salary-data
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 69e7c8ebacad1a5b9cbf9283a005a59338d12895
+    pushed_at: '2019-10-14T04:22:27Z'
+    description: 'Simpson''s paradox: a case study exercise '
+    language: R
+    topics:
+    - data-science
+    - opendata
+    - shinyapps
+    license: null
+    stargazers_count: 6
+    indexed_at: '2026-07-07T03:31:27.028961+00:00'
+    last_changed_at: '2026-07-07T03:31:27.028976+00:00'
+- repo: MySportsFeeds/mysportsfeeds-r
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d2893d98d2c7610a18e873c76f3494affb55d56c
+    pushed_at: '2023-10-06T02:12:31Z'
+    description: R wrapper functions for the MySportsFeeds Sports Data API
+    language: R
+    topics:
+    - mlb
+    - nba
+    - nba-analytics
+    - nba-stats
+    - nfl
+    - nhl
+    - sports-data
+    - sports-stats
+    - sportsanalytics
+    license: MIT
+    stargazers_count: 28
+    indexed_at: '2026-07-07T03:31:27.594128+00:00'
+    last_changed_at: '2026-07-07T03:31:27.594155+00:00'
+- repo: mattmills49/AtlantaRUsers
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d7b2f899a246222ae69c0f84fd93cdba66ed3548
+    pushed_at: '2018-04-18T18:08:59Z'
+    description: This is the old repo, check out the correct one https://github.com/AtlantaRUsers/Meetups
+    language: R
+    topics: []
+    license: null
+    stargazers_count: 7
+    indexed_at: '2026-07-07T03:31:28.108514+00:00'
+    last_changed_at: '2026-07-07T03:31:28.108531+00:00'
+- repo: walkerke/tidycensus
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5461f0386f46f3ca26bb13bfb1ff37b1d9b2054e
+    pushed_at: '2026-05-25T11:57:54Z'
+    description: Load US Census boundary and attribute data as 'tidyverse' and 'sf'-ready
+      data frames in R
+    language: R
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 678
+    indexed_at: '2026-07-07T03:31:28.638106+00:00'
+    last_changed_at: '2026-07-07T03:31:28.638134+00:00'
+- repo: tiagomendesdantas/Rspotify
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: e2673f96e26715c3c6ab391720f99d5b0b2b93bc
+    pushed_at: '2019-07-12T21:13:33Z'
+    description: This package allows you to connect R to Spotify's API and get information
+      about Songs, Albums, Artists and Users.
+    language: R
+    topics: []
+    license: null
+    stargazers_count: 54
+    indexed_at: '2026-07-07T03:31:29.164247+00:00'
+    last_changed_at: '2026-07-07T03:31:29.164268+00:00'
+- repo: business-science/tidyquant
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a5cb868d79edfcef2f7de8aee71a1453d3aa40c5
+    pushed_at: '2026-07-01T00:44:01Z'
+    description: Bringing financial analysis to the tidyverse
+    language: R
+    topics:
+    - dplyr
+    - financial-analysis
+    - financial-data
+    - financial-statements
+    - multiple-stocks
+    - performance-analysis
+    - performanceanalytics
+    - quantmod
+    - r-package
+    - stock
+    - stock-exchanges
+    - stock-indexes
+    - stock-lists
+    - stock-performance
+    - stock-prices
+    - stock-symbol
+    - tidyverse
+    - time-series
+    - timeseries
+    - xts
+    license: NOASSERTION
+    stargazers_count: 911
+    indexed_at: '2026-07-07T03:31:29.741656+00:00'
+    last_changed_at: '2026-07-07T03:31:29.741670+00:00'
+- repo: business-science/timetk
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5a06bd8b5d777e4d6be4d15658c289f1da2c1884
+    pushed_at: '2025-08-29T13:07:15Z'
+    description: Time series analysis in the `tidyverse`
+    language: R
+    topics:
+    - coercion
+    - coercion-functions
+    - data-mining
+    - dplyr
+    - forecast
+    - forecasting
+    - forecasting-models
+    - machine-learning
+    - r-package
+    - series-decomposition
+    - series-signature
+    - tibble
+    - tidy
+    - tidyquant
+    - tidyverse
+    - time
+    - time-series
+    - timeseries
+    license: null
+    stargazers_count: 644
+    indexed_at: '2026-07-07T03:31:30.310174+00:00'
+    last_changed_at: '2026-07-07T03:31:30.310204+00:00'
+- repo: foratlanta/foratlanta.github.io
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: d8891432ae74b2655a5277870064020f60ad73aa
+    pushed_at: '2022-07-21T22:57:01Z'
+    description: Focus On Results Atlanta (FOR Atlanta)
+    language: CSS
+    topics: []
+    license: null
+    stargazers_count: 1
+    indexed_at: '2026-07-07T03:31:30.910416+00:00'
+    last_changed_at: '2026-07-07T03:31:30.910439+00:00'
+- repo: etsy/divertsy-client
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a36f6e978322cc569c22208666fbc44f288c1569
+    pushed_at: '2017-04-14T21:52:05Z'
+    description: The Android client for running DIVERTsy, a waste stream recording
+      tool to help track diversion rates.
+    language: Java
+    topics:
+    - non-sox
+    license: MIT
+    stargazers_count: 13
+    indexed_at: '2026-07-07T03:31:31.504953+00:00'
+    last_changed_at: '2026-07-07T03:31:31.504980+00:00'
+- repo: hrbrmstr/ggalt
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 7b5e9f98d0afd8c47277e6e96ce152d63b8d3776
+    pushed_at: '2026-05-13T13:35:46Z'
+    description: ':earth_americas: Extra Coordinate Systems, Geoms,  Statistical Transformations
+      & Scales for ''ggplot2'''
+    language: R
+    topics:
+    - geom
+    - ggplot-extension
+    - ggplot2
+    - ggplot2-geom
+    - ggplot2-scales
+    - r
+    - rstats
+    license: NOASSERTION
+    stargazers_count: 688
+    indexed_at: '2026-07-07T03:31:32.025589+00:00'
+    last_changed_at: '2026-07-07T03:31:32.025607+00:00'
+- repo: Data4Democracy/read-this-first
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5d49ba775b1fd6f7bb29fc5e88b23267734307d0
+    pushed_at: '2019-01-31T14:27:49Z'
+    description: Start here!
+    language: null
+    topics: []
+    license: null
+    stargazers_count: 425
+    indexed_at: '2026-07-07T03:31:32.585662+00:00'
+    last_changed_at: '2026-07-07T03:31:32.585684+00:00'
+- repo: skorasaurus/mapmakers-cheatsheet
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 394bcde1d05283597d5dbc07f775f389654ca3cc
+    pushed_at: '2017-03-01T18:26:31Z'
+    description: popular tourist destinations on the wild and exciting quest to make
+      web maps in fewer tries
+    language: null
+    topics: []
+    license: null
+    stargazers_count: 4
+    indexed_at: '2026-07-07T03:31:33.119732+00:00'
+    last_changed_at: '2026-07-07T03:31:33.119758+00:00'
+- repo: NewsappAJC/precinct-election-map
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 8237244043cb48dcc8704a43e009711add0c6382
+    pushed_at: '2016-11-11T21:22:01Z'
+    description: A map of precinct-level election results scraped from the Secretary
+      of State website
+    language: JavaScript
+    topics: []
+    license: MIT
+    stargazers_count: 4
+    indexed_at: '2026-07-07T03:31:33.635219+00:00'
+    last_changed_at: '2026-07-07T03:31:33.635237+00:00'
+- repo: corynissen/yahooFantasySports
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2991ddcce767ec96acbcfb2bb58c172dc9b40308
+    pushed_at: '2016-10-07T03:02:49Z'
+    description: R package to use yahoo fantasy sports API
+    language: R
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 11
+    indexed_at: '2026-07-07T03:31:34.124875+00:00'
+    last_changed_at: '2026-07-07T03:31:34.124903+00:00'
+- repo: mavam/stat-cookbook
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 09bd804a5251911088d55f8ce787a991b8b4ba15
+    pushed_at: '2023-02-20T06:43:02Z'
+    description: ':orange_book: The probability and statistics cookbook'
+    language: TeX
+    topics:
+    - cheatsheet
+    - cookbook
+    - probability
+    - statistics
+    license: NOASSERTION
+    stargazers_count: 2301
+    indexed_at: '2026-07-07T03:31:34.642348+00:00'
+    last_changed_at: '2026-07-07T03:31:34.642366+00:00'
+- repo: ujjwalkarn/DataScienceR
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0da11cbe0a260fd911bb75ca64dd638687dce214
+    pushed_at: '2023-03-10T11:06:16Z'
+    description: 'a curated list of R tutorials for Data Science, NLP and Machine
+      Learning '
+    language: R
+    topics:
+    - data-science
+    - datascience
+    - r
+    - text-mining
+    license: MIT
+    stargazers_count: 2147
+    indexed_at: '2026-07-07T03:31:35.149328+00:00'
+    last_changed_at: '2026-07-07T03:31:35.149358+00:00'
+- repo: alexgutteridge/rsruby
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: e3f7982a9ccc75175b8f7cac868fdd45af18fd18
+    pushed_at: '2018-10-06T17:17:14Z'
+    description: Ruby - R bridge.
+    language: Ruby
+    topics: []
+    license: LGPL-2.1
+    stargazers_count: 334
+    indexed_at: '2026-07-07T03:31:35.640636+00:00'
+    last_changed_at: '2026-07-07T03:31:35.640663+00:00'
+- repo: Chicago/opengrid
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 817bc27577adb6f48ea18f9f539537bfc68e364f
+    pushed_at: '2025-01-24T22:38:45Z'
+    description: A user-friendly, map-based tool to combine and explore real-time
+      or historical data.
+    language: JavaScript
+    topics:
+    - leaflet
+    - nodejs
+    - opengrid
+    - smart-cities
+    license: NOASSERTION
+    stargazers_count: 264
+    indexed_at: '2026-07-07T03:31:36.177711+00:00'
+    last_changed_at: '2026-07-07T03:31:36.177739+00:00'
+- repo: GordonMcKinney/gist-assets
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 6ed330aae42c01b2c23ee251f40b160505bb5275
+    pushed_at: '2016-02-01T16:02:45Z'
+    description: Assets for my Gist pages
+    language: null
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 1
+    indexed_at: '2026-07-07T03:31:36.683711+00:00'
+    last_changed_at: '2026-07-07T03:31:36.683739+00:00'
+- repo: CivicTechAtlanta/apd-crime-data
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a9880f36b0e70234914fb2d3be01fe8702785d58
+    pushed_at: '2017-02-06T18:54:53Z'
+    description: Working with publicly available data on Atlanta Police Department's
+      "Crime Data Downloads" site at http://www.atlantapd.org/crimedatadownloads.aspx
+    language: HTML
+    topics: []
+    license: null
+    stargazers_count: 19
+    indexed_at: '2026-07-07T03:31:37.277130+00:00'
+    last_changed_at: '2026-07-07T03:31:37.277159+00:00'
+- repo: robertjwilson/ggplot2-theme
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: ae3b9b83302d9ebfe4c2d10a27f5c521a3e8b9d7
+    pushed_at: '2016-01-18T15:31:54Z'
+    description: a ggplot2 designed to make it easier to create publication quality
+      figures
+    language: R
+    topics: []
+    license: null
+    stargazers_count: 58
+    indexed_at: '2026-07-07T03:31:37.762780+00:00'
+    last_changed_at: '2026-07-07T03:31:37.762807+00:00'
+- repo: briatte/ggnetwork
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 3e47965fde5c53d4aca60a4ae45c06210c020f55
+    pushed_at: '2026-05-09T05:39:22Z'
+    description: Geoms to plot networks with ggplot2
+    language: HTML
+    topics:
+    - ggplot2
+    - network-visualization
+    - r
+    license: null
+    stargazers_count: 153
+    indexed_at: '2026-07-07T03:31:38.294926+00:00'
+    last_changed_at: '2026-07-07T03:31:38.294951+00:00'
+- repo: jennybc/analyze-github-stuff-with-r
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 23020c259a7788bb19ae7d9369d4195bd7161d73
+    pushed_at: '2015-12-02T19:40:03Z'
+    description: Marshal data from the GitHub API with R
+    language: R
+    topics: []
+    license: null
+    stargazers_count: 40
+    indexed_at: '2026-07-07T03:31:38.817950+00:00'
+    last_changed_at: '2026-07-07T03:31:38.817977+00:00'
+- repo: thomasp85/gganimate
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 16129a6fbec4d8cf881056f18570da205894f227
+    pushed_at: '2025-09-04T12:14:57Z'
+    description: A Grammar of Animated Graphics
+    language: R
+    topics:
+    - animation
+    - data-visualization
+    - ggplot-extension
+    - ggplot2
+    - rstats
+    - transition
+    license: NOASSERTION
+    stargazers_count: 1983
+    indexed_at: '2026-07-07T03:31:39.348977+00:00'
+    last_changed_at: '2026-07-07T03:31:39.348996+00:00'
+- repo: josephmisiti/awesome-machine-learning
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 433f2a138e6c6a51b9059d073530fb022c398f2d
+    pushed_at: '2026-06-18T13:51:25Z'
+    description: A curated list of awesome Machine Learning frameworks, libraries
+      and software.
+    language: Python
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 73215
+    indexed_at: '2026-07-07T03:31:39.876351+00:00'
+    last_changed_at: '2026-07-07T03:31:39.876376+00:00'
+- repo: tomhartley/AirPi
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 572bcd2ae5d76a95f22e01cef076bb483ce668ee
+    pushed_at: '2017-11-01T11:35:21Z'
+    description: a Raspberry Pi weather station
+    language: Python
+    topics: []
+    license: null
+    stargazers_count: 358
+    indexed_at: '2026-07-07T03:31:40.416934+00:00'
+    last_changed_at: '2026-07-07T03:31:40.416959+00:00'
+- repo: awoodruff/dst-sunrise-sunset-map
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: cd9d0bda3cc53f6fa848f7718870f2c67b487595
+    pushed_at: '2018-05-29T17:11:46Z'
+    description: Interactive map showing effects of daylight saving time on sunrise
+      and sunset times
+    language: HTML
+    topics: []
+    license: null
+    stargazers_count: 9
+    indexed_at: '2026-07-07T03:31:40.965715+00:00'
+    last_changed_at: '2026-07-07T03:31:40.965734+00:00'
+- repo: bbrewington/R_Reference
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: c33a7c4e749da287f61a12582b3f67c4ed9ee66f
+    pushed_at: '2017-08-08T21:01:46Z'
+    description: A place to store helpful files for using R
+    language: R
+    topics: []
+    license: null
+    stargazers_count: 3
+    indexed_at: '2026-07-07T03:31:41.474523+00:00'
+    last_changed_at: '2026-07-07T03:31:41.474545+00:00'
