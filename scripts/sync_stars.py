@@ -43,9 +43,11 @@ if GITHUB_TOKEN:
 # GitHub API helpers
 # -----------------------------------------------------------------------
 
-def get_starred_repos(user: str) -> list[dict]:
+def get_starred_repos(user: str) -> tuple[list[dict], bool]:
+    """Returns (repos, rate_limited) - rate_limited is True if discovery was cut short."""
     repos = []
     page = 1
+    rate_limited = False
     while True:
         r = requests.get(
             f"https://api.github.com/users/{user}/starred",
@@ -59,9 +61,10 @@ def get_starred_repos(user: str) -> list[dict]:
         repos.extend(batch)
         page += 1
         if int(r.headers.get("X-RateLimit-Remaining", 999)) < 10:
-            print("WARNING: approaching GitHub rate limit", file=sys.stderr)
+            print("WARNING: approaching GitHub rate limit - discovery may be incomplete", file=sys.stderr)
+            rate_limited = True
             break
-    return repos
+    return repos, rate_limited
 
 
 def get_repo_meta(owner_repo: str) -> dict:
@@ -98,6 +101,18 @@ def get_latest_commit_sha(owner_repo: str, paths: list[str] | None = None) -> st
 # tracked.yml read/write
 # -----------------------------------------------------------------------
 
+def extract_header(text: str) -> str:
+    """Leading '#' comment block (plus its trailing blank line), stripped by a plain yaml.dump round-trip."""
+    lines = text.splitlines(keepends=True)
+    header_lines = []
+    for line in lines:
+        if line.startswith("#") or line.strip() == "":
+            header_lines.append(line)
+        else:
+            break
+    return "".join(header_lines)
+
+
 def load_tracked() -> dict:
     data = yaml.safe_load(TRACKED_FILE.read_text())
     data.setdefault("tracked", [])
@@ -113,7 +128,9 @@ def load_tracked() -> dict:
 def save_tracked(data: dict, dry_run: bool) -> None:
     if dry_run:
         return
-    TRACKED_FILE.write_text(yaml.dump(data, default_flow_style=False, sort_keys=False, allow_unicode=True))
+    header = extract_header(TRACKED_FILE.read_text()) if TRACKED_FILE.exists() else ""
+    body = yaml.dump(data, default_flow_style=False, sort_keys=False, allow_unicode=True)
+    TRACKED_FILE.write_text(header + body)
 
 
 def now_iso() -> str:
@@ -171,13 +188,13 @@ def run_sync(data: dict, dry_run: bool) -> list[dict]:
 # Discover mode
 # -----------------------------------------------------------------------
 
-def run_discover(data: dict, dry_run: bool) -> list[dict]:
+def run_discover(data: dict, dry_run: bool) -> tuple[list[dict], bool]:
     print(f"[discover] Fetching stars for {GITHUB_USER}...")
     try:
-        starred = get_starred_repos(GITHUB_USER)
+        starred, rate_limited = get_starred_repos(GITHUB_USER)
     except requests.HTTPError as e:
         print(f"  ERROR: {e}", file=sys.stderr)
-        return []
+        return [], False
     print(f"  {len(starred)} starred repos found")
 
     tracked_names = {item["repo"] for item in data["tracked"]}
@@ -208,7 +225,7 @@ def run_discover(data: dict, dry_run: bool) -> list[dict]:
         new_stubs.append({"repo": repo, "reason": "new_star", "state": stub["state"]})
 
     print(f"  {len(new_stubs)} new stub(s) added")
-    return new_stubs
+    return new_stubs, rate_limited
 
 
 # -----------------------------------------------------------------------
@@ -228,12 +245,13 @@ def main():
 
     sync_changes: list[dict] = []
     new_stars: list[dict] = []
+    discover_rate_limited = False
 
     if args.mode in ("all", "sync"):
         sync_changes = run_sync(data, dry_run=args.dry_run)
 
     if args.mode in ("all", "discover"):
-        new_stars = run_discover(data, dry_run=args.dry_run)
+        new_stars, discover_rate_limited = run_discover(data, dry_run=args.dry_run)
 
     save_tracked(data, dry_run=args.dry_run)
 
@@ -243,6 +261,7 @@ def main():
         "changed_count": len(sync_changes),
         "new_stars_count": len(new_stars),
         "total_changes": len(sync_changes) + len(new_stars),
+        "discover_rate_limited": discover_rate_limited,
         "changes": sync_changes,
         "new_stars": new_stars,
     }

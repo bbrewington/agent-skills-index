@@ -33,6 +33,13 @@ def gen_body(data: dict) -> str:
         "",
     ]
 
+    if data.get("discover_rate_limited"):
+        lines += [
+            "> [!WARNING]",
+            "> Hit the GitHub API rate limit during discovery - the star list below may be incomplete. Re-run `sync_stars.py --mode discover` once the limit resets to pick up any missed stars.",
+            "",
+        ]
+
     # ------------------------------------------------------------------
     # Section 1: tracked repos with upstream changes
     # ------------------------------------------------------------------

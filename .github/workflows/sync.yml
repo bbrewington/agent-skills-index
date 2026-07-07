@@ -18,12 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           token: ${{ secrets.SKILLS_INDEX_TOKEN }}
+          persist-credentials: false
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
         with:
           python-version: "3.14"
 
@@ -54,7 +55,7 @@ jobs:
 
       - name: Upload changes.yaml (dry run)
         if: github.event.inputs.dry_run == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: changes
           path: changes.yaml
@@ -69,12 +70,12 @@ jobs:
           GH_TOKEN: ${{ secrets.SKILLS_INDEX_TOKEN }}
         run: |
           set -e
-          branch="skills-index/update-$(date -u +%Y%m%dT%H%M%S)"
+          branch="agent-skills-index/update-$(date -u +%Y%m%dT%H%M%S)"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
           git add tracked.yml
           git commit -m "chore(index): skills index update $(date -u +%Y-%m-%d)"
-          git push origin "$branch"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" "$branch"
           title="chore(index): skills index update $(date -u +%Y-%m-%d) (${{ steps.counts.outputs.changed_count }} updated, ${{ steps.counts.outputs.new_stars_count }} new stars)"
-          gh pr create --title "$title" --body-file pr_body.md --label skills-index --head "$branch"
+          gh pr create --title "$title" --body-file pr_body.md --label agent-skills-index --head "$branch"
