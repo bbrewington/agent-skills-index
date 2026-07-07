@@ -17,11 +17,11 @@
 # State fields (bot-written, under state:):
 #   latest_sha, pushed_at, indexed_at, last_changed_at
 
-tracked:
+tracked: []
+stubs:
 - repo: dbt-labs/dbt-core
   skill: null
-  notes: 'TEMP: end-to-end workflow validation test entry, remove after confirming
-    PR flow'
+  notes: null
   watch_paths: null
   state:
     latest_sha: 0166be26e85aa583457ca478d813902bab49a24a
@@ -41,7 +41,6 @@ tracked:
     stargazers_count: 13375
     indexed_at: '2026-07-07T03:31:11.325055+00:00'
     last_changed_at: '2026-07-07T03:49:21.872565+00:00'
-stubs:
 - repo: bponzbro/swyft-sigma-skills
   skill: null
   notes: null
