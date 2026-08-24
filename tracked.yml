@@ -5257,3 +5257,297 @@ stubs:
     stargazers_count: 3
     indexed_at: '2026-07-07T03:31:41.474523+00:00'
     last_changed_at: '2026-07-07T03:31:41.474545+00:00'
+- repo: exploreomni/omni-agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 32a3ec459f77d347131067a8fd1c56a95a51b603
+    pushed_at: '2026-08-20T22:04:21Z'
+    description: A collection of skill for working with Omni. These skills help AI
+      agents understand and execute Omni workflows more effectively.
+    language: Python
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 32
+    indexed_at: '2026-08-24T08:43:16.084219+00:00'
+    last_changed_at: '2026-08-24T08:43:16.084234+00:00'
+- repo: growthxai/squeaks
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1be5c034accd49958c8e34e75d2b2d54beaf57b7
+    pushed_at: '2026-03-04T02:40:43Z'
+    description: Copy-first Prototyping with Claude. Whiteboard sketches can't be
+      clicked, Figma looks finished before the thinking is finished. Vibe-coding skips
+      the thinking entirely.
+    language: TypeScript
+    topics: []
+    license: MIT
+    stargazers_count: 51
+    indexed_at: '2026-08-24T08:43:16.612963+00:00'
+    last_changed_at: '2026-08-24T08:43:16.612977+00:00'
+- repo: dbt-labs/agents_schema
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: dd7fc6fdb58e7ba1563fbd61ad274a0d94cee1e9
+    pushed_at: '2026-08-20T18:18:42Z'
+    description: null
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 43
+    indexed_at: '2026-08-24T08:43:17.287675+00:00'
+    last_changed_at: '2026-08-24T08:43:17.287689+00:00'
+- repo: awslabs/hcls-agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 48287b7d6ec853f62fb29066507f8bbac4d96397
+    pushed_at: '2026-07-22T17:53:57Z'
+    description: 'Agent skills for healthcare and life sciences: genomics, imaging,
+      claims, drug discovery, and more. Works with Amazon Quick, Kiro, Amazon AgentCore,
+      AWS Strands SDK, Claude Code, Codex, and any Agent Skills-compatible platform.'
+    language: Python
+    topics:
+    - agent-skills
+    - agentcore
+    - ai-agents
+    - amazon-quick-desktop
+    - claims-processing
+    - drug-discovery
+    - genomics
+    - healthcare-ai
+    - kiro
+    - life-sciences
+    - medical-imaging
+    - risk-adjustment
+    - strands-agents
+    license: MIT-0
+    stargazers_count: 16
+    indexed_at: '2026-08-24T08:43:17.905419+00:00'
+    last_changed_at: '2026-08-24T08:43:17.905439+00:00'
+- repo: mkiser/wtf-transcription-factory
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a31619a181feb72774ffd4728eab0e4e8995dfd2
+    pushed_at: '2026-07-28T20:46:28Z'
+    description: Paste a video or podcast link, get a clean transcript — 100% local.
+      yt-dlp + Whisper.
+    language: Python
+    topics:
+    - macos
+    - podcast
+    - transcription
+    - whisper
+    - yt-dlp
+    license: MIT
+    stargazers_count: 6
+    indexed_at: '2026-08-24T08:43:18.335676+00:00'
+    last_changed_at: '2026-08-24T08:43:18.335689+00:00'
+- repo: shepherd-agents/shepherd
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 4b44f4e8822a919a74b4bf9c13d9370dbf4cd9be
+    pushed_at: '2026-08-09T20:42:47Z'
+    description: A runtime substrate that turns an agent's execution into a reversible,
+      Git-like trace, so meta-agents can observe, fork, replay, and revert any run.
+      Couples agent and environments in a copy-on-write fork ~5x faster than docker
+      commit, with ~95% KV-cache reuse on replay. Framework built for meta-agents
+      to supervise, optimize, and train other agents
+    language: Python
+    topics:
+    - mcts-rl
+    - meta-agents
+    - meta-optimization
+    - runtime-supervision
+    - tree-rl
+    - workflow-automation
+    license: MIT
+    stargazers_count: 2367
+    indexed_at: '2026-08-24T08:43:18.784387+00:00'
+    last_changed_at: '2026-08-24T08:43:18.784402+00:00'
+- repo: pydantic/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: e5f7cb13d01561fe3735040ed37596abd9b83976
+    pushed_at: '2026-08-24T06:27:29Z'
+    description: null
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 124
+    indexed_at: '2026-08-24T08:43:19.294468+00:00'
+    last_changed_at: '2026-08-24T08:43:19.294483+00:00'
+- repo: columnar-tech/skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 138bee73fa956e89577b0efb8e1a212cd5232498
+    pushed_at: '2026-07-08T15:53:04Z'
+    description: Agent Skills for ADBC and dbc
+    language: null
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 8
+    indexed_at: '2026-08-24T08:43:20.080110+00:00'
+    last_changed_at: '2026-08-24T08:43:20.080124+00:00'
+- repo: dekart-xyz/geosql
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 2803d29c39628da4f5e52a518ccb88601d60de8b
+    pushed_at: '2026-08-19T15:23:31Z'
+    description: A Claude/Codex skill for geospatial data
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 608
+    indexed_at: '2026-08-24T08:43:20.519969+00:00'
+    last_changed_at: '2026-08-24T08:43:20.519983+00:00'
+- repo: composio-community/awesome-claude-plugins
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: e521f7ada8d89abea888e67b93b4dcfbb977041f
+    pushed_at: '2026-07-26T09:02:02Z'
+    description: A curated list of Plugins that let you extend Claude Code with custom
+      commands, agents, hooks, and MCP servers through the plugin system.
+    language: JavaScript
+    topics:
+    - anthropic
+    - claude-ai
+    - claude-code
+    - claude-code-plugin
+    - claude-code-plugin-marketplace
+    - claude-code-plugins
+    - claude-code-plugins-marketplace
+    - claude-cowork
+    - claude-desktop
+    - claude-plugins
+    - claude-skills
+    - plugins
+    license: null
+    stargazers_count: 1903
+    indexed_at: '2026-08-24T08:43:21.069241+00:00'
+    last_changed_at: '2026-08-24T08:43:21.069255+00:00'
+- repo: composio-community/awesome-codex-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0930e1373789d2eda449039f7ac154b33031de89
+    pushed_at: '2026-07-26T01:14:54Z'
+    description: A curated list of practical Codex skills for automating workflows
+      across the Codex CLI and API.
+    language: Python
+    topics:
+    - awesome
+    - awesome-lists
+    - awesome-resources
+    - codex
+    - codex-cli
+    - codex-skills
+    - coding-agent-skills
+    - coding-agents
+    - gpt-5-1-codex
+    - gpt-5-codex
+    - llm
+    - skills
+    license: null
+    stargazers_count: 16013
+    indexed_at: '2026-08-24T08:43:21.550823+00:00'
+    last_changed_at: '2026-08-24T08:43:21.550838+00:00'
+- repo: dlt-hub/dlthub-ai-harness
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 52646dd28ffddf76d04fe0421ad3ce74aab46ebb
+    pushed_at: '2026-08-20T09:15:44Z'
+    description: null
+    language: Python
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 55
+    indexed_at: '2026-08-24T08:43:22.007969+00:00'
+    last_changed_at: '2026-08-24T08:43:22.007982+00:00'
+- repo: tuva-health/tuva-core
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 47c94ad6b7ce0885dc044b7ae516ce5302cb5c73
+    pushed_at: '2026-08-23T07:24:57Z'
+    description: Main repo including core data model, data marts, data quality tests,
+      and terminology sets.
+    language: Python
+    topics:
+    - analytics-engineering
+    - bigquery
+    - data-analytics
+    - data-governance
+    - data-lineage
+    - data-pipelines
+    - data-warehouse
+    - dbt
+    - dbt-packages
+    - healthcare
+    - healthcare-analysis
+    - healthcare-data
+    - open-source
+    - redshift
+    - snowflake
+    - sql
+    - terminology
+    license: null
+    stargazers_count: 324
+    indexed_at: '2026-08-24T08:43:22.507285+00:00'
+    last_changed_at: '2026-08-24T08:43:22.507299+00:00'
+- repo: MarioLazo/agentic-coe
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 88b0559faa8e165ca30e73621a109ba3a71798e6
+    pushed_at: '2026-08-23T23:02:09Z'
+    description: Building the Agentic Center of Excellence — the operating model,
+      governance, and quality gates that move AI agents from pilots to production.
+      Tools, frameworks, and field notes from production experience.
+    language: null
+    topics: []
+    license: CC-BY-4.0
+    stargazers_count: 16
+    indexed_at: '2026-08-24T08:43:22.906552+00:00'
+    last_changed_at: '2026-08-24T08:43:22.906566+00:00'
+- repo: apache/ossie
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 88e0011148283302c9a04cd0287e00e0b9d87354
+    pushed_at: '2026-08-18T22:17:10Z'
+    description: Apache Ossie, industry wide specification effort to standardize how
+      we exchange semantic metadata across analytics, AI and BI platforms, providing
+      a vendor neutral, single source of truth for semantic data
+    language: Python
+    topics:
+    - metadata
+    - semantic
+    license: Apache-2.0
+    stargazers_count: 1939
+    indexed_at: '2026-08-24T08:43:23.410126+00:00'
+    last_changed_at: '2026-08-24T08:43:23.410140+00:00'
