@@ -10,22 +10,58 @@ on:
         type: boolean
         default: false
       prune_stubs:
-        description: "Remove stubs that are not in the star list (one-off cleanup; tracked entries are never removed)"
+        description: "Remove stubs that are not in the star list (one-off cleanup; entries with a verdict are never removed)"
         type: boolean
         default: false
 
 permissions:
   contents: read
 
+# One run at a time: a racing run would start from a stale tracked.yml.
+concurrency:
+  group: skills-index-sync
+  cancel-in-progress: false
+
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write # failure issue, via the workflow's own token
+    env:
+      GH_TOKEN: ${{ secrets.SKILLS_INDEX_TOKEN }}
+      REPO_URL: https://x-access-token:${{ secrets.SKILLS_INDEX_TOKEN }}@github.com/${{ github.repository }}.git
+      DRY_RUN: ${{ github.event.inputs.dry_run }}
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           token: ${{ secrets.SKILLS_INDEX_TOKEN }}
           persist-credentials: false
+          fetch-depth: 0
+
+      - name: Find open bot PR
+        id: pr
+        run: |
+          # `read` returns 1 at EOF when no PR is open; that is the normal case
+          read -r number branch < <(gh pr list --label agent-skills-index --state open --json number,headRefName \
+            --jq '.[0] // empty | "\(.number) \(.headRefName)"') || true
+          echo "number=${number:-}" >> "$GITHUB_OUTPUT"
+          echo "branch=${branch:-}" >> "$GITHUB_OUTPUT"
+
+      # Start from the PR branch's tracked.yml, not main's. If main can't be merged in, stop and
+      # leave the branch alone (nothing is pushed); the failure issue reports it.
+      - name: Check out open bot PR branch and merge main
+        if: steps.pr.outputs.number != '' && env.DRY_RUN != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout "${{ steps.pr.outputs.branch }}"
+          if ! git merge origin/main -m "Merge main into ${{ steps.pr.outputs.branch }}"; then
+            git merge --abort
+            echo "FAILURE_REASON=Merging main into \`${{ steps.pr.outputs.branch }}\` (PR #${{ steps.pr.outputs.number }}) conflicts. The branch was left untouched. Resolve the conflict by hand, or close the PR so the next run opens a fresh one." >> "$GITHUB_ENV"
+            exit 1
+          fi
 
       - name: Install uv
         uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
@@ -44,38 +80,46 @@ jobs:
         run: |
           set +e
           args="--mode all --output changes.yaml"
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+          if [ "$DRY_RUN" = "true" ]; then
             args="$args --dry-run"
           fi
           if [ "${{ github.event.inputs.prune_stubs }}" = "true" ]; then
             args="$args --prune-stubs"
           fi
           uv run python scripts/sync_stars.py $args
-          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
-
-      - name: Read change counts
-        id: counts
-        run: |
-          {
-            echo "changed_count=$(uv run python -c "import yaml; print(yaml.safe_load(open('changes.yaml'))['changed_count'])")"
-            echo "new_stars_count=$(uv run python -c "import yaml; print(yaml.safe_load(open('changes.yaml'))['new_stars_count'])")"
-          } >> "$GITHUB_OUTPUT"
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # 0 = nothing changed, 1 = changes; anything else is a real failure
+          if [ "$code" -gt 1 ]; then
+            echo "FAILURE_REASON=\`sync_stars.py\` exited with code $code (2 means tracked.yml failed validation). See the run log." >> "$GITHUB_ENV"
+            exit "$code"
+          fi
 
       - name: Upload changes.yaml (dry run)
-        if: github.event.inputs.dry_run == 'true'
+        if: env.DRY_RUN == 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: changes
           path: changes.yaml
 
+      - name: Decide what to do with the changes
+        id: policy
+        if: env.DRY_RUN != 'true' && steps.sync.outputs.exit_code == '1'
+        run: |
+          pr_exists=false
+          if [ -n "${{ steps.pr.outputs.number }}" ]; then pr_exists=true; fi
+          echo "action=$(uv run python scripts/pr_policy.py --input changes.yaml --pr-exists $pr_exists)" >> "$GITHUB_OUTPUT"
+          {
+            echo "changed_count=$(uv run python -c "import yaml; print(yaml.safe_load(open('changes.yaml'))['changed_count'])")"
+            echo "new_stars_count=$(uv run python -c "import yaml; print(yaml.safe_load(open('changes.yaml'))['new_stars_count'])")"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Generate PR body
-        if: github.event.inputs.dry_run != 'true' && steps.sync.outputs.exit_code == '1'
+        if: steps.policy.outputs.action == 'open' || steps.policy.outputs.action == 'update'
         run: uv run python scripts/gen_pr_body.py --input changes.yaml --output pr_body.md
 
       - name: Open PR
-        if: github.event.inputs.dry_run != 'true' && steps.sync.outputs.exit_code == '1'
-        env:
-          GH_TOKEN: ${{ secrets.SKILLS_INDEX_TOKEN }}
+        if: steps.policy.outputs.action == 'open'
         run: |
           set -e
           branch="agent-skills-index/update-$(date -u +%Y%m%dT%H%M%S)"
@@ -84,6 +128,43 @@ jobs:
           git checkout -b "$branch"
           git add tracked.yml
           git commit -m "chore(index): skills index update $(date -u +%Y-%m-%d)"
-          git push "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" "$branch"
-          title="chore(index): skills index update $(date -u +%Y-%m-%d) (${{ steps.counts.outputs.changed_count }} updated, ${{ steps.counts.outputs.new_stars_count }} new stars)"
+          git push "$REPO_URL" "$branch"
+          title="chore(index): skills index update $(date -u +%Y-%m-%d) (${{ steps.policy.outputs.changed_count }} updated, ${{ steps.policy.outputs.new_stars_count }} new stars)"
           gh pr create --title "$title" --body-file pr_body.md --label agent-skills-index --head "$branch"
+
+      - name: Update open PR
+        if: steps.policy.outputs.action == 'update'
+        run: |
+          set -e
+          pr="${{ steps.pr.outputs.number }}"
+          branch="${{ steps.pr.outputs.branch }}"
+          today="$(date -u +%Y-%m-%d)"
+          git add tracked.yml
+          git commit -m "chore(index): skills index update $today"
+          git push "$REPO_URL" "$branch"
+          gh pr view "$pr" --json body --jq .body > pr_body_old.md
+          uv run python scripts/pr_policy.py --merge-body pr_body_old.md --new-body pr_body.md --date "$today" --output pr_body_merged.md
+          gh pr edit "$pr" --title "chore(index): skills index update $today (refreshed)" --body-file pr_body_merged.md
+
+      - name: Open or update failure issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }} # there may be no checkout (e.g. an expired token fails Checkout)
+        run: |
+          title="Skills Index Sync is failing"
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          {
+            echo "Run: $run_url"
+            echo
+            echo "${FAILURE_REASON:-The run failed; see the log for the failing step.}"
+            echo
+            echo "If the Checkout step failed with \`could not read Username for 'https://github.com'\`, \`SKILLS_INDEX_TOKEN\` has expired or been revoked. Regenerate the PAT with the prefilled link in the [README Setup](${{ github.server_url }}/${{ github.repository }}#setup) and update the secret (README Setup steps 1 and 2), then re-run the workflow."
+          } > failure.md
+          gh label create sync-failure --description "Skills Index Sync run failed" --color d73a4a 2>/dev/null || true
+          existing="$(gh issue list --label sync-failure --state open --json number --jq '.[0].number // empty')"
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file failure.md
+          else
+            gh issue create --title "$title" --label sync-failure --body-file failure.md
+          fi
