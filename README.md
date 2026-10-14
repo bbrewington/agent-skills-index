@@ -29,6 +29,7 @@ tracked:
       pushed_at: "2025-06-01T12:00:00Z"
       indexed_at: "2025-06-01T08:00:00Z"
       last_changed_at: "2025-06-01T08:00:00Z"
+      description: ...                   # also: language, topics, license, stargazers_count
 
 stubs:
   - repo: some/new-star                  # auto-added by discover mode
@@ -60,9 +61,10 @@ Branches are named `agent-skills-index/update-<ISO datetime>`, e.g.:
 
 ## Setup
 
-1. Create a PAT with `contents: write` and `pull-requests: write` on this repo,
-   plus `read:user` scope for the starred-repos API (must be your own token).
-2. Add it as secret `SKILLS_INDEX_TOKEN`.
+0. Install dependencies with `uv sync` (Python 3.14).
+1. Create a classic PAT with `repo` and `read:user` scopes (must be your own
+   token; the starred-repos endpoint won't work with a repo-scoped fine-grained token).
+2. Add it as secret `SKILLS_INDEX_TOKEN`, and note its expiry date.
 3. Populate the `tracked:` section of `tracked.yml`.
 4. Trigger the workflow manually once to bootstrap `state:` blocks.
 
@@ -85,3 +87,9 @@ tracked:
 
 The `dry_run` input runs the full check without writing `tracked.yml` or opening
 a PR - uploads `changes.yaml` as a workflow artifact instead.
+
+## Troubleshooting
+
+If a run fails in the Checkout step with `could not read Username for
+'https://github.com'`, `SKILLS_INDEX_TOKEN` has expired or been revoked.
+Regenerate the PAT, update the secret, and re-run the workflow.

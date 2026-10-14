@@ -42,14 +42,17 @@ There is no test suite or lint configuration in this repo yet.
 - `tracked:` — repos explicitly wired to a skill. Fields `repo`, `skill`, `notes`, `watch_paths` are human-authored; `state:` (`latest_sha`, `pushed_at`, `indexed_at`, `last_changed_at`, `description`, `language`, `topics`, `license`, `stargazers_count`) is bot-written by `sync_stars.py`.
 - `stubs:` — auto-discovered stars not yet linked to a skill, same shape but with `skill`/`notes`/`watch_paths` set to `null`.
 
-`scripts/sync_stars.py` is the only writer of `tracked.yml`. It does a full `yaml.safe_load` / `yaml.dump` round-trip on every run — **this does not preserve the leading comment block** at the top of `tracked.yml` that documents the config/state field split. That's a known open issue (see `docs/skills-index-spec.md`): either move that documentation into README-only, or have the script read the file as raw text and re-prepend the header after dumping.
+`scripts/sync_stars.py` is the only writer of `tracked.yml`. It does a full `yaml.safe_load` / `yaml.dump` round-trip on every run, but `extract_header` re-prepends the leading comment block afterward, so the header documenting the config/state field split survives. Other comments in the file would not.
 
 `scripts/gen_pr_body.py` reads the `changes.yaml` emitted by `sync_stars.py` and renders a Markdown PR body with two sections: tracked repos with upstream changes (plus a review checklist), and newly discovered stars grouped by language.
 
-The intended CI wiring (`.github/workflows/sync.yml`) is **not yet implemented**. Per the design in `docs/skills-index-spec.md`, it should run on a weekly cron + `workflow_dispatch`, invoke `sync_stars.py --mode all`, and if anything changed, generate a PR body and open a PR via `gh pr create` on a branch named `agent-skills-index/update-<ISO datetime, no separators>` (e.g. `agent-skills-index/update-20250602T080012`). It needs a secret `SKILLS_INDEX_TOKEN` with `contents:write`, `pull-requests:write`, and `read:user`.
+CI is `.github/workflows/sync.yml`: weekly cron (Mon 08:00 UTC) + `workflow_dispatch` (with a `dry_run` input). It runs `sync_stars.py --mode all`, and if the exit code is 1, renders a PR body and opens a PR via `gh pr create` on a branch named `agent-skills-index/update-<ISO datetime, no separators>` (e.g. `agent-skills-index/update-20250602T080012`) with label `agent-skills-index`. Dry runs upload `changes.yaml` as an artifact instead. Actions are pinned to commit SHAs. It needs a secret `SKILLS_INDEX_TOKEN` (classic PAT, `repo` + `read:user`, owned by the starred user).
+
+If the checkout step fails with `fatal: could not read Username for 'https://github.com'`, the `SKILLS_INDEX_TOKEN` secret has expired or been revoked (this caused the failed runs of 2026-10-05 and 2026-10-12). Regenerate the PAT and update the secret.
 
 `docs/skills-index-spec.md` has the full design rationale and a running list of remaining work — check it for context before making structural changes.
 
 ## Known gotchas
 
-- `get_starred_repos` in `scripts/sync_stars.py` bails out early once `X-RateLimit-Remaining < 10`, which can silently truncate discovery on a large star backlog.
+- `get_starred_repos` in `scripts/sync_stars.py` bails out early once `X-RateLimit-Remaining < 10`. It returns a `rate_limited` flag, written to `changes.yaml` as `discover_rate_limited`, and `gen_pr_body.py` renders a warning in the PR body when it is set.
+- Weekly PRs accumulate unreviewed stubs if not merged or closed; `tracked:` is currently empty and everything is a stub.

@@ -15,7 +15,8 @@
 #   watch_paths: optional list of paths to scope SHA checks (default: whole repo)
 #
 # State fields (bot-written, under state:):
-#   latest_sha, pushed_at, indexed_at, last_changed_at
+#   latest_sha, pushed_at, indexed_at, last_changed_at,
+#   description, language, topics, license, stargazers_count
 
 tracked: []
 stubs:
