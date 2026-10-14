@@ -4,7 +4,7 @@
 A repo that tracks GitHub starred repos (bbrewington) and maps them to skills stored in this repo. When a curated upstream repo changes, or a new star is detected, a GitHub Actions workflow opens a PR for review.
 
 ## Current state
-Implemented and running. The workflow has run weekly since 2026-07-13 and opens PRs against `tracked.yml`. No entry has a verdict yet; every repo is a stub. Remaining work is listed at the bottom.
+Implemented and running. The workflow has run weekly since 2026-07-13 and opens PRs against `tracked.yml`. No entry has a verdict yet; every repo is a stub. Remaining work is tracked in GitHub Issues.
 
 ## Repo structure
 ```
@@ -17,7 +17,7 @@ agent-skills-index/
   .github/workflows/sync.yml     - scheduled + manual trigger workflow
   .github/workflows/ci.yml       - pytest + ruff on pull requests
   pyproject.toml / uv.lock       - dependencies (uv)
-  CLAUDE.md, TODO.md, docs/
+  CLAUDE.md, docs/
   .gitignore
   README.md
 ```
@@ -51,11 +51,6 @@ agent-skills-index/
 
 ## Remaining work
 
-Done (originally open): repo init and push, PAT/secret, discover mode against the real API, state bootstrap, header-comment preservation (`extract_header`), rate-limit warning in the PR body, end-to-end PR flow test, first large discover PR.
+Tracked in [GitHub Issues](https://github.com/bbrewington/agent-skills-index/issues); see `docs/agents/issue-tracker.md`.
 
-Open:
-
-0. Verify star-list scoping in Actions: run the workflow with `dry_run` (GraphQL is blocked from Claude Code sessions, so this has only been tested with mocks), check `changes.yaml`, then run once with `prune_stubs` to drop out-of-list stubs.
-1. Review stubs: set verdicts, `use_contexts`, notes and `skill_or_plugin_paths` (no entry has a verdict yet).
-2. Triage the stub backlog (286 as of 2026-10-14) and decide whether unreviewed weekly PRs should be closed or merged.
-3. Token expiry: `SKILLS_INDEX_TOKEN` expired once (runs failing at checkout, 2026-10-05 to 2026-10-12). Now a 365 day fine-grained PAT; track its expiry date.
+`SKILLS_INDEX_TOKEN` is a 365 day fine-grained PAT (expires about 2027-10-14). It lapsed once before (runs failing at checkout, 2026-10-05 to 2026-10-12), so rotate it before expiry via README Setup.

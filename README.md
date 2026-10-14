@@ -80,7 +80,7 @@ Branches are named `agent-skills-index/update-<ISO datetime>`, e.g.:
    (contents: write, pull requests: write, metadata: read; 365 day expiry).
    On the token page, set repository access to only `bbrewington/agent-skills-index`.
 2. Add it as secret `SKILLS_INDEX_TOKEN` (Settings -> Secrets and variables -> Actions),
-   and note its expiry date.
+   and note its expiry date (current token: about 2027-10-14).
 3. Review stubs in `tracked.yml` (see below).
 4. Trigger the workflow manually once to bootstrap `state:` blocks.
 
