@@ -9,8 +9,8 @@ on:
         description: "Dry run (skip writing tracked.yml and opening a PR)"
         type: boolean
         default: false
-      prune_stubs:
-        description: "Remove stubs that are not in the star list (one-off cleanup; entries with a verdict are never removed)"
+      update_changelog:
+        description: "Record changelog entries and advance last-seen SHAs (scheduled runs always do). Off: report findings only, advance nothing"
         type: boolean
         default: false
 
@@ -83,8 +83,8 @@ jobs:
           if [ "$DRY_RUN" = "true" ]; then
             args="$args --dry-run"
           fi
-          if [ "${{ github.event.inputs.prune_stubs }}" = "true" ]; then
-            args="$args --prune-stubs"
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.update_changelog }}" = "true" ]; then
+            args="$args --update-changelog"
           fi
           uv run python scripts/sync_stars.py $args
           code=$?
@@ -126,7 +126,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
-          git add tracked.yml
+          git add tracked.yml generated
           git commit -m "chore(index): skills index update $(date -u +%Y-%m-%d)"
           git push "$REPO_URL" "$branch"
           title="chore(index): skills index update $(date -u +%Y-%m-%d) (${{ steps.policy.outputs.changed_count }} updated, ${{ steps.policy.outputs.new_stars_count }} new stars)"
@@ -139,7 +139,7 @@ jobs:
           pr="${{ steps.pr.outputs.number }}"
           branch="${{ steps.pr.outputs.branch }}"
           today="$(date -u +%Y-%m-%d)"
-          git add tracked.yml
+          git add tracked.yml generated
           git commit -m "chore(index): skills index update $today"
           git push "$REPO_URL" "$branch"
           gh pr view "$pr" --json body --jq .body > pr_body_old.md

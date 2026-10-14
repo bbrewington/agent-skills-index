@@ -15,10 +15,8 @@ from pathlib import Path
 import yaml
 
 
-def format_sha(sha: str, repo: str, length: int = 7) -> str:
-    short = sha[:length]
-    url = f"https://github.com/{repo}/commit/{sha}"
-    return f"[`{short}`]({url})"
+def _count(n: int, noun: str) -> str:
+    return f"{n} {noun}{'' if n == 1 else 's'}" if n else ""
 
 
 def gen_body(data: dict) -> str:
@@ -41,30 +39,74 @@ def gen_body(data: dict) -> str:
         ]
 
     # ------------------------------------------------------------------
-    # Section 1: tracked repos with upstream changes
+    # Section 1: upstream changes (the changelog) for curated repos
     # ------------------------------------------------------------------
     if changes:
-        lines += [f"### Curated repos with upstream changes ({len(changes)})", ""]
-        for c in changes:
-            repo = c["repo"]
-            lines.append(f"#### `{repo}`")
-            lines.append("")
-            if c["reason"] == "new":
-                lines.append("- **Status:** First time indexed")
-            elif c["reason"] == "updated":
-                old = format_sha(c["old_sha"], repo)
-                new = format_sha(c["new_sha"], repo)
-                compare = f"https://github.com/{repo}/compare/{c['old_sha'][:7]}...{c['new_sha'][:7]}"
-                lines.append(f"- **Status:** Updated - {old} -> {new} ([compare]({compare}))")
-            lines.append("")
-
         lines += [
+            f"### Upstream changes ({len(changes)})",
+            "",
+            "Full entries are in `generated/changelog/`.",
+            "",
+        ]
+        for c in sorted(changes, key=lambda c: (c.get("verdict") != "adopt", c["repo"].lower())):
+            parts = [
+                _count(len(c.get("releases", [])), "release"),
+                _count(len(c.get("tags", [])), "new tag"),
+                _count(len(c.get("commits", [])), "commit"),
+            ]
+            summary = ", ".join(p for p in parts if p)
+            lines.append(f"- `{c['repo']}` ({c.get('verdict')}) - {summary} - [compare]({c['compare_url']})")
+        lines += [
+            "",
             "**Review checklist:**",
             "- [ ] Does the linked skill need updating?",
             "- [ ] Are there new patterns or anti-patterns to document?",
             "- [ ] Should `skill_or_plugin_paths` in `tracked.yml` be narrowed?",
             "",
         ]
+
+    baselines = data.get("baselines", [])
+    if baselines:
+        lines += [
+            f"### Now tracking ({len(baselines)})",
+            "",
+            "First sync after a verdict: the current head is the baseline, so nothing is reported until the next change.",
+            "",
+            *[f"- `{b['repo']}` ({b.get('verdict')})" for b in baselines],
+            "",
+        ]
+
+    flags = data.get("flags", [])
+    if flags:
+        lines += [
+            f"### Upstream repos flagged ({len(flags)})",
+            "",
+            "Entries are never removed automatically. Update or drop them in `tracked.yml` yourself.",
+            "",
+            *[f"- `{f['repo']}` ({f.get('verdict')}): {', '.join(f['flags'])}" for f in flags],
+            "",
+        ]
+
+    suggestions = data.get("suggestions", [])
+    if suggestions:
+        lines += [
+            f"### Suggested skill/plugin paths ({len(suggestions)})",
+            "",
+            "Found in the upstream file tree and not yet in `skill_or_plugin_paths`. Nothing was written to your fields.",
+            "",
+        ]
+        for sug in suggestions:
+            lines.append(f"**`{sug['repo']}`** ({sug.get('verdict') or 'stub'})")
+            if sug.get("truncated"):
+                lines.append("- _File tree truncated; this list may be incomplete._")
+            for found in sug.get("suggestions", []):
+                label = f"{found['kind']}, {found['format']}"
+                if found.get("compliant") is False:
+                    label += f"; not compliant: {'; '.join(found['problems'])}"
+                lines.append(f"- `{found['path']}` ({label})")
+            for path in sug.get("invalid_paths", []):
+                lines.append(f"- listed path `{path}` is neither a skill nor a plugin")
+            lines.append("")
 
     # ------------------------------------------------------------------
     # Section 2: newly discovered stars

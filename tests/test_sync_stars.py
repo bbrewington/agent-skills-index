@@ -59,65 +59,159 @@ def test_build_state_handles_missing_license_and_keeps_indexed_at():
     assert state["latest_sha"] == "abc"
 
 
-def test_run_sync_new_updated_unchanged(monkeypatch):
-    monkeypatch.setattr(sync_stars, "get_repo_meta", lambda repo: meta())
-    shas = {"o/new": "n1", "o/upd": "u2", "o/same": "s1"}
-    monkeypatch.setattr(sync_stars, "get_latest_commit_sha", lambda repo, paths=None: shas[repo])
-    data = {
-        "repos": [
-            {"repo": "o/new", "verdict": "adopt", "state": {}},
-            {"repo": "o/upd", "verdict": "watch", "state": {"latest_sha": "u1"}},
-            {"repo": "o/same", "verdict": "adopt", "state": {"latest_sha": "s1"}},
-        ]
+def gh_commit(sha, date="2026-10-12T00:00:00Z", parents=1):
+    return {
+        "sha": sha,
+        "html_url": f"https://x/{sha}",
+        "parents": [{}] * parents,
+        "commit": {"message": f"msg {sha}", "committer": {"date": date}},
     }
-    changes = sync_stars.run_sync(data, dry_run=False)
-    assert [(c["repo"], c["reason"]) for c in changes] == [("o/new", "new"), ("o/upd", "updated")]
-    assert data["repos"][1]["state"]["latest_sha"] == "u2"
-    assert data["repos"][2]["state"] == {"latest_sha": "s1"}
 
 
-def test_run_sync_only_checks_adopt_and_watch(monkeypatch):
-    checked = []
-    monkeypatch.setattr(sync_stars, "get_repo_meta", lambda repo: checked.append(repo) or meta())
-    monkeypatch.setattr(sync_stars, "get_latest_commit_sha", lambda repo, paths=None: "sha")
-    data = {
-        "repos": [
-            {"repo": "o/stub", "verdict": None, "state": {}},
-            {"repo": "o/skip", "verdict": "skip", "state": {}},
-            {"repo": "o/adopt", "verdict": "adopt", "state": {}},
-        ]
+def repo_routes(repo="o/r", head="new", archived=False, full_name=None, tags=("v1",), commits=None):
+    commits = commits if commits is not None else [gh_commit(head)]
+    return {
+        f"/repos/{repo}": {"full_name": full_name or repo, "archived": archived, **meta()},
+        f"/repos/{repo}/commits": commits,
+        f"/repos/{repo}/releases": [],
+        f"/repos/{repo}/tags": [{"name": t} for t in tags],
     }
-    sync_stars.run_sync(data, dry_run=False)
-    assert checked == ["o/adopt"]
 
 
-def test_run_sync_scopes_to_paths_and_never_touches_human_fields(monkeypatch):
-    seen = {}
-    monkeypatch.setattr(sync_stars, "get_repo_meta", lambda repo: meta())
-    monkeypatch.setattr(
-        sync_stars, "get_latest_commit_sha", lambda repo, paths=None: seen.setdefault("paths", paths) and "sha"
-    )
-    entry = {
-        "repo": "o/r",
-        "verdict": "adopt",
-        "use_contexts": ["data-engineering"],
-        "notes": "n",
-        "skill_or_plugin_paths": ["skills/a"],
-        "state": {},
-    }
+SEEN = {"changelog_sha": "old", "changelog_at": "2026-10-01T00:00:00Z", "known_tags": ["v1"]}
+
+
+def curated(repo="o/r", verdict="adopt", state=None, **extra):
+    return {"repo": repo, "verdict": verdict, "state": dict(state or {}), **extra}
+
+
+def test_first_adoption_records_a_baseline_and_reports_no_changes(gh):
+    gh(repo_routes())
+    data = {"repos": [curated()]}
+    result, pending, _ = sync_stars.run_sync(data, record=True)
+    assert result["changes"] == [] and pending == []
+    assert result["baselines"] == [{"repo": "o/r", "verdict": "adopt"}]
+    assert data["repos"][0]["state"]["changelog_sha"] == "new"
+
+
+def test_change_is_reported_but_last_seen_waits_for_persist(gh, tmp_path, monkeypatch):
+    gh(repo_routes())
+    monkeypatch.setattr(sync_stars, "TRACKED_FILE", tmp_path / "tracked.yml")
+    monkeypatch.setattr(sync_stars.render, "CHANGELOG_DIR", tmp_path / "changelog")
+    monkeypatch.setattr(sync_stars.render, "write_index", lambda data: None)
+    data = {"repos": [curated(state=SEEN)]}
+    result, pending, _ = sync_stars.run_sync(data, record=True)
+    assert [c["new_sha"] for c in result["changes"]] == ["new"]
+    assert result["changes"][0]["verdict"] == "adopt"
+    assert data["repos"][0]["state"]["changelog_sha"] == "old"  # not advanced yet
+    sync_stars.persist(data, result, pending, dry_run=False, today="2026-10-14")
+    assert data["repos"][0]["state"]["changelog_sha"] == "new"
+    assert "o/r" in (tmp_path / "changelog" / "2026-10.md").read_text()
+    assert "o/r" in (tmp_path / "tracked.yml").read_text()
+
+
+def test_failed_changelog_write_leaves_last_seen_and_tracked_yml_alone(gh, tmp_path, monkeypatch):
+    gh(repo_routes())
+    tracked = tmp_path / "tracked.yml"
+    tracked.write_text("repos: []\n")
+    monkeypatch.setattr(sync_stars, "TRACKED_FILE", tracked)
+
+    def boom(*args):
+        raise OSError("disk full")
+
+    monkeypatch.setattr(sync_stars.render, "write_changelog", boom)
+    data = {"repos": [curated(state=SEEN)]}
+    result, pending, _ = sync_stars.run_sync(data, record=True)
+    with pytest.raises(OSError):
+        sync_stars.persist(data, result, pending, dry_run=False, today="2026-10-14")
+    assert data["repos"][0]["state"]["changelog_sha"] == "old"
+    assert tracked.read_text() == "repos: []\n"
+
+
+def test_not_recording_reports_findings_and_advances_nothing(gh):
+    data = {"repos": [curated(state=SEEN), curated("o/b", state={})]}
+    gh(repo_routes(archived=True) | repo_routes("o/b"))
+    result, pending, _ = sync_stars.run_sync(data, record=False)
+    assert result["changes"] == result["baselines"] == result["flags"] == [] and pending == []
+    assert {u["type"] for u in result["unrecorded"]} == {"flag", "change", "baseline"}
+    assert data["repos"][0]["state"] == SEEN
+    assert data["repos"][1]["state"] == {}
+
+
+def test_only_adopt_and_watch_are_synced(gh):
+    fake = gh(repo_routes("o/adopt") | repo_routes("o/watch"))
+    data = {"repos": [curated("o/stub", None), curated("o/skip", "skip"), curated("o/adopt"), curated("o/watch", "watch")]}
+    sync_stars.run_sync(data, record=True)
+    touched = {path.split("/")[2] + "/" + path.split("/")[3] for path, _ in fake.calls}
+    assert touched == {"o/adopt", "o/watch"}
+
+
+def test_sync_never_touches_human_fields_and_scopes_commits_to_paths(gh):
+    routes = repo_routes(commits=[gh_commit("new")])
+    seen_params = []
+    routes["/repos/o/r/commits"] = lambda params: seen_params.append(params) or [gh_commit("new")]
+    gh(routes)
+    entry = curated(state=SEEN, use_contexts=["data-engineering"], notes="n", skill_or_plugin_paths=["skills/a"])
     human = {k: v for k, v in entry.items() if k != "state"}
-    sync_stars.run_sync({"repos": [entry]}, dry_run=False)
-    assert seen["paths"] == ["skills/a"]
+    sync_stars.run_sync({"repos": [entry]}, record=True)
     assert {k: v for k, v in entry.items() if k != "state"} == human
+    assert any(p and p.get("path") == "skills/a" for p in seen_params)
 
 
-def test_run_sync_skips_repo_on_http_error(monkeypatch):
-    def boom(repo):
-        raise requests.HTTPError("404")
+def test_flags_surface_once_and_clear_when_resolved(gh):
+    data = {"repos": [curated(state=SEEN)]}
+    gh(repo_routes(archived=True, commits=[gh_commit("old")]))
+    first, _, _ = sync_stars.run_sync(data, record=True)
+    assert first["flags"] == [{"repo": "o/r", "verdict": "adopt", "flags": ["archived"]}]
+    assert data["repos"][0]["state"]["flags"] == ["archived"]
+    second, _, _ = sync_stars.run_sync(data, record=True)
+    assert second["flags"] == []
+    gh(repo_routes(commits=[gh_commit("old")]))
+    sync_stars.run_sync(data, record=True)
+    assert data["repos"][0]["state"]["flags"] == []
 
-    monkeypatch.setattr(sync_stars, "get_repo_meta", boom)
-    data = {"repos": [{"repo": "o/gone", "verdict": "adopt", "state": {}}]}
-    assert sync_stars.run_sync(data, dry_run=False) == []
+
+def test_renamed_and_gone_repos_are_flagged_and_gone_skips_further_checks(gh):
+    gh(repo_routes(full_name="new/name", commits=[gh_commit("old")]))
+    data = {"repos": [curated(state=SEEN)]}
+    result, _, _ = sync_stars.run_sync(data, record=True)
+    assert result["flags"][0]["flags"] == ["renamed:new/name"]
+    fake = gh({})  # everything 404s
+    result, _, _ = sync_stars.run_sync({"repos": [curated(state={})]}, record=True)
+    assert result["flags"][0]["flags"] == ["gone"]
+    assert [path for path, _ in fake.calls] == ["/repos/o/r"]
+
+
+def test_sync_skips_repo_on_http_error(gh):
+    from conftest import Resp
+
+    gh({"/repos/o/r": Resp({}, 500)})
+    result, pending, _ = sync_stars.run_sync({"repos": [curated()]}, record=True)
+    assert result["changes"] == [] and pending == []
+
+
+def tree_for(*paths):
+    return {"/repos/o/r/git/trees/h1": {"truncated": False, "tree": [{"path": p, "type": "blob"} for p in paths]}}
+
+
+def test_audit_suggests_for_stubs_when_head_moved_and_remembers_it(gh):
+    gh({"/repos/o/r/commits": [gh_commit("h1")]} | tree_for("skills/a/SKILL.md"))
+    data = {"repos": [curated(verdict=None)]}
+    suggestions, unrecorded = sync_stars.run_audit(data, record=True, heads={})
+    assert [s["repo"] for s in suggestions] == ["o/r"] and unrecorded == []
+    assert suggestions[0]["curated"] is False
+    assert suggestions[0]["suggestions"][0]["path"] == "skills/a"
+    assert data["repos"][0]["state"]["tree_sha"] == "h1"
+    again, _ = sync_stars.run_audit(data, record=True, heads={})
+    assert again == []
+
+
+def test_audit_not_recording_remembers_nothing_and_ignores_skipped(gh):
+    gh({"/repos/o/r/commits": [gh_commit("h1")]} | tree_for("skills/a/SKILL.md"))
+    data = {"repos": [curated(verdict=None), curated("o/skip", "skip")]}
+    suggestions, unrecorded = sync_stars.run_audit(data, record=False, heads={})
+    assert suggestions == [] and [u["repo"] for u in unrecorded] == ["o/r"]
+    assert "tree_sha" not in data["repos"][0]["state"]
 
 
 def test_run_discover_adds_only_unknown_stars(monkeypatch):
@@ -183,19 +277,18 @@ def test_run_discover_with_list_prunes_and_adds(monkeypatch):
     monkeypatch.setattr(sync_stars, "get_repo_meta", lambda repo: meta())
     monkeypatch.setattr(sync_stars, "get_latest_commit_sha", lambda repo, paths=None: "sha")
     data = {"repos": [{"repo": "o/keep", "verdict": None}, {"repo": "o/drop", "verdict": None}]}
-    new, rate_limited, pruned = sync_stars.run_discover(data, dry_run=False, star_list="agent-skills", prune=True)
+    new, rate_limited, pruned = sync_stars.run_discover(data, dry_run=False, star_list="agent-skills")
     assert [n["repo"] for n in new] == ["o/new"]
     assert pruned == ["o/drop"]
     assert rate_limited is False
     assert sorted(e["repo"] for e in data["repos"]) == ["o/keep", "o/new"]
 
 
-def test_run_discover_without_prune_keeps_out_of_list_stubs(monkeypatch):
+def test_run_discover_prunes_on_every_list_run_but_not_when_the_list_is_empty(monkeypatch):
     monkeypatch.setattr(sync_stars, "get_list_repos", lambda user, slug: [])
     data = {"repos": [{"repo": "o/other", "verdict": None}]}
     _, _, pruned = sync_stars.run_discover(data, dry_run=False, star_list="agent-skills")
-    assert pruned == []
-    assert len(data["repos"]) == 1
+    assert pruned == [] and len(data["repos"]) == 1
 
 
 class FakeGraphQL:
