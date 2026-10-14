@@ -41,7 +41,7 @@ uv run pytest
 uv run ruff check .
 ```
 
-Tests live in `tests/` and stub out the GitHub API; nothing hits the network. CI does not run them yet.
+Tests live in `tests/` and stub out the GitHub API; nothing hits the network. `.github/workflows/ci.yml` runs both on every pull request.
 
 ## Architecture
 
