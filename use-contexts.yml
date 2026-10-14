@@ -1,0 +1,26 @@
+# use-contexts.yml
+# Controlled vocabulary for `use_contexts` on entries in tracked.yml.
+# A tag names the kind of work a curated repo helps with (see CONTEXT.md).
+# sync_stars.py and the test suite fail on any tag not listed here, so add a
+# tag here before using it. Format: slug: one-line description.
+# A repo may carry several tags. Keep this list short (about 12) so it stays useful for filtering.
+
+# Agents
+agent-workflow: Methodology and skills for building software with coding agents
+ai-agent-helpers: Harnesses, orchestration and observability for agents, plus the skills ecosystem itself (spec, catalogs, generators)
+
+# Data
+data-engineering: Pipelines, orchestration, modeling and transformation
+analytics-bi: BI, semantic layers, dashboards and analytics apps
+cloud-data-platforms: Cloud data platforms (warehouses, lakehouses)
+ml-ai-engineering: ML and LLM engineering, evaluation and extraction
+
+# Software
+software-engineering: General software development workflows
+infrastructure-cloud: Cloud and infrastructure provisioning, deployment and operations
+web-frontend-design: Web, frontend and UI design
+
+# Business and content
+product-management: Product management methods and artifacts
+business-domains: Other domain work (marketing, legal, finance, healthcare and science)
+content-creation: Writing, documents, slides and media

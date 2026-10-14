@@ -6,7 +6,7 @@ BASE = {"checked_at": "2026-10-14T00:56:00+00:00", "changes": [], "new_stars": [
 def test_updated_change_renders_compare_link_and_checklist():
     data = BASE | {"changes": [{"repo": "o/r", "reason": "updated", "old_sha": "a" * 40, "new_sha": "b" * 40}]}
     body = gen_pr_body.gen_body(data)
-    assert "### Tracked repos with upstream changes (1)" in body
+    assert "### Curated repos with upstream changes (1)" in body
     assert "compare/aaaaaaa...bbbbbbb" in body
     assert "Review checklist" in body
 
