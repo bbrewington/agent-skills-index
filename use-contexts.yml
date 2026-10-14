@@ -1,0 +1,11 @@
+# use-contexts.yml
+# Controlled vocabulary for `use_contexts` on entries in tracked.yml.
+# A tag names the kind of work a curated repo helps with (see CONTEXT.md).
+# sync_stars.py and the test suite fail on any tag not listed here, so add a
+# tag here before using it. Format: slug: one-line description.
+
+cloud-data-platforms: Cloud and data platforms (warehouses, lakehouses, BI and semantic layers)
+data-engineering: Pipelines, orchestration, modeling and transformation
+software-engineering: General software development workflows
+software-vendors: Skills and plugins published by a vendor for their own product
+content-creation: Writing, documents, slides and media

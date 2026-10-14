@@ -2,10 +2,16 @@
 """
 sync_stars.py
 
-Two modes, both writing state back into tracked.yml:
+Two modes, both writing back into tracked.yml (one `repos:` list; a stub is an entry
+with `verdict: null`):
 
-  sync      Check every repo in tracked.tracked[] for upstream SHA changes.
-  discover  Fetch all starred repos; add new ones as stubs to tracked.stubs[].
+  sync      Check every adopt/watch repo for upstream SHA changes.
+  discover  Fetch starred repos; add unseen ones as stubs.
+
+The bot only writes bot-owned fields: `state`, new stubs, and (with --prune-stubs)
+removal of stubs. It never touches verdict, use_contexts, notes or skill_or_plugin_paths
+on an existing entry. The file fails validation on an unknown verdict or a use_contexts
+tag missing from use-contexts.yml.
 
 Default (--mode all) runs both.
 
@@ -34,6 +40,10 @@ GITHUB_USER = os.getenv("GITHUB_USER", "bbrewington")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 STAR_LIST = os.getenv("STAR_LIST") or None
 TRACKED_FILE = Path(__file__).parent.parent / "tracked.yml"
+USE_CONTEXTS_FILE = Path(__file__).parent.parent / "use-contexts.yml"
+
+VERDICTS = {"adopt", "watch", "skip"}
+SYNCED_VERDICTS = {"adopt", "watch"}
 
 HEADERS = {
     "Accept": "application/vnd.github+json",
@@ -166,16 +176,35 @@ def extract_header(text: str) -> str:
     return "".join(header_lines)
 
 
+class ValidationError(ValueError):
+    pass
+
+
 def load_tracked() -> dict:
-    data = yaml.safe_load(TRACKED_FILE.read_text())
-    data.setdefault("tracked", [])
-    data.setdefault("stubs", [])
+    data = yaml.safe_load(TRACKED_FILE.read_text()) or {}
+    data.setdefault("repos", [])
     # Ensure every entry has a state block
-    for item in data["tracked"]:
-        item.setdefault("state", {})
-    for item in data["stubs"]:
+    for item in data["repos"]:
         item.setdefault("state", {})
     return data
+
+
+def load_use_contexts() -> set[str]:
+    return set(yaml.safe_load(USE_CONTEXTS_FILE.read_text()) or {})
+
+
+def validate(data: dict, use_contexts: set[str]) -> None:
+    """Raise ValidationError on an unknown verdict or a use_contexts tag outside the vocabulary."""
+    errors = []
+    for item in data["repos"]:
+        verdict = item.get("verdict")
+        if verdict is not None and verdict not in VERDICTS:
+            errors.append(f"{item['repo']}: unknown verdict '{verdict}' (allowed: {sorted(VERDICTS)})")
+        unknown = [tag for tag in item.get("use_contexts") or [] if tag not in use_contexts]
+        if unknown:
+            errors.append(f"{item['repo']}: unknown use_contexts {unknown} (add to use-contexts.yml)")
+    if errors:
+        raise ValidationError("\n".join(errors))
 
 
 def save_tracked(data: dict, dry_run: bool) -> None:
@@ -210,12 +239,14 @@ def build_state(meta: dict, sha: str, existing_state: dict | None = None) -> dic
 
 def run_sync(data: dict, dry_run: bool) -> list[dict]:
     changes = []
-    for item in data["tracked"]:
+    for item in data["repos"]:
+        if item.get("verdict") not in SYNCED_VERDICTS:
+            continue
         repo = item["repo"]
         print(f"[sync] {repo}")
         try:
             meta = get_repo_meta(repo)
-            sha = get_latest_commit_sha(repo, item.get("watch_paths"))
+            sha = get_latest_commit_sha(repo, item.get("skill_or_plugin_paths"))
         except requests.HTTPError as e:
             print(f"  ERROR: {e}", file=sys.stderr)
             continue
@@ -253,10 +284,13 @@ def fetch_candidates(star_list: str | None) -> tuple[list[dict], bool]:
 
 
 def prune_stubs(data: dict, candidates: list[dict]) -> list[str]:
-    """Drop stubs not in `candidates` (never touches tracked:). Returns the removed repo names."""
+    """Drop stubs (verdict null) not in `candidates`; curated entries are never removed. Returns removed repo names."""
     keep = {c["full_name"] for c in candidates}
-    removed = [item["repo"] for item in data["stubs"] if item["repo"] not in keep]
-    data["stubs"] = [item for item in data["stubs"] if item["repo"] in keep]
+    def is_prunable(item: dict) -> bool:
+        return item.get("verdict") is None and item["repo"] not in keep
+
+    removed = [item["repo"] for item in data["repos"] if is_prunable(item)]
+    data["repos"] = [item for item in data["repos"] if not is_prunable(item)]
     return removed
 
 
@@ -275,9 +309,7 @@ def run_discover(
     if pruned:
         print(f"  {len(pruned)} stub(s) not in {source} pruned")
 
-    tracked_names = {item["repo"] for item in data["tracked"]}
-    stub_names = {item["repo"] for item in data["stubs"]}
-    known = tracked_names | stub_names
+    known = {item["repo"] for item in data["repos"]}
 
     new_stubs = []
     for star in starred:
@@ -294,12 +326,13 @@ def run_discover(
 
         stub = {
             "repo": repo,
-            "skill": None,
+            "verdict": None,
+            "use_contexts": None,
             "notes": None,
-            "watch_paths": None,
+            "skill_or_plugin_paths": None,
             "state": build_state(meta, sha),
         }
-        data["stubs"].append(stub)
+        data["repos"].append(stub)
         new_stubs.append({"repo": repo, "reason": "new_star", "state": stub["state"]})
 
     print(f"  {len(new_stubs)} new stub(s) added")
@@ -318,12 +351,17 @@ def main():
     parser.add_argument(
         "--prune-stubs",
         action="store_true",
-        help="with --star-list, remove stubs that are not in the list (tracked: is never pruned)",
+        help="with --star-list, remove stubs that are not in the list (curated entries are never pruned)",
     )
     parser.add_argument("--output", default="changes.yaml")
     args = parser.parse_args()
 
     data = load_tracked()
+    try:
+        validate(data, load_use_contexts())
+    except ValidationError as e:
+        print(f"ERROR: invalid tracked.yml:\n{e}", file=sys.stderr)
+        sys.exit(2)
     # Keep a snapshot for diffing in gen_pr_body if needed
     original = deepcopy(data)  # noqa: F841
 

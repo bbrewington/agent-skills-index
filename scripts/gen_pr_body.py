@@ -44,7 +44,7 @@ def gen_body(data: dict) -> str:
     # Section 1: tracked repos with upstream changes
     # ------------------------------------------------------------------
     if changes:
-        lines += [f"### Tracked repos with upstream changes ({len(changes)})", ""]
+        lines += [f"### Curated repos with upstream changes ({len(changes)})", ""]
         for c in changes:
             repo = c["repo"]
             lines.append(f"#### `{repo}`")
@@ -62,7 +62,7 @@ def gen_body(data: dict) -> str:
             "**Review checklist:**",
             "- [ ] Does the linked skill need updating?",
             "- [ ] Are there new patterns or anti-patterns to document?",
-            "- [ ] Should `watch_paths` in `tracked.yml` be narrowed?",
+            "- [ ] Should `skill_or_plugin_paths` in `tracked.yml` be narrowed?",
             "",
         ]
 
@@ -73,12 +73,11 @@ def gen_body(data: dict) -> str:
         lines += [
             "---",
             "",
-            f"### Newly starred repos - not yet linked to a skill ({len(new_stars)})",
+            f"### Newly starred repos - no verdict yet ({len(new_stars)})",
             "",
-            "These were added to `stubs:` in `tracked.yml`. For each one:",
-            "- Promote to `tracked:` and add a `skill:` path, OR",
-            "- Leave as a stub for now, OR",
-            "- Delete the stub entry if not relevant",
+            "These were added to `tracked.yml` as stubs (`verdict: null`). For each one:",
+            "- Set `verdict` (`adopt`, `watch` or `skip`) plus `use_contexts`, `notes` and `skill_or_plugin_paths`, OR",
+            "- Leave as a stub for now",
             "",
         ]
 

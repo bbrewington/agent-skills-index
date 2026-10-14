@@ -1,29 +1,27 @@
 # tracked.yml
-# Two sections:
+# One list, `repos:`. A stub is an entry with `verdict: null`; the owner reviews it
+# by setting a verdict and filling in the human-authored fields.
 #
-#   tracked  - repos explicitly mapped to a skill in this repo.
-#              Human-authored config fields; bot writes only under state:
+# Human-authored fields (the bot never writes these on an existing entry):
+#   repo:                   "owner/repo" on GitHub
+#   verdict:                adopt | watch | skip | null (null = stub, not yet reviewed)
+#   use_contexts:           list of tags from use-contexts.yml
+#   notes:                  why this repo is (or is not) worth following
+#   skill_or_plugin_paths:  paths in the repo holding a skill or plugin; scopes SHA checks
+#                           (null = whole repo)
 #
-#   stubs    - repos you've starred but not yet linked to a skill.
-#              Created automatically by discover mode; promote to tracked
-#              by moving the entry up and adding skill/notes/watch_paths.
-#
-# Config fields (human-authored):
-#   repo:        "owner/repo" on GitHub
-#   skill:       path to skill in this repo
-#   notes:       why this repo is tracked
-#   watch_paths: optional list of paths to scope SHA checks (default: whole repo)
-#
-# State fields (bot-written, under state:):
+# Bot-written fields (under state:):
 #   latest_sha, pushed_at, indexed_at, last_changed_at,
 #   description, language, topics, license, stargazers_count
+#
+# The bot only adds new stubs, rewrites state:, and (with --prune-stubs) removes stubs.
 
-tracked: []
-stubs:
+repos:
 - repo: bponzbro/swyft-sigma-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: accd5ce41f60c4fc08bef2a1d8e884a8efbf5d7c
     pushed_at: '2026-06-24T03:32:57Z'
@@ -37,9 +35,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:08.997218+00:00'
     last_changed_at: '2026-07-07T03:29:09.002188+00:00'
 - repo: getnao/nao
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 12bf3fd013b993f40f676379cd46fe1d52266e67
     pushed_at: '2026-07-06T15:45:10Z'
@@ -71,9 +70,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:09.559892+00:00'
     last_changed_at: '2026-07-07T03:29:09.559922+00:00'
 - repo: BuilderIO/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 3a7b1d98901fc8fabfaa1a387d9be4dea36e37b3
     pushed_at: '2026-07-06T14:42:49Z'
@@ -86,9 +86,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:10.142665+00:00'
     last_changed_at: '2026-07-07T03:29:10.142682+00:00'
 - repo: dotnet/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 17bd25bec422a7c49badfc27c116d7d80e7d6dde
     pushed_at: '2026-07-07T02:36:56Z'
@@ -101,9 +102,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:10.763900+00:00'
     last_changed_at: '2026-07-07T03:29:10.763917+00:00'
 - repo: google/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 1e2062f5e83e49c8b842dbe9de0f9e592044e52c
     pushed_at: '2026-07-06T22:23:28Z'
@@ -118,9 +120,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:12.142869+00:00'
     last_changed_at: '2026-07-07T03:29:12.142903+00:00'
 - repo: oracle/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 2f20ebeccc0785e68cefaa1fe352c4965d437359
     pushed_at: '2026-07-01T16:48:56Z'
@@ -135,9 +138,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:12.781862+00:00'
     last_changed_at: '2026-07-07T03:29:12.781881+00:00'
 - repo: camelot-dev/camelot
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 1a5275346732026223c709d0938a6d56f806b074
     pushed_at: '2026-07-04T16:26:42Z'
@@ -149,9 +153,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:13.343738+00:00'
     last_changed_at: '2026-07-07T03:29:13.343757+00:00'
 - repo: CUPIDS-Lab/data-liberation-skill
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: acb59c9bf5439f06642768e42a619757314287fa
     pushed_at: '2026-06-19T02:13:11Z'
@@ -163,9 +168,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:13.899533+00:00'
     last_changed_at: '2026-07-07T03:29:13.899549+00:00'
 - repo: getsentry/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 5a64b36c62d042d3981b7937d9d6ca7bd1753b9a
     pushed_at: '2026-06-30T20:52:20Z'
@@ -178,9 +184,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:14.560693+00:00'
     last_changed_at: '2026-07-07T03:29:14.560722+00:00'
 - repo: confident-ai/deepeval
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 1a1758c4ff7ab4b43f2b9b4b6e77cb74f4bd36cb
     pushed_at: '2026-07-06T15:24:31Z'
@@ -198,9 +205,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:15.120322+00:00'
     last_changed_at: '2026-07-07T03:29:15.120346+00:00'
 - repo: EveryInc/compound-engineering-plugin
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 1287b0985ce6a6a2a0b35e2302df5658b171cc6d
     pushed_at: '2026-07-06T04:23:58Z'
@@ -215,9 +223,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:16.384051+00:00'
     last_changed_at: '2026-07-07T03:29:16.384081+00:00'
 - repo: stripe/ai
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 423788e067d899f73f96a8466a7431074b210db1
     pushed_at: '2026-07-07T00:57:21Z'
@@ -237,9 +246,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:17.635108+00:00'
     last_changed_at: '2026-07-07T03:29:17.635119+00:00'
 - repo: CloudAI-X/threejs-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: b1c623076c661fc9b03dac19292e825a5d106823
     pushed_at: '2026-01-19T21:15:32Z'
@@ -251,9 +261,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:19.327305+00:00'
     last_changed_at: '2026-07-07T03:29:19.327324+00:00'
 - repo: mattpocock/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 16a2a5cd00b4416f673f4ff38c7971a04dd708e7
     pushed_at: '2026-07-06T15:17:23Z'
@@ -265,9 +276,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:19.839706+00:00'
     last_changed_at: '2026-07-07T03:29:19.839722+00:00'
 - repo: anthropics/financial-services
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 4aa51ed3d379731f8f9beff498d749580372699c
     pushed_at: '2026-06-26T21:55:15Z'
@@ -279,9 +291,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:21.690379+00:00'
     last_changed_at: '2026-07-07T03:29:21.690397+00:00'
 - repo: addyosmani/agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 70b7506ce90e200cb47645ddb3f6b8e84fecc047
     pushed_at: '2026-07-07T00:59:41Z'
@@ -299,9 +312,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:22.170889+00:00'
     last_changed_at: '2026-07-07T03:29:22.170903+00:00'
 - repo: addyosmani/web-quality-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 95d6e255afe1596b557d7a8498517884438f5b3a
     pushed_at: '2026-06-14T09:08:35Z'
@@ -322,9 +336,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:22.662182+00:00'
     last_changed_at: '2026-07-07T03:29:22.662203+00:00'
 - repo: danielmiessler/LifeOS
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 58b270f6cef652e21599b6cbca3b48f6fb141442
     pushed_at: '2026-07-07T03:01:57Z'
@@ -340,9 +355,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:23.660754+00:00'
     last_changed_at: '2026-07-07T03:29:23.660774+00:00'
 - repo: multica-ai/andrej-karpathy-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 2c606141936f1eeef17fa3043a72095b4765b9c2
     pushed_at: '2026-04-20T10:05:04Z'
@@ -355,9 +371,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:24.244871+00:00'
     last_changed_at: '2026-07-07T03:29:24.244892+00:00'
 - repo: WordPress/agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: aecc4d6f6f1ffcc0b508cddc5c40f55bae324ad1
     pushed_at: '2026-07-06T15:28:41Z'
@@ -370,9 +387,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:26.148353+00:00'
     last_changed_at: '2026-07-07T03:29:26.148385+00:00'
 - repo: hesreallyhim/awesome-claude-code
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: e50c7555ebeb8bfb9c163585711b5fc471a4dee5
     pushed_at: '2026-07-07T00:41:13Z'
@@ -407,9 +425,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:27.213409+00:00'
     last_changed_at: '2026-07-07T03:29:27.213426+00:00'
 - repo: streamlit/agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 4b5aacdfb9b80d8215441c2500f7cb978b5e0881
     pushed_at: '2026-06-19T07:58:14Z'
@@ -421,9 +440,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:28.326071+00:00'
     last_changed_at: '2026-07-07T03:29:28.326089+00:00'
 - repo: techwolf-ai/ai-first-toolkit
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 8b3107b1b7b7b7da7c0dcd88f8e56b75e8fe39ca
     pushed_at: '2026-06-29T09:01:55Z'
@@ -447,9 +467,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:30.019533+00:00'
     last_changed_at: '2026-07-07T03:29:30.019544+00:00'
 - repo: neurofoo/agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 0e7ac2aa4d094352a082ebeedf1dbb4c52b77782
     pushed_at: '2026-01-19T13:00:05Z'
@@ -461,9 +482,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:30.531776+00:00'
     last_changed_at: '2026-07-07T03:29:30.531801+00:00'
 - repo: kfchou/wiki-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: d9267ec9ccef1b43aa9f2a5f65c1fc56ac1701b0
     pushed_at: '2026-07-03T20:04:57Z'
@@ -476,9 +498,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:31.013170+00:00'
     last_changed_at: '2026-07-07T03:29:31.013184+00:00'
 - repo: duckdb/duckdb-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 7feda8e01e22bc0886c86123f3884947e36d8c69
     pushed_at: '2026-04-23T13:56:22Z'
@@ -490,9 +513,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:31.619343+00:00'
     last_changed_at: '2026-07-07T03:29:31.619368+00:00'
 - repo: mlflow/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 5f561418262bdcaa9e705bdf7facc72f17b181fc
     pushed_at: '2026-06-18T07:01:59Z'
@@ -504,9 +528,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:32.686581+00:00'
     last_changed_at: '2026-07-07T03:29:32.686600+00:00'
 - repo: coreyhaines31/marketingskills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 6c6017451dcd340f3aaab3e354e28eed8aa782aa
     pushed_at: '2026-07-06T22:49:02Z'
@@ -522,9 +547,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:33.212890+00:00'
     last_changed_at: '2026-07-07T03:29:33.212929+00:00'
 - repo: kepano/obsidian-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: a1dc48e68138490d522c04cbf5822214c6eb1202
     pushed_at: '2026-06-08T16:12:01Z'
@@ -553,9 +579,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:33.705386+00:00'
     last_changed_at: '2026-07-07T03:29:33.705405+00:00'
 - repo: googleworkspace/cli
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: a3768d0e82ad83cca2da97724e46bea4ff0e6dbd
     pushed_at: '2026-07-01T03:10:20Z'
@@ -585,9 +612,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:34.300351+00:00'
     last_changed_at: '2026-07-07T03:29:34.300365+00:00'
 - repo: block/agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 329a55d1500748a0a48d64629757cbe2622e34bf
     pushed_at: '2026-06-26T15:48:44Z'
@@ -599,9 +627,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:34.964905+00:00'
     last_changed_at: '2026-07-07T03:29:34.964913+00:00'
 - repo: mlopscommunity/Coding-Agents-Conference-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: f6a336079dc84c02b100ccfdbea7dc5fe68bf27a
     pushed_at: '2026-03-17T14:33:51Z'
@@ -614,9 +643,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:36.116104+00:00'
     last_changed_at: '2026-07-07T03:29:36.116123+00:00'
 - repo: BauplanLabs/bauplan-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: dc08166a9d1a6f0ef7c6926be0e37d6e5064dc6e
     pushed_at: '2026-04-10T16:03:06Z'
@@ -629,9 +659,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:36.709075+00:00'
     last_changed_at: '2026-07-07T03:29:36.709093+00:00'
 - repo: davila7/claude-code-templates
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 31fc2b5d44ef60d5d0823f41da17fe23a33b942c
     pushed_at: '2026-07-06T20:58:40Z'
@@ -647,9 +678,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:37.274360+00:00'
     last_changed_at: '2026-07-07T03:29:37.274379+00:00'
 - repo: NTCoding/claude-skillz
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 21c61010e6081ced1eac8e45e3f788b2c4358bcf
     pushed_at: '2026-03-24T16:19:26Z'
@@ -661,9 +693,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:37.785915+00:00'
     last_changed_at: '2026-07-07T03:29:37.785934+00:00'
 - repo: anthropics/claude-code-security-review
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 0c6a49f1fa56a1d472575da86a94dbc1edb78eda
     pushed_at: '2026-02-11T18:01:23Z'
@@ -676,9 +709,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:38.395905+00:00'
     last_changed_at: '2026-07-07T03:29:38.395929+00:00'
 - repo: caylent/tufte-data-viz
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: ae7ca0de7819db83241b24a2618810d5f1171145
     pushed_at: '2026-02-19T05:25:40Z'
@@ -701,9 +735,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:39.014609+00:00'
     last_changed_at: '2026-07-07T03:29:39.014634+00:00'
 - repo: monarch-initiative/ontogpt
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: d55054b4e3f0365c05dfcc28341c326d6fc6541a
     pushed_at: '2026-06-22T22:27:05Z'
@@ -731,9 +766,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:44.085590+00:00'
     last_changed_at: '2026-07-07T03:29:44.085613+00:00'
 - repo: n8n-io/n8n
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 0cc00f3436477ac8a1411b403c21c04e114327ed
     pushed_at: '2026-07-07T01:01:08Z'
@@ -766,9 +802,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:51.735382+00:00'
     last_changed_at: '2026-07-07T03:29:51.735397+00:00'
 - repo: humansintheloop-dev/humansintheloop-dev-workflow-and-tools
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: d24e20ada973d6c04b970fe306e79d04244cafda
     pushed_at: '2026-06-24T16:18:10Z'
@@ -780,9 +817,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:52.301946+00:00'
     last_changed_at: '2026-07-07T03:29:52.301962+00:00'
 - repo: AltimateAI/data-engineering-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: a13847e205cb61ece8d613b19fbbe1cd0ac2bfcd
     pushed_at: '2026-06-24T10:49:52Z'
@@ -799,9 +837,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:52.902601+00:00'
     last_changed_at: '2026-07-07T03:29:52.902614+00:00'
 - repo: AltimateAI/altimate-code
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: bf90e189a391d9a602b34de4417ddab534b31e6b
     pushed_at: '2026-07-06T02:40:35Z'
@@ -832,9 +871,10 @@ stubs:
     indexed_at: '2026-07-07T03:29:53.544536+00:00'
     last_changed_at: '2026-07-07T03:29:53.544557+00:00'
 - repo: MicrosoftDocs/Agent-Skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 3b52fb07698cd50c371c4d81e3d091cb7b5cdcc1
     pushed_at: '2026-07-06T13:41:36Z'
@@ -866,9 +906,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:02.303737+00:00'
     last_changed_at: '2026-07-07T03:30:02.303752+00:00'
 - repo: OneWave-AI/claude-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 4d09aaeeb87dc07701d8bcbd199d81b58c31c6ad
     pushed_at: '2026-07-04T18:52:56Z'
@@ -891,9 +932,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:02.873626+00:00'
     last_changed_at: '2026-07-07T03:30:02.873642+00:00'
 - repo: sean-zhang-dbx/prompt-to-genie
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: f360937c9784e6c02e92590641bcebf038cae644
     pushed_at: '2026-04-10T17:03:46Z'
@@ -905,9 +947,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:03.914187+00:00'
     last_changed_at: '2026-07-07T03:30:03.914209+00:00'
 - repo: sfc-gh-dflippo/snowflake-dbt-demo
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: f9db05e235299610e53a0dd98982b89da590efd1
     pushed_at: '2026-02-09T20:28:06Z'
@@ -920,9 +963,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:04.404877+00:00'
     last_changed_at: '2026-07-07T03:30:04.404899+00:00'
 - repo: airbytehq/airbyte-agent-sdk
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 1ac8056af32b6a2336a8e5234c53f9f001bfda9f
     pushed_at: '2026-07-06T22:36:57Z'
@@ -951,9 +995,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:05.068970+00:00'
     last_changed_at: '2026-07-07T03:30:05.068992+00:00'
 - repo: pulumi/agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 592e4da33a779ad780788c5a22f91f0d5bcb401c
     pushed_at: '2026-06-29T18:38:42Z'
@@ -965,9 +1010,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:07.437576+00:00'
     last_changed_at: '2026-07-07T03:30:07.437601+00:00'
 - repo: hashicorp/agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 339a113935812ad75c6ff90d418b739a021826d1
     pushed_at: '2026-05-28T15:48:31Z'
@@ -981,9 +1027,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:08.078509+00:00'
     last_changed_at: '2026-07-07T03:30:08.078527+00:00'
 - repo: databricks/databricks-agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 5be3080ae386e9c96412d082a188080dd64b7f8a
     pushed_at: '2026-07-04T04:20:48Z'
@@ -995,9 +1042,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:08.698246+00:00'
     last_changed_at: '2026-07-07T03:30:08.698266+00:00'
 - repo: databricks-solutions/ai-dev-kit
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 5b4b26c31262c08349d5ee726815f5b2e89cb53c
     pushed_at: '2026-07-06T09:33:06Z'
@@ -1014,9 +1062,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:09.337402+00:00'
     last_changed_at: '2026-07-07T03:30:09.337419+00:00'
 - repo: awslabs/agent-plugins
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 23dc619d35f848fd03b12d45d0e16c191d40d1e6
     pushed_at: '2026-07-07T02:40:12Z'
@@ -1035,9 +1084,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:10.120201+00:00'
     last_changed_at: '2026-07-07T03:30:10.120227+00:00'
 - repo: microsoft/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 079ddaabb53a3f6b6d622bfb02d2e1497f85883e
     pushed_at: '2026-07-06T16:26:57Z'
@@ -1057,9 +1107,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:10.782240+00:00'
     last_changed_at: '2026-07-07T03:30:10.782257+00:00'
 - repo: thiswillbeyourgithub/wdoc
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 4f72563f5c9cd9900f55880705dc94261907c9e3
     pushed_at: '2026-07-03T23:10:02Z'
@@ -1081,9 +1132,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:11.316827+00:00'
     last_changed_at: '2026-07-07T03:30:11.316846+00:00'
 - repo: meleantonio/ChernyCode
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 8a74a2ada2f0762ca78fa7da6c16fb23e318f407
     pushed_at: '2026-02-11T18:12:30Z'
@@ -1095,9 +1147,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:12.527052+00:00'
     last_changed_at: '2026-07-07T03:30:12.527072+00:00'
 - repo: K-Dense-AI/scientific-agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 4d97e293dc6f604fb6b63dcd49b9028df413d65b
     pushed_at: '2026-07-06T11:52:50Z'
@@ -1130,9 +1183,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:13.110085+00:00'
     last_changed_at: '2026-07-07T03:30:13.110105+00:00'
 - repo: github/awesome-copilot
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 1f92908fa89f9f0fc6aca97006b3bfd6c0ca01ab
     pushed_at: '2026-07-07T02:06:48Z'
@@ -1153,9 +1207,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:13.819177+00:00'
     last_changed_at: '2026-07-07T03:30:13.819207+00:00'
 - repo: lawve-ai/awesome-legal-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 7f58aaf1fbc7b12904b15b622edb1f8ac0742f5a
     pushed_at: '2026-06-22T13:34:18Z'
@@ -1172,9 +1227,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:14.856348+00:00'
     last_changed_at: '2026-07-07T03:30:14.856381+00:00'
 - repo: agentskills/agentskills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 0c0c5673846d0a1c983d910b189e329ef3ab8f2a
     pushed_at: '2026-07-01T21:37:32Z'
@@ -1187,9 +1243,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:16.843011+00:00'
     last_changed_at: '2026-07-07T03:30:16.843036+00:00'
 - repo: google/langextract
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 0dff5479aa51934c7d5833a7c38e2a5abba4e0c2
     pushed_at: '2026-07-02T07:59:47Z'
@@ -1213,9 +1270,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:19.713609+00:00'
     last_changed_at: '2026-07-07T03:30:19.713627+00:00'
 - repo: dbt-labs/dbt-agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 9eee2733ed63bb26edb8fcd0237d8c4589a773e6
     pushed_at: '2026-07-06T01:13:43Z'
@@ -1228,9 +1286,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:20.455684+00:00'
     last_changed_at: '2026-07-07T03:30:20.455714+00:00'
 - repo: lexler/skill-factory
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 06a17c808a32aebb454ebae99f6d2e12049afb38
     pushed_at: '2026-07-06T17:44:29Z'
@@ -1242,9 +1301,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:20.957266+00:00'
     last_changed_at: '2026-07-07T03:30:20.957291+00:00'
 - repo: openai/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 49f948faa9258a0c61caceaf225e179651397431
     pushed_at: '2026-06-24T02:36:15Z'
@@ -1256,9 +1316,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:21.584535+00:00'
     last_changed_at: '2026-07-07T03:30:21.584567+00:00'
 - repo: zebbern/claude-code-guide
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 82a1370363fb50d35ded966ffaa3bea6ec74cf50
     pushed_at: '2026-07-07T01:02:56Z'
@@ -1291,9 +1352,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:22.101342+00:00'
     last_changed_at: '2026-07-07T03:30:22.101361+00:00'
 - repo: jpoutrin/product-forge
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 0ebe7aea08747cb1c121bc77652d458b9e8ee782
     pushed_at: '2026-03-01T13:57:15Z'
@@ -1306,9 +1368,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:22.591168+00:00'
     last_changed_at: '2026-07-07T03:30:22.591194+00:00'
 - repo: Dammyjay93/interface-design
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 2f9be3206855bcb2d1d0af262c8bae25cba6658d
     pushed_at: '2026-06-20T11:32:45Z'
@@ -1321,9 +1384,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:23.100773+00:00'
     last_changed_at: '2026-07-07T03:30:23.100789+00:00'
 - repo: jdepoix/youtube-transcript-api
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 72d79711ec4db95262660029b4d63298b0820502
     pushed_at: '2026-05-19T18:17:07Z'
@@ -1355,9 +1419,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:24.172327+00:00'
     last_changed_at: '2026-07-07T03:30:24.172345+00:00'
 - repo: stravu/crystal
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 1e18e0bc981225f75b5226f82a300fa741970c6f
     pushed_at: '2026-02-26T21:48:10Z'
@@ -1384,9 +1449,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:25.824999+00:00'
     last_changed_at: '2026-07-07T03:30:25.825014+00:00'
 - repo: coffeefuelbump/csv-data-summarizer-claude-skill
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 9b3affd270f85aaf1c8a7a457f510034d5736cde
     pushed_at: '2025-10-16T20:20:06Z'
@@ -1401,9 +1467,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:26.376949+00:00'
     last_changed_at: '2026-07-07T03:30:26.376974+00:00'
 - repo: yusufkaraaslan/Skill_Seekers
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: ea7324eea96a414e06ae1dd3673a086725502d6c
     pushed_at: '2026-07-02T21:50:59Z'
@@ -1434,9 +1501,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:26.870120+00:00'
     last_changed_at: '2026-07-07T03:30:26.870136+00:00'
 - repo: omkamal/pypict-claude-skill
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: fbda212bca79dfa7611be12527b102c89cc8faeb
     pushed_at: '2026-03-22T20:31:42Z'
@@ -1449,9 +1517,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:27.396035+00:00'
     last_changed_at: '2026-07-07T03:30:27.396060+00:00'
 - repo: lackeyjb/playwright-skill
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: bb7e920d376022958214e349ef25498a2644e189
     pushed_at: '2025-12-19T16:23:38Z'
@@ -1478,9 +1547,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:27.990150+00:00'
     last_changed_at: '2026-07-07T03:30:27.990173+00:00'
 - repo: obra/superpowers
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: d884ae04edebef577e82ff7c4e143debd0bbec99
     pushed_at: '2026-07-06T21:53:36Z'
@@ -1501,9 +1571,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:28.515982+00:00'
     last_changed_at: '2026-07-07T03:30:28.516012+00:00'
 - repo: anthropics/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 9d2f1ae187231d8199c64b5b762e1bdf2244733d
     pushed_at: '2026-07-01T18:11:25Z'
@@ -1516,9 +1587,10 @@ stubs:
     indexed_at: '2026-07-07T03:30:29.217320+00:00'
     last_changed_at: '2026-07-07T03:30:29.217337+00:00'
 - repo: awslabs/hcls-agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 43e711bf18c338741b7c1126bf1dad18a8a5740c
     pushed_at: '2026-07-09T05:47:40Z'
@@ -1545,9 +1617,10 @@ stubs:
     indexed_at: '2026-07-13T10:57:36.577067+00:00'
     last_changed_at: '2026-07-13T10:57:36.577079+00:00'
 - repo: shepherd-agents/shepherd
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 2d86248884b8a4ec10f7283681cbcb8f0773af8e
     pushed_at: '2026-07-09T02:11:19Z'
@@ -1569,9 +1642,10 @@ stubs:
     indexed_at: '2026-07-13T10:57:38.033618+00:00'
     last_changed_at: '2026-07-13T10:57:38.033628+00:00'
 - repo: pydantic/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 6730ba856ab097042e8e704cf4faba3cfb9bf672
     pushed_at: '2026-07-13T07:23:33Z'
@@ -1583,9 +1657,10 @@ stubs:
     indexed_at: '2026-07-13T10:57:38.768794+00:00'
     last_changed_at: '2026-07-13T10:57:38.768804+00:00'
 - repo: columnar-tech/skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 138bee73fa956e89577b0efb8e1a212cd5232498
     pushed_at: '2026-07-08T15:53:04Z'
@@ -1597,9 +1672,10 @@ stubs:
     indexed_at: '2026-07-13T10:57:39.629006+00:00'
     last_changed_at: '2026-07-13T10:57:39.629016+00:00'
 - repo: dekart-xyz/geosql
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 0cb04bfc1af518ed9462931f374a7aad91ad1650
     pushed_at: '2026-06-30T04:49:52Z'
@@ -1611,9 +1687,10 @@ stubs:
     indexed_at: '2026-07-13T10:57:40.297158+00:00'
     last_changed_at: '2026-07-13T10:57:40.297170+00:00'
 - repo: deanpeters/Product-Manager-Skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 1b5a524ebb95e9497fa3f25002d8b8ec528d4444
     pushed_at: '2026-09-01T22:34:38Z'
@@ -1631,9 +1708,10 @@ stubs:
     indexed_at: '2026-10-14T00:56:26.204411+00:00'
     last_changed_at: '2026-10-14T00:56:26.204426+00:00'
 - repo: ayghri/i-have-adhd
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 1ecea1993b7fce257ffbd686c070948b5e07eda6
     pushed_at: '2026-10-11T16:03:54Z'
@@ -1652,9 +1730,10 @@ stubs:
     indexed_at: '2026-10-14T00:56:27.993880+00:00'
     last_changed_at: '2026-10-14T00:56:27.993893+00:00'
 - repo: exploreomni/omni-agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 3323e68bbc3da807b7f8a15c0febcbf471a7333b
     pushed_at: '2026-10-12T16:14:55Z'
@@ -1667,9 +1746,10 @@ stubs:
     indexed_at: '2026-10-14T00:56:28.569535+00:00'
     last_changed_at: '2026-10-14T00:56:28.569548+00:00'
 - repo: growthxai/squeaks
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 1be5c034accd49958c8e34e75d2b2d54beaf57b7
     pushed_at: '2026-03-04T02:40:43Z'
@@ -1683,9 +1763,10 @@ stubs:
     indexed_at: '2026-10-14T00:56:29.195616+00:00'
     last_changed_at: '2026-10-14T00:56:29.195630+00:00'
 - repo: GoogleCloudPlatform/google-cloud-storage-plugin
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 701fcaee68a6005e3fcbfa2bdb684f02592a2bcb
     pushed_at: '2026-10-09T20:32:34Z'
@@ -1715,9 +1796,10 @@ stubs:
     indexed_at: '2026-10-14T00:56:30.579062+00:00'
     last_changed_at: '2026-10-14T00:56:30.579073+00:00'
 - repo: dlt-hub/dlthub-ai-harness
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 8eeaa327eea5ced2037ebf5dbbd9d4c428350558
     pushed_at: '2026-10-08T14:26:29Z'
@@ -1729,9 +1811,10 @@ stubs:
     indexed_at: '2026-10-14T00:56:31.797064+00:00'
     last_changed_at: '2026-10-14T00:56:31.797077+00:00'
 - repo: MarioLazo/agentic-coe
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 9ebce09ce3334e1b07a9ead5de0805a3ed59030a
     pushed_at: '2026-08-25T17:38:48Z'
@@ -1750,9 +1833,10 @@ stubs:
     indexed_at: '2026-10-14T00:56:32.425459+00:00'
     last_changed_at: '2026-10-14T00:56:32.425472+00:00'
 - repo: microsoft/skills-for-fabric
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: bc42aaf734771bf752c1d7082dd91e5a6ca72b9f
     pushed_at: '2026-10-05T11:17:15Z'
@@ -1765,9 +1849,10 @@ stubs:
     indexed_at: '2026-10-14T11:00:49.230039+00:00'
     last_changed_at: '2026-10-14T11:00:49.230058+00:00'
 - repo: looker-open-source/looker-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 938b48562359911864d446c1db4c9101a8cc53a9
     pushed_at: '2026-10-02T15:38:05Z'
@@ -1779,9 +1864,10 @@ stubs:
     indexed_at: '2026-10-14T11:00:49.789988+00:00'
     last_changed_at: '2026-10-14T11:00:49.790003+00:00'
 - repo: cube-js/cube-agent-skills
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 5e5ef13c40f3bfc101d575b568b5c5a3447d6fcb
     pushed_at: '2026-09-30T21:18:35Z'
@@ -1794,9 +1880,10 @@ stubs:
     indexed_at: '2026-10-14T11:00:50.410562+00:00'
     last_changed_at: '2026-10-14T11:00:50.410577+00:00'
 - repo: malloydata/publisher
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: aae7dae32f2dfcf138442767f36726040bfd739e
     pushed_at: '2026-10-14T07:31:46Z'
@@ -1828,9 +1915,10 @@ stubs:
     indexed_at: '2026-10-14T11:00:50.897922+00:00'
     last_changed_at: '2026-10-14T11:00:50.897936+00:00'
 - repo: cbrock84/headcount
-  skill: null
+  verdict: null
+  use_contexts: null
   notes: null
-  watch_paths: null
+  skill_or_plugin_paths: null
   state:
     latest_sha: 98d1c17d480f606060102a781f9a8601690685f7
     pushed_at: '2026-09-17T19:13:19Z'

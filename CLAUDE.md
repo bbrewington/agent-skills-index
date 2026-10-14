@@ -20,9 +20,9 @@ Run the sync script (mutates `tracked.yml`, writes a `changes.yaml` summary):
 uv run python scripts/sync_stars.py --mode all|sync|discover [--dry-run] [--output changes.yaml]
 ```
 
-- `--mode sync` checks each `tracked:` entry for upstream SHA changes.
-- `--mode discover` adds unseen repos as `stubs:`. With `STAR_LIST` (or `--star-list`) set to comma-separated star list slug(s), it only considers repos in those lists (GraphQL); otherwise it considers every star.
-- `--prune-stubs` (requires a star list) removes stubs that are not in the list. `tracked:` is never pruned.
+- `--mode sync` checks each `adopt`/`watch` entry for upstream SHA changes (scoped to `skill_or_plugin_paths` if set).
+- `--mode discover` adds unseen repos as stubs. With `STAR_LIST` (or `--star-list`) set to comma-separated star list slug(s), it only considers repos in those lists (GraphQL); otherwise it considers every star.
+- `--prune-stubs` (requires a star list) removes stubs that are not in the list. Entries with a verdict are never pruned.
 - `--mode all` (default) runs both.
 - `--dry-run` skips writing `tracked.yml` but still writes `changes.yaml`.
 - Requires env var `GITHUB_TOKEN` (fine-grained PAT owned by the starred user; if `GET /users/{user}/starred` returns nothing or 403, use a classic PAT with `read:user`). `GITHUB_USER` defaults to `bbrewington`. `STAR_LIST` is `agent-skills,ai-helpers-and-reference` in the workflow.
@@ -45,10 +45,11 @@ Tests live in `tests/` and stub out the GitHub API; nothing hits the network. `.
 
 ## Architecture
 
-`tracked.yml` is the single source of truth, with two sections:
+`tracked.yml` is the single source of truth: one `repos:` list. A stub is an entry with `verdict: null`; curated repos have `verdict` of `adopt`, `watch` or `skip` (vocabulary in `CONTEXT.md`).
 
-- `tracked:` — repos explicitly wired to a skill. Fields `repo`, `skill`, `notes`, `watch_paths` are human-authored; `state:` (`latest_sha`, `pushed_at`, `indexed_at`, `last_changed_at`, `description`, `language`, `topics`, `license`, `stargazers_count`) is bot-written by `sync_stars.py`.
-- `stubs:` — auto-discovered stars not yet linked to a skill, same shape but with `skill`/`notes`/`watch_paths` set to `null`.
+- Human-authored fields: `repo`, `verdict`, `use_contexts`, `notes`, `skill_or_plugin_paths`. The bot never writes these on an existing entry; new stubs get them as `null`.
+- Bot-written `state:` (`latest_sha`, `pushed_at`, `indexed_at`, `last_changed_at`, `description`, `language`, `topics`, `license`, `stargazers_count`).
+- `use_contexts` tags must exist in `use-contexts.yml`. `sync_stars.py` exits 2 on an unknown tag or verdict, and `tests/test_sync_stars.py::test_committed_tracked_yml_is_valid` fails CI.
 
 `scripts/sync_stars.py` is the only writer of `tracked.yml`. It does a full `yaml.safe_load` / `yaml.dump` round-trip on every run, but `extract_header` re-prepends the leading comment block afterward, so the header documenting the config/state field split survives. Other comments in the file would not.
 
@@ -64,7 +65,7 @@ If the checkout step fails with `fatal: could not read Username for 'https://git
 
 - GraphQL (used for star lists) is blocked from Claude Code cloud sessions, so list fetching can only be verified in Actions (use `dry_run`), not locally in a session. It is covered by mocked tests only. The fine-grained PAT's access to `user.lists` was verified in Actions on 2026-10-14.
 - `get_starred_repos` in `scripts/sync_stars.py` bails out early once `X-RateLimit-Remaining < 10`. It returns a `rate_limited` flag, written to `changes.yaml` as `discover_rate_limited`, and `gen_pr_body.py` renders a warning in the PR body when it is set.
-- Weekly PRs accumulate unreviewed stubs if not merged or closed; `tracked:` is currently empty and everything is a stub.
+- Weekly PRs accumulate unreviewed stubs if not merged or closed; no entry has a verdict yet, so everything is a stub.
 
 ## Agent skills
 
