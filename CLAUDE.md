@@ -24,7 +24,7 @@ uv run python scripts/sync_stars.py --mode all|sync|discover [--dry-run] [--outp
 - `--mode discover` fetches the full starred list and adds unseen repos as `stubs:`.
 - `--mode all` (default) runs both.
 - `--dry-run` skips writing `tracked.yml` but still writes `changes.yaml`.
-- Requires env var `GITHUB_TOKEN` (PAT with `read:user` scope — must belong to the starred user, since `GET /users/{user}/starred` requires it). `GITHUB_USER` defaults to `bbrewington`.
+- Requires env var `GITHUB_TOKEN` (fine-grained PAT owned by the starred user; if `GET /users/{user}/starred` returns nothing or 403, use a classic PAT with `read:user`). `GITHUB_USER` defaults to `bbrewington`.
 - Exit code is `1` if anything changed, `0` otherwise (this drives whether CI opens a PR).
 
 Render a PR body from a `changes.yaml`:
@@ -53,9 +53,9 @@ Tests live in `tests/` and stub out the GitHub API; nothing hits the network. CI
 
 `scripts/gen_pr_body.py` reads the `changes.yaml` emitted by `sync_stars.py` and renders a Markdown PR body with two sections: tracked repos with upstream changes (plus a review checklist), and newly discovered stars grouped by language.
 
-CI is `.github/workflows/sync.yml`: weekly cron (Mon 08:00 UTC) + `workflow_dispatch` (with a `dry_run` input). It runs `sync_stars.py --mode all`, and if the exit code is 1, renders a PR body and opens a PR via `gh pr create` on a branch named `agent-skills-index/update-<ISO datetime, no separators>` (e.g. `agent-skills-index/update-20250602T080012`) with label `agent-skills-index`. Dry runs upload `changes.yaml` as an artifact instead. Actions are pinned to commit SHAs. It needs a secret `SKILLS_INDEX_TOKEN` (classic PAT, `repo` + `read:user`, owned by the starred user).
+CI is `.github/workflows/sync.yml`: weekly cron (Mon 08:00 UTC) + `workflow_dispatch` (with a `dry_run` input). It runs `sync_stars.py --mode all`, and if the exit code is 1, renders a PR body and opens a PR via `gh pr create` on a branch named `agent-skills-index/update-<ISO datetime, no separators>` (e.g. `agent-skills-index/update-20250602T080012`) with label `agent-skills-index`. Dry runs upload `changes.yaml` as an artifact instead. Actions are pinned to commit SHAs. It needs a secret `SKILLS_INDEX_TOKEN` (fine-grained PAT: contents write, pull requests write, metadata read, scoped to this repo, 365 day expiry; creation link in README Setup).
 
-If the checkout step fails with `fatal: could not read Username for 'https://github.com'`, the `SKILLS_INDEX_TOKEN` secret has expired or been revoked (this caused the failed runs of 2026-10-05 and 2026-10-12). Regenerate the PAT and update the secret.
+If the checkout step fails with `fatal: could not read Username for 'https://github.com'`, the `SKILLS_INDEX_TOKEN` secret has expired or been revoked (this caused the failed runs of 2026-10-05 and 2026-10-12). Regenerate the PAT (README Setup has a prefilled link) and update the secret.
 
 `docs/skills-index-spec.md` has the full design rationale and a running list of remaining work — check it for context before making structural changes.
 

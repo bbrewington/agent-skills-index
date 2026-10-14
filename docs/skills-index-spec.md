@@ -43,7 +43,7 @@ agent-skills-index/
 - Trigger: weekly cron (Mon 08:00 UTC) + `workflow_dispatch` with a `dry_run` boolean input.
 - Steps: checkout -> setup uv (Python 3.14) -> `uv sync --locked` -> run `sync_stars.py --mode all` -> if changed, generate PR body via `gen_pr_body.py` -> create branch (ISO datetime name) -> commit `tracked.yml` -> `gh pr create` with title showing counts, e.g. `chore(index): skills index update 2025-06-02 (3 updated, 5 new stars)` -> label `agent-skills-index`.
 - Dry run uploads `changes.yaml` as a workflow artifact instead of opening a PR.
-- Needs secret `SKILLS_INDEX_TOKEN`: a PAT with `contents: write`, `pull-requests: write`, and `read:user` (the starred-repos endpoint requires the token belong to the starred user, i.e. bbrewington's own PAT - a repo-scoped fine-grained token alone won't work for `GET /users/{user}/starred`).
+- Needs secret `SKILLS_INDEX_TOKEN`: a fine-grained PAT with contents: write, pull requests: write, metadata: read, scoped to this repo (prefilled creation link in README Setup). Original design assumed a classic PAT with `read:user` was required for `GET /users/{user}/starred`; with a fine-grained token, verify via a dry run that discover still lists stars and fall back to classic (`repo` + `read:user`) if not.
 
 ## Remaining work
 
@@ -53,4 +53,4 @@ Open:
 
 1. Decide the real `tracked:` list and skill paths (currently `tracked: []`; the 4 placeholders were removed).
 2. Triage the stub backlog (286 as of 2026-10-14) and decide whether unreviewed weekly PRs should be closed or merged.
-3. Token expiry: `SKILLS_INDEX_TOKEN` expired once (runs failing at checkout, 2026-10-05 to 2026-10-12). Track its expiry date or consider a fine-grained setup if possible.
+3. Token expiry: `SKILLS_INDEX_TOKEN` expired once (runs failing at checkout, 2026-10-05 to 2026-10-12). Now a 365 day fine-grained PAT; track its expiry date.

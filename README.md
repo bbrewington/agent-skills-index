@@ -62,9 +62,11 @@ Branches are named `agent-skills-index/update-<ISO datetime>`, e.g.:
 ## Setup
 
 0. Install dependencies with `uv sync` (Python 3.14).
-1. Create a classic PAT with `repo` and `read:user` scopes (must be your own
-   token; the starred-repos endpoint won't work with a repo-scoped fine-grained token).
-2. Add it as secret `SKILLS_INDEX_TOKEN`, and note its expiry date.
+1. [Create a fine-grained PAT](https://github.com/settings/personal-access-tokens/new?name=agent-skills-index-sync&target_name=bbrewington&expires_in=365&contents=write&pull_requests=write&metadata=read) with the permissions prefilled
+   (contents: write, pull requests: write, metadata: read; 365 day expiry).
+   On the token page, set repository access to only `bbrewington/agent-skills-index`.
+2. Add it as secret `SKILLS_INDEX_TOKEN` (Settings -> Secrets and variables -> Actions),
+   and note its expiry date.
 3. Populate the `tracked:` section of `tracked.yml`.
 4. Trigger the workflow manually once to bootstrap `state:` blocks.
 
@@ -94,11 +96,8 @@ If a run fails in the Checkout step with `could not read Username for
 'https://github.com'`, `SKILLS_INDEX_TOKEN` has expired or been revoked.
 Regenerate the PAT, update the secret, and re-run the workflow.
 
-To regenerate, [create a new fine-grained PAT with the permissions prefilled](https://github.com/settings/personal-access-tokens/new?name=agent-skills-index-sync&target_name=bbrewington&expires_in=365&contents=write&pull_requests=write&metadata=read)
-(365 day expiry; contents and pull requests write, metadata read). On the
-token page, restrict it to the `agent-skills-index` repo, then update the
-`SKILLS_INDEX_TOKEN` secret under Settings -> Secrets and variables -> Actions.
+To regenerate, follow Setup steps 1 and 2 again (same prefilled link), then re-run the workflow.
 
 Fine-grained tokens have no `read:user` scope. After rotating, run the workflow
 with `dry_run` enabled and confirm discover mode still lists your stars; if it
-doesn't, use a classic PAT with `repo` and `read:user` as in Setup.
+doesn't, use a classic PAT with `repo` and `read:user` instead.

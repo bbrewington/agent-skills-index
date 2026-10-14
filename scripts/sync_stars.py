@@ -13,7 +13,7 @@ Usage:
     python scripts/sync_stars.py [--mode all|sync|discover] [--dry-run] [--output changes.yaml]
 
 Environment variables:
-    GITHUB_TOKEN   PAT with read:user scope
+    GITHUB_TOKEN   PAT (fine-grained, or classic with read:user)
     GITHUB_USER    Defaults to "bbrewington"
 """
 
