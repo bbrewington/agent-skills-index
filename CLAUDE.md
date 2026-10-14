@@ -62,6 +62,20 @@ If the checkout step fails with `fatal: could not read Username for 'https://git
 
 ## Known gotchas
 
-- GraphQL (used for star lists) is blocked from Claude Code cloud sessions, so list fetching can only be verified in Actions (use `dry_run`), not locally in a session. It is covered by mocked tests only. Fine-grained PAT access to `user.lists` is unverified.
+- GraphQL (used for star lists) is blocked from Claude Code cloud sessions, so list fetching can only be verified in Actions (use `dry_run`), not locally in a session. It is covered by mocked tests only. The fine-grained PAT's access to `user.lists` was verified in Actions on 2026-10-14.
 - `get_starred_repos` in `scripts/sync_stars.py` bails out early once `X-RateLimit-Remaining < 10`. It returns a `rate_limited` flag, written to `changes.yaml` as `discover_rate_limited`, and `gen_pr_body.py` renders a warning in the PR body when it is set.
 - Weekly PRs accumulate unreviewed stubs if not merged or closed; `tracked:` is currently empty and everything is a stub.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues for bbrewington/agent-skills-index (via `gh`). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Uses the default five-label vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
