@@ -5,18 +5,20 @@ sync_stars.py
 Two modes, both writing back into tracked.yml (one `repos:` list; a stub is an entry
 with `verdict: null`):
 
-  sync      Check every adopt/watch repo for upstream SHA changes.
-  discover  Fetch starred repos; add unseen ones as stubs.
+  sync      For adopt/watch repos: flag archived/renamed/gone upstreams, find releases, tags and path
+            commits since the last-seen SHA (the changelog), and suggest unlisted skill/plugin paths.
+            Also suggests paths for stubs whose upstream head moved.
+  discover  Fetch starred repos; add unseen ones as stubs; prune stubs outside the star list(s).
 
 The bot only writes bot-owned fields: `state`, new stubs, and (with --prune-stubs)
-removal of stubs. It never touches verdict, use_contexts, notes or skill_or_plugin_paths
-on an existing entry. The file fails validation on an unknown verdict or a use_contexts
+removal of stubs, plus the changelog files and INDEX.md under generated/. It never touches
+verdict, use_contexts, notes or skill_or_plugin_paths on an existing entry. The file fails validation on an unknown verdict or a use_contexts
 tag missing from use-contexts.yml.
 
 Default (--mode all) runs both.
 
 Usage:
-    python scripts/sync_stars.py [--mode all|sync|discover] [--dry-run] [--output changes.yaml]
+    python scripts/sync_stars.py [--mode all|sync|discover] [--dry-run] [--update-changelog] [--output changes.yaml]
 
 Environment variables:
     GITHUB_TOKEN   PAT (fine-grained, or classic with read:user)
@@ -29,28 +31,22 @@ Environment variables:
 import argparse
 import os
 import sys
-from copy import deepcopy
 from datetime import UTC, datetime
 from pathlib import Path
 
+import render
 import requests
+import upstream
 import yaml
+from ghapi import HEADERS
 
 GITHUB_USER = os.getenv("GITHUB_USER", "bbrewington")
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 STAR_LIST = os.getenv("STAR_LIST") or None
 TRACKED_FILE = Path(__file__).parent.parent / "tracked.yml"
 USE_CONTEXTS_FILE = Path(__file__).parent.parent / "use-contexts.yml"
 
 VERDICTS = {"adopt", "watch", "skip"}
 SYNCED_VERDICTS = {"adopt", "watch"}
-
-HEADERS = {
-    "Accept": "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28",
-}
-if GITHUB_TOKEN:
-    HEADERS["Authorization"] = f"Bearer {GITHUB_TOKEN}"
 
 
 # -----------------------------------------------------------------------
@@ -237,35 +233,113 @@ def build_state(meta: dict, sha: str, existing_state: dict | None = None) -> dic
 # Sync mode
 # -----------------------------------------------------------------------
 
-def run_sync(data: dict, dry_run: bool) -> list[dict]:
-    changes = []
+def run_sync(data: dict, record: bool) -> tuple[dict, list[tuple], dict]:
+    """Check adopt/watch repos. Returns (result, pending, heads).
+
+    result: changes (changelog entries), baselines, flags, unrecorded (findings when not recording).
+    pending: (entry, head, tags, meta) for each change; `persist` advances the last-seen SHA only after the
+    entry is written. Nothing advances when `record` is false.
+    """
+    result: dict[str, list] = {"changes": [], "baselines": [], "flags": [], "unrecorded": []}
+    pending: list[tuple] = []
+    heads: dict[str, dict] = {}
     for item in data["repos"]:
         if item.get("verdict") not in SYNCED_VERDICTS:
             continue
-        repo = item["repo"]
+        repo, verdict = item["repo"], item["verdict"]
+        state = item.setdefault("state", {})
         print(f"[sync] {repo}")
         try:
-            meta = get_repo_meta(repo)
-            sha = get_latest_commit_sha(repo, item.get("skill_or_plugin_paths"))
+            meta, flags = upstream.fetch_repo(repo)
         except requests.HTTPError as e:
             print(f"  ERROR: {e}", file=sys.stderr)
             continue
 
-        old_sha = (item.get("state") or {}).get("latest_sha")
-        new_state = build_state(meta, sha, item.get("state"))
+        old_flags = state.get("flags", [])
+        fresh = [f for f in flags if f not in old_flags]
+        if fresh:
+            print(f"  -> FLAGS {fresh}")
+            report = {"repo": repo, "verdict": verdict, "flags": fresh}
+            if record:
+                result["flags"].append(report)
+            else:
+                result["unrecorded"].append({"type": "flag"} | report)
+        if record and flags != old_flags:
+            state["flags"] = flags
+        if meta is None:
+            continue
 
-        if old_sha is None:
-            print("  -> NEW (first index)")
-            item["state"] = new_state
-            changes.append({"repo": repo, "reason": "new", "new_sha": sha})
-        elif old_sha != sha:
-            print(f"  -> UPDATED {old_sha[:7]}..{sha[:7]}")
-            item["state"] = new_state
-            changes.append({"repo": repo, "reason": "updated", "old_sha": old_sha, "new_sha": sha})
-        else:
+        try:
+            head = upstream.head_commit(repo)
+            found = upstream.detect(repo, item.get("skill_or_plugin_paths"), state, head)
+        except requests.HTTPError as e:
+            print(f"  ERROR: {e}", file=sys.stderr)
+            continue
+        if head:
+            heads[repo] = head
+        if found is None:
             print("  -> no change")
+        elif found["kind"] == "baseline":
+            print("  -> BASELINE")
+            if record:
+                upstream.advance(state, head, found["tags"])
+                state.update(build_state(meta, head["sha"], state))
+                result["baselines"].append({"repo": repo, "verdict": verdict})
+            else:
+                result["unrecorded"].append({"type": "baseline", "repo": repo, "verdict": verdict})
+        else:
+            entry = found["entry"] | {"verdict": verdict}
+            print(f"  -> CHANGED {found['entry']['old_sha'][:7]}..{head['sha'][:7]}")
+            if record:
+                result["changes"].append(entry)
+                pending.append((item, head, found["tags"], meta))
+            else:
+                result["unrecorded"].append({"type": "change"} | entry)
+    return result, pending, heads
 
-    return changes
+
+def run_audit(data: dict, record: bool, heads: dict[str, dict]) -> tuple[list[dict], list[dict]]:
+    """Suggest unlisted skill/plugin paths (and flag listed ones that are neither) for every repo whose upstream
+    head moved since its last audit. Curated repos also get compliance checks. Returns (suggestions, unrecorded)."""
+    suggestions: list[dict] = []
+    unrecorded: list[dict] = []
+    for item in data["repos"]:
+        verdict = item.get("verdict")
+        state = item.setdefault("state", {})
+        if verdict == "skip" or "gone" in state.get("flags", []):
+            continue
+        repo = item["repo"]
+        curated = verdict in SYNCED_VERDICTS
+        try:
+            head = heads.get(repo) or upstream.head_commit(repo)
+            if head is None or head["sha"] == state.get("tree_sha"):
+                continue
+            audited = upstream.audit(repo, head["sha"], item.get("skill_or_plugin_paths"), check_compliance=curated)
+        except requests.HTTPError as e:
+            print(f"  [audit] {repo} ERROR: {e}", file=sys.stderr)
+            continue
+        report = {"repo": repo, "verdict": verdict, "curated": curated} | audited
+        has_findings = bool(audited["suggestions"] or audited["invalid_paths"])
+        if record:
+            state["tree_sha"] = head["sha"]
+            if has_findings:
+                suggestions.append(report)
+        elif has_findings:
+            unrecorded.append({"type": "suggestion"} | report)
+    return suggestions, unrecorded
+
+
+def persist(data: dict, result: dict, pending: list[tuple], dry_run: bool, today: str) -> None:
+    """Write the changelog first, then advance last-seen SHAs, then INDEX.md and tracked.yml. A failed changelog
+    write raises before anything is advanced or saved."""
+    if dry_run:
+        return
+    render.write_changelog(result["changes"], render.CHANGELOG_DIR, today)
+    for item, head, tags, meta in pending:
+        upstream.advance(item["state"], head, tags)
+        item["state"].update(build_state(meta, head["sha"], item["state"]))
+    render.write_index(data)
+    save_tracked(data, dry_run=False)
 
 
 # -----------------------------------------------------------------------
@@ -294,9 +368,7 @@ def prune_stubs(data: dict, candidates: list[dict]) -> list[str]:
     return removed
 
 
-def run_discover(
-    data: dict, dry_run: bool, star_list: str | None = None, prune: bool = False
-) -> tuple[list[dict], bool, list[str]]:
+def run_discover(data: dict, dry_run: bool, star_list: str | None = None) -> tuple[list[dict], bool, list[str]]:
     source = f"star list(s) '{star_list}'" if star_list else "stars"
     print(f"[discover] Fetching {source} for {GITHUB_USER}...")
     try:
@@ -305,7 +377,11 @@ def run_discover(
         print(f"  ERROR: {e}", file=sys.stderr)
         return [], False, []
     print(f"  {len(starred)} repos found")
-    pruned = prune_stubs(data, starred) if prune else []
+    pruned = []
+    if star_list and starred:
+        pruned = prune_stubs(data, starred)
+    elif star_list:
+        print("  WARNING: star list(s) returned no repos; not pruning", file=sys.stderr)
     if pruned:
         print(f"  {len(pruned)} stub(s) not in {source} pruned")
 
@@ -349,9 +425,9 @@ def main():
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--star-list", default=STAR_LIST, help="comma-separated star list slug(s) (default: $STAR_LIST)")
     parser.add_argument(
-        "--prune-stubs",
+        "--update-changelog",
         action="store_true",
-        help="with --star-list, remove stubs that are not in the list (curated entries are never pruned)",
+        help="record changelog entries and advance last-seen markers; without it, upstream findings are only reported",
     )
     parser.add_argument("--output", default="changes.yaml")
     args = parser.parse_args()
@@ -362,42 +438,56 @@ def main():
     except ValidationError as e:
         print(f"ERROR: invalid tracked.yml:\n{e}", file=sys.stderr)
         sys.exit(2)
-    # Keep a snapshot for diffing in gen_pr_body if needed
-    original = deepcopy(data)  # noqa: F841
 
-    sync_changes: list[dict] = []
     new_stars: list[dict] = []
     discover_rate_limited = False
     pruned: list[str] = []
-
-    if args.mode in ("all", "sync"):
-        sync_changes = run_sync(data, dry_run=args.dry_run)
+    result: dict[str, list] = {"changes": [], "baselines": [], "flags": [], "unrecorded": []}
+    pending: list[tuple] = []
+    suggestions: list[dict] = []
 
     if args.mode in ("all", "discover"):
-        new_stars, discover_rate_limited, pruned = run_discover(
-            data,
-            dry_run=args.dry_run,
-            star_list=args.star_list,
-            prune=args.prune_stubs and bool(args.star_list),
-        )
+        new_stars, discover_rate_limited, pruned = run_discover(data, dry_run=args.dry_run, star_list=args.star_list)
 
-    save_tracked(data, dry_run=args.dry_run)
+    if args.mode in ("all", "sync"):
+        result, pending, heads = run_sync(data, record=args.update_changelog)
+        suggestions, unrecorded = run_audit(data, record=args.update_changelog, heads=heads)
+        result["unrecorded"] += unrecorded
 
+    persist(data, result, pending, dry_run=args.dry_run, today=now_iso()[:10])
+
+    counts = {
+        "changed_count": len(result["changes"]),
+        "baseline_count": len(result["baselines"]),
+        "flag_count": len(result["flags"]),
+        "suggestion_count": len(suggestions),
+        "new_stars_count": len(new_stars),
+        "pruned_count": len(pruned),
+    }
     summary = {
         "checked_at": now_iso(),
         "mode": args.mode,
-        "changed_count": len(sync_changes),
-        "new_stars_count": len(new_stars),
-        "pruned_count": len(pruned),
-        "total_changes": len(sync_changes) + len(new_stars) + len(pruned),
+        "recorded": args.update_changelog,
+        **counts,
+        "total_changes": sum(counts.values()),
         "discover_rate_limited": discover_rate_limited,
-        "changes": sync_changes,
+        "changes": result["changes"],
+        "baselines": result["baselines"],
+        "flags": result["flags"],
+        "suggestions": suggestions,
         "new_stars": new_stars,
         "pruned_stubs": pruned,
+        "unrecorded": result["unrecorded"],
     }
 
     Path(args.output).write_text(yaml.dump(summary, default_flow_style=False, sort_keys=False, allow_unicode=True))
-    print(f"\nDone. {len(sync_changes)} tracked change(s), {len(new_stars)} new star(s). Summary -> {args.output}")
+    print(
+        f"\nDone. {counts['changed_count']} changelog entr(ies), {counts['baseline_count']} baseline(s), "
+        f"{counts['flag_count']} flag(s), {counts['suggestion_count']} suggestion(s), "
+        f"{counts['new_stars_count']} new star(s), {counts['pruned_count']} pruned. Summary -> {args.output}"
+    )
+    if result["unrecorded"]:
+        print(f"{len(result['unrecorded'])} finding(s) not recorded (pass --update-changelog to record).")
 
     sys.exit(1 if summary["total_changes"] else 0)
 

@@ -14,11 +14,41 @@ from pathlib import Path
 
 import yaml
 
+MAX_SUGGESTIONS_PER_REPO = 10
+MAX_BODY_CHARS = 60000  # GitHub rejects PR bodies over 65536 characters
 
-def format_sha(sha: str, repo: str, length: int = 7) -> str:
-    short = sha[:length]
-    url = f"https://github.com/{repo}/commit/{sha}"
-    return f"[`{short}`]({url})"
+
+def _top_level(found: list[dict]) -> list[dict]:
+    """Drop skills nested inside another suggested skill; they are covered once the parent is listed."""
+    skill_dirs = [f["path"] for f in found if f["kind"] == "skill" and f["path"] != "."]
+    return [
+        f
+        for f in found
+        if not (f["kind"] == "skill" and any(f["path"].startswith(d + "/") for d in skill_dirs))
+    ]
+
+
+def _suggestion_lines(sug: dict) -> list[str]:
+    lines = [f"**`{sug['repo']}`** ({sug.get('verdict') or 'stub'})"]
+    if sug.get("truncated"):
+        lines.append("- _File tree truncated; this list may be incomplete._")
+    found = _top_level(sug.get("suggestions", []))
+    for item in found[:MAX_SUGGESTIONS_PER_REPO]:
+        label = f"{item['kind']}, {item['format']}"
+        if item.get("compliant") is False:
+            label += f"; not compliant: {'; '.join(item['problems'])}"
+        lines.append(f"- `{item['path']}` ({label})")
+    hidden = len(sug.get("suggestions", [])) - min(len(found), MAX_SUGGESTIONS_PER_REPO)
+    if hidden > 0:
+        lines.append(f"- _{hidden} more not shown (nested or over the limit)_")
+    for path in sug.get("invalid_paths", []):
+        lines.append(f"- listed path `{path}` is neither a skill nor a plugin")
+    lines.append("")
+    return lines
+
+
+def _count(n: int, noun: str) -> str:
+    return f"{n} {noun}{'' if n == 1 else 's'}" if n else ""
 
 
 def gen_body(data: dict) -> str:
@@ -41,30 +71,75 @@ def gen_body(data: dict) -> str:
         ]
 
     # ------------------------------------------------------------------
-    # Section 1: tracked repos with upstream changes
+    # Section 1: upstream changes (the changelog) for curated repos
     # ------------------------------------------------------------------
     if changes:
-        lines += [f"### Curated repos with upstream changes ({len(changes)})", ""]
-        for c in changes:
-            repo = c["repo"]
-            lines.append(f"#### `{repo}`")
-            lines.append("")
-            if c["reason"] == "new":
-                lines.append("- **Status:** First time indexed")
-            elif c["reason"] == "updated":
-                old = format_sha(c["old_sha"], repo)
-                new = format_sha(c["new_sha"], repo)
-                compare = f"https://github.com/{repo}/compare/{c['old_sha'][:7]}...{c['new_sha'][:7]}"
-                lines.append(f"- **Status:** Updated - {old} -> {new} ([compare]({compare}))")
-            lines.append("")
-
         lines += [
+            f"### Upstream changes ({len(changes)})",
+            "",
+            "Full entries are in `generated/changelog/`.",
+            "",
+        ]
+        for c in sorted(changes, key=lambda c: (c.get("verdict") != "adopt", c["repo"].lower())):
+            parts = [
+                _count(len(c.get("releases", [])), "release"),
+                _count(len(c.get("tags", [])), "new tag"),
+                _count(len(c.get("commits", [])), "commit"),
+            ]
+            summary = ", ".join(p for p in parts if p)
+            lines.append(f"- `{c['repo']}` ({c.get('verdict')}) - {summary} - [compare]({c['compare_url']})")
+        lines += [
+            "",
             "**Review checklist:**",
             "- [ ] Does the linked skill need updating?",
             "- [ ] Are there new patterns or anti-patterns to document?",
             "- [ ] Should `skill_or_plugin_paths` in `tracked.yml` be narrowed?",
             "",
         ]
+
+    baselines = data.get("baselines", [])
+    if baselines:
+        lines += [
+            f"### Now tracking ({len(baselines)})",
+            "",
+            "First sync after a verdict: the current head is the baseline, so nothing is reported until the next change.",
+            "",
+            *[f"- `{b['repo']}` ({b.get('verdict')})" for b in baselines],
+            "",
+        ]
+
+    flags = data.get("flags", [])
+    if flags:
+        lines += [
+            f"### Upstream repos flagged ({len(flags)})",
+            "",
+            "Entries are never removed automatically. Update or drop them in `tracked.yml` yourself.",
+            "",
+            *[f"- `{f['repo']}` ({f.get('verdict')}): {', '.join(f['flags'])}" for f in flags],
+            "",
+        ]
+
+    suggestions = data.get("suggestions", [])
+    if suggestions:
+        lines += [
+            f"### Suggested skill/plugin paths ({len(suggestions)})",
+            "",
+            "Found in the upstream file tree and not yet in `skill_or_plugin_paths`. Nothing was written to your fields.",
+            "",
+        ]
+        # curated repos first; the section is trimmed to keep the whole body under GitHub's limit
+        budget = MAX_BODY_CHARS - len("\n".join(lines)) - 5000
+        shown = 0
+        for sug in sorted(suggestions, key=lambda x: (not x.get("curated"), x["repo"].lower())):
+            block = _suggestion_lines(sug)
+            cost = sum(len(line) + 1 for line in block)
+            if cost > budget:
+                break
+            lines += block
+            budget -= cost
+            shown += 1
+        if shown < len(suggestions):
+            lines += [f"_{len(suggestions) - shown} repos not shown; the full list is in the `changes` artifact of the workflow run._", ""]
 
     # ------------------------------------------------------------------
     # Section 2: newly discovered stars

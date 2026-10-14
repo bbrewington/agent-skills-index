@@ -46,10 +46,26 @@ repos:
       indexed_at: "2025-06-02T08:00:00Z"
 ```
 
-The bot only writes bot-owned fields: `state:`, new stubs, and (with
-`--prune-stubs`) removal of stubs. It never changes `verdict`, `use_contexts`,
-`notes` or `skill_or_plugin_paths` on an existing entry. A `skip` entry stays in
-the file so the repo never comes back as a stub.
+The bot only writes bot-owned fields: `state:`, new stubs, removal of stubs that
+left the star list(s), and the files under `generated/`. It never changes
+`verdict`, `use_contexts`, `notes` or `skill_or_plugin_paths` on an existing entry.
+A `skip` entry stays in the file so the repo never comes back as a stub.
+
+Bot state beyond the fields above: `changelog_sha` / `changelog_at` / `known_tags`
+(the last-seen marker for the changelog), `tree_sha` (the upstream head last scanned
+for skill/plugin paths) and `flags` (`archived`, `renamed:<new name>`, `gone`).
+
+### Generated files
+
+The bot commits plain markdown (no build step), in the same PR as `tracked.yml`:
+
+- [`generated/INDEX.md`](generated/INDEX.md) - curated repos grouped by use-context,
+  with verdict, notes, paths and flags, plus the stub list. Do not edit it. To
+  regenerate it after editing `tracked.yml` by hand: `uv run python scripts/render.py`.
+- [`generated/changelog/`](generated/changelog/) - one `YYYY-MM.md` per month,
+  newest first: releases, new tags and commits touching each repo's
+  `skill_or_plugin_paths`, one entry per repo per run with a compare link. Merge
+  commits are skipped and `adopt` repos are listed above `watch`.
 
 `sync_stars.py` exits with code 2 (and CI's pytest fails) if an entry has an
 unknown `verdict` or a `use_contexts` tag that is not in `use-contexts.yml`. Add
@@ -59,9 +75,15 @@ the tag to that file first.
 
 `--mode all` (default) runs both:
 
-- **sync** - for each `adopt` or `watch` entry, checks whether the latest commit
-  SHA (optionally scoped to `skill_or_plugin_paths`) has moved since
-  `state.latest_sha`.
+- **sync** - for each `adopt` or `watch` entry: flags it if the upstream is
+  archived, renamed or gone (never auto-removed); then reports releases, new tags and
+  commits touching `skill_or_plugin_paths` since the last-seen SHA. The first sync
+  after a verdict only sets a baseline and reports nothing. It also suggests
+  skill/plugin paths found in the upstream file tree (one Git Trees call per repo,
+  skipped while the head SHA is unchanged) that are not yet listed, checks them
+  against the agentskills.io / Claude Code rules, and flags listed paths that are
+  neither. Stubs get the path suggestions too, without the compliance check.
+  Suggestions never touch your fields.
 - **discover** - adds any repo not already in `repos:` as a new stub. With `STAR_LIST` set (comma-separated list slugs; the workflow uses
   `agent-skills,ai-helpers-and-reference`, from
   [your GitHub star lists](https://github.com/stars/bbrewington/lists)),
@@ -115,9 +137,14 @@ Edit the entry in place: set `verdict`, and fill in the other human fields.
 The `dry_run` input runs the full check without writing `tracked.yml` or opening
 a PR - uploads `changes.yaml` as a workflow artifact instead.
 
-The `prune_stubs` input (one-off cleanup) removes stubs that are not in the star
-list. Entries with a verdict are never removed. Removed repos are listed in the PR
-body. Run it with `dry_run` first and check `pruned_stubs` in `changes.yaml`.
+The `update_changelog` input (default off) controls whether changelog entries are
+recorded and last-seen SHAs advance. Scheduled runs always record. With it off, the
+run reports what it would record (`unrecorded` in `changes.yaml`) and advances
+nothing.
+
+Stubs that are not in the star list(s) are pruned on every run (entries with a
+verdict are never removed); they are listed in the PR body and in `pruned_stubs`
+in `changes.yaml`.
 
 ## Troubleshooting
 

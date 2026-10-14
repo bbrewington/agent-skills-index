@@ -9,7 +9,8 @@ Decides what the sync workflow does with a run's changes.yaml:
   update  push to the open bot PR's branch and refresh its title/body
 
 At most one bot PR is open at a time. New and pruned stubs never open a PR on their own;
-they ride along on the next PR. Upstream changes to curated repos are what a human decides on.
+they ride along on the next PR, as do path suggestions for stubs. What a human decides on: changelog entries,
+new baselines, upstream flags and path suggestions for curated repos.
 
 Usage:
     python scripts/pr_policy.py --input changes.yaml --pr-exists true|false
@@ -25,7 +26,13 @@ TITLE_HEADING = "## Skills Index Update"
 
 
 def needs_decision(summary: dict) -> bool:
-    return bool(summary.get("changes"))
+    """Changelog entries, new baselines, upstream flags, or path suggestions for a curated repo."""
+    return bool(
+        summary.get("changes")
+        or summary.get("baselines")
+        or summary.get("flags")
+        or any(s.get("curated") for s in summary.get("suggestions", []))
+    )
 
 
 def decide(summary: dict, pr_exists: bool) -> str:
