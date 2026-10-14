@@ -79,3 +79,33 @@ def test_pruned_stubs_section_only_when_present():
     body = gen_pr_body.gen_body(BASE | {"pruned_stubs": ["o/gone"]})
     assert "Stubs removed - no longer in the star list (1)" in body
     assert "- `o/gone`" in body
+
+
+def _sug(path, kind="skill"):
+    return {"path": path, "kind": kind, "format": "agentskills", "compliant": None, "problems": []}
+
+
+def test_suggestions_hide_skills_nested_in_another_suggested_skill_and_cap_per_repo():
+    found = [_sug("apex"), _sug("apex/apexlang"), _sug("apex/apexlang/26.1")] + [_sug(f"s{i:02d}") for i in range(20)]
+    data = BASE | {"suggestions": [{"repo": "o/big", "verdict": None, "curated": False, "suggestions": found, "invalid_paths": []}]}
+    body = gen_pr_body.gen_body(data)
+    assert "`apex`" in body
+    assert "`apex/apexlang`" not in body
+    assert body.count("- `s") == gen_pr_body.MAX_SUGGESTIONS_PER_REPO - 1  # apex takes one slot
+    assert "more not shown" in body
+
+
+def test_marketplace_at_root_does_not_hide_other_suggestions():
+    found = [_sug(".", "marketplace"), _sug("skills/a")]
+    data = BASE | {"suggestions": [{"repo": "o/r", "verdict": None, "curated": False, "suggestions": found, "invalid_paths": []}]}
+    assert "`skills/a`" in gen_pr_body.gen_body(data)
+
+
+def test_suggestions_section_is_trimmed_to_fit_the_pr_body_limit():
+    many = [
+        {"repo": f"o/r{i}", "verdict": None, "curated": False, "suggestions": [_sug("x" * 200)], "invalid_paths": []}
+        for i in range(400)
+    ]
+    body = gen_pr_body.gen_body(BASE | {"suggestions": many})
+    assert len(body) <= gen_pr_body.MAX_BODY_CHARS
+    assert "repos not shown" in body

@@ -14,6 +14,38 @@ from pathlib import Path
 
 import yaml
 
+MAX_SUGGESTIONS_PER_REPO = 10
+MAX_BODY_CHARS = 60000  # GitHub rejects PR bodies over 65536 characters
+
+
+def _top_level(found: list[dict]) -> list[dict]:
+    """Drop skills nested inside another suggested skill; they are covered once the parent is listed."""
+    skill_dirs = [f["path"] for f in found if f["kind"] == "skill" and f["path"] != "."]
+    return [
+        f
+        for f in found
+        if not (f["kind"] == "skill" and any(f["path"].startswith(d + "/") for d in skill_dirs))
+    ]
+
+
+def _suggestion_lines(sug: dict) -> list[str]:
+    lines = [f"**`{sug['repo']}`** ({sug.get('verdict') or 'stub'})"]
+    if sug.get("truncated"):
+        lines.append("- _File tree truncated; this list may be incomplete._")
+    found = _top_level(sug.get("suggestions", []))
+    for item in found[:MAX_SUGGESTIONS_PER_REPO]:
+        label = f"{item['kind']}, {item['format']}"
+        if item.get("compliant") is False:
+            label += f"; not compliant: {'; '.join(item['problems'])}"
+        lines.append(f"- `{item['path']}` ({label})")
+    hidden = len(sug.get("suggestions", [])) - min(len(found), MAX_SUGGESTIONS_PER_REPO)
+    if hidden > 0:
+        lines.append(f"- _{hidden} more not shown (nested or over the limit)_")
+    for path in sug.get("invalid_paths", []):
+        lines.append(f"- listed path `{path}` is neither a skill nor a plugin")
+    lines.append("")
+    return lines
+
 
 def _count(n: int, noun: str) -> str:
     return f"{n} {noun}{'' if n == 1 else 's'}" if n else ""
@@ -95,18 +127,19 @@ def gen_body(data: dict) -> str:
             "Found in the upstream file tree and not yet in `skill_or_plugin_paths`. Nothing was written to your fields.",
             "",
         ]
-        for sug in suggestions:
-            lines.append(f"**`{sug['repo']}`** ({sug.get('verdict') or 'stub'})")
-            if sug.get("truncated"):
-                lines.append("- _File tree truncated; this list may be incomplete._")
-            for found in sug.get("suggestions", []):
-                label = f"{found['kind']}, {found['format']}"
-                if found.get("compliant") is False:
-                    label += f"; not compliant: {'; '.join(found['problems'])}"
-                lines.append(f"- `{found['path']}` ({label})")
-            for path in sug.get("invalid_paths", []):
-                lines.append(f"- listed path `{path}` is neither a skill nor a plugin")
-            lines.append("")
+        # curated repos first; the section is trimmed to keep the whole body under GitHub's limit
+        budget = MAX_BODY_CHARS - len("\n".join(lines)) - 5000
+        shown = 0
+        for sug in sorted(suggestions, key=lambda x: (not x.get("curated"), x["repo"].lower())):
+            block = _suggestion_lines(sug)
+            cost = sum(len(line) + 1 for line in block)
+            if cost > budget:
+                break
+            lines += block
+            budget -= cost
+            shown += 1
+        if shown < len(suggestions):
+            lines += [f"_{len(suggestions) - shown} repos not shown; the full list is in the `changes` artifact of the workflow run._", ""]
 
     # ------------------------------------------------------------------
     # Section 2: newly discovered stars
