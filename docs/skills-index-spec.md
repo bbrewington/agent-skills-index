@@ -33,7 +33,7 @@ agent-skills-index/
 ## Two modes (in `sync_stars.py`)
 
 - `--mode sync` - for each `tracked:` entry, fetch repo meta + latest commit SHA (scoped to `watch_paths` if set), compare against `state.latest_sha`, update state if changed.
-- `--mode discover` - add any repo not in `tracked:` or `stubs:` as a new stub. Scoped to the `agent-skills` star list (slug in `STAR_LIST`, fetched via GraphQL) so unrelated stars are ignored; with no `STAR_LIST` it uses every star via the REST starred endpoint. `--prune-stubs` removes stubs outside the list (never `tracked:`).
+- `--mode discover` - add any repo not in `tracked:` or `stubs:` as a new stub. Scoped to the `agent-skills` and `ai-helpers-and-reference` star lists (comma-separated slugs in `STAR_LIST`, fetched via GraphQL) so unrelated stars are ignored; with no `STAR_LIST` it uses every star via the REST starred endpoint. `--prune-stubs` removes stubs outside the list (never `tracked:`).
 - `--mode all` (default) runs both in one pass.
 - `--dry-run` skips writing `tracked.yml` (still writes `changes.yaml` for inspection).
 - Exit code 1 if any changes/new stars found, 0 otherwise (drives the workflow's PR step).

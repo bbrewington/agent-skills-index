@@ -21,11 +21,11 @@ uv run python scripts/sync_stars.py --mode all|sync|discover [--dry-run] [--outp
 ```
 
 - `--mode sync` checks each `tracked:` entry for upstream SHA changes.
-- `--mode discover` adds unseen repos as `stubs:`. With `STAR_LIST` (or `--star-list`) set to a star list slug, it only considers repos in that list (GraphQL); otherwise it considers every star.
+- `--mode discover` adds unseen repos as `stubs:`. With `STAR_LIST` (or `--star-list`) set to comma-separated star list slug(s), it only considers repos in those lists (GraphQL); otherwise it considers every star.
 - `--prune-stubs` (requires a star list) removes stubs that are not in the list. `tracked:` is never pruned.
 - `--mode all` (default) runs both.
 - `--dry-run` skips writing `tracked.yml` but still writes `changes.yaml`.
-- Requires env var `GITHUB_TOKEN` (fine-grained PAT owned by the starred user; if `GET /users/{user}/starred` returns nothing or 403, use a classic PAT with `read:user`). `GITHUB_USER` defaults to `bbrewington`. `STAR_LIST` is `agent-skills` in the workflow.
+- Requires env var `GITHUB_TOKEN` (fine-grained PAT owned by the starred user; if `GET /users/{user}/starred` returns nothing or 403, use a classic PAT with `read:user`). `GITHUB_USER` defaults to `bbrewington`. `STAR_LIST` is `agent-skills,ai-helpers-and-reference` in the workflow.
 - Exit code is `1` if anything changed, `0` otherwise (this drives whether CI opens a PR).
 
 Render a PR body from a `changes.yaml`:

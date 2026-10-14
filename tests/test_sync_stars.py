@@ -181,3 +181,14 @@ def test_get_list_repos_unknown_slug_raises(monkeypatch):
     monkeypatch.setattr(sync_stars.requests, "post", FakeGraphQL([lists]))
     with pytest.raises(requests.HTTPError, match="not found"):
         sync_stars.get_list_repos("u", "agent-skills")
+
+
+def test_fetch_candidates_merges_and_dedupes_multiple_lists(monkeypatch):
+    lists = {
+        "a": [{"full_name": "o/1"}, {"full_name": "o/2"}],
+        "b": [{"full_name": "o/2"}, {"full_name": "o/3"}],
+    }
+    monkeypatch.setattr(sync_stars, "get_list_repos", lambda user, slug: lists[slug])
+    repos, rate_limited = sync_stars.fetch_candidates("a, b")
+    assert [r["full_name"] for r in repos] == ["o/1", "o/2", "o/3"]
+    assert rate_limited is False

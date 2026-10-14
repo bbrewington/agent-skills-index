@@ -40,7 +40,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.SKILLS_INDEX_TOKEN }}
           GITHUB_USER: bbrewington
-          STAR_LIST: agent-skills
+          STAR_LIST: agent-skills,ai-helpers-and-reference
         run: |
           set +e
           args="--mode all --output changes.yaml"

@@ -15,9 +15,9 @@ Usage:
 Environment variables:
     GITHUB_TOKEN   PAT (fine-grained, or classic with read:user)
     GITHUB_USER    Defaults to "bbrewington"
-    STAR_LIST      Optional slug of a GitHub star list (e.g. "agent-skills"). When set,
-                   discover mode only considers repos in that list (via GraphQL) instead
-                   of every starred repo.
+    STAR_LIST      Optional comma-separated slug(s) of GitHub star lists (e.g.
+                   "agent-skills,ai-helpers-and-reference"). When set, discover mode only
+                   considers repos in those lists (via GraphQL) instead of every starred repo.
 """
 
 import argparse
@@ -242,9 +242,13 @@ def run_sync(data: dict, dry_run: bool) -> list[dict]:
 # -----------------------------------------------------------------------
 
 def fetch_candidates(star_list: str | None) -> tuple[list[dict], bool]:
-    """Repos to consider for discovery: one star list if given, else every star."""
+    """Repos to consider for discovery: the given star list(s) (comma-separated slugs), else every star."""
     if star_list:
-        return get_list_repos(GITHUB_USER, star_list), False
+        seen: dict[str, dict] = {}
+        for slug in (part.strip() for part in star_list.split(",") if part.strip()):
+            for repo in get_list_repos(GITHUB_USER, slug):
+                seen.setdefault(repo["full_name"], repo)
+        return list(seen.values()), False
     return get_starred_repos(GITHUB_USER)
 
 
@@ -259,7 +263,7 @@ def prune_stubs(data: dict, candidates: list[dict]) -> list[str]:
 def run_discover(
     data: dict, dry_run: bool, star_list: str | None = None, prune: bool = False
 ) -> tuple[list[dict], bool, list[str]]:
-    source = f"star list '{star_list}'" if star_list else "stars"
+    source = f"star list(s) '{star_list}'" if star_list else "stars"
     print(f"[discover] Fetching {source} for {GITHUB_USER}...")
     try:
         starred, rate_limited = fetch_candidates(star_list)
@@ -310,7 +314,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["all", "sync", "discover"], default="all")
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--star-list", default=STAR_LIST, help="star list slug (default: $STAR_LIST)")
+    parser.add_argument("--star-list", default=STAR_LIST, help="comma-separated star list slug(s) (default: $STAR_LIST)")
     parser.add_argument(
         "--prune-stubs",
         action="store_true",

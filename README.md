@@ -52,9 +52,10 @@ for you to triage.
 - **sync** - for each `tracked:` entry, checks whether the latest commit SHA
   (optionally scoped to `watch_paths`) has moved since `state.latest_sha`.
 - **discover** - adds any repo not already in `tracked:` or `stubs:` as a new
-  stub entry. With `STAR_LIST` set (the workflow uses `agent-skills`, the slug of
-  [your GitHub star list](https://github.com/stars/bbrewington/lists/agent-skills)),
-  only repos in that list are considered, fetched via the GraphQL API. Without it,
+  stub entry. With `STAR_LIST` set (comma-separated list slugs; the workflow uses
+  `agent-skills,ai-helpers-and-reference`, from
+  [your GitHub star lists](https://github.com/stars/bbrewington/lists)),
+  only repos in those lists are considered, fetched via the GraphQL API. Without it,
   every starred repo is considered.
 
 ### Branch naming
