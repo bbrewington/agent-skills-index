@@ -4,7 +4,7 @@
 A repo that tracks GitHub starred repos (bbrewington) and maps them to skills stored in this repo. When a tracked upstream repo changes, or a new star is detected, a GitHub Actions workflow opens a PR for review.
 
 ## Current state
-Scaffold already built and available as a zip in the prior conversation (`agent-skills-index.zip`). Needs to be unpacked into a real git repo, tested end-to-end with actual GitHub API access, and pushed.
+Implemented and running. The workflow has run weekly since 2026-07-13 and opens PRs against `tracked.yml`. `tracked:` is still empty; all starred repos are `stubs:`. Remaining work is listed at the bottom.
 
 ## Repo structure
 ```
@@ -14,7 +14,8 @@ agent-skills-index/
     sync_stars.py                - sync + discover modes
     gen_pr_body.py                - renders changes.yaml into PR markdown
   .github/workflows/sync.yml     - scheduled + manual trigger workflow
-  requirements.txt
+  pyproject.toml / uv.lock       - dependencies (uv)
+  CLAUDE.md, TODO.md, docs/
   .gitignore
   README.md
 ```
@@ -32,7 +33,7 @@ agent-skills-index/
 ## Two modes (in `sync_stars.py`)
 
 - `--mode sync` - for each `tracked:` entry, fetch repo meta + latest commit SHA (scoped to `watch_paths` if set), compare against `state.latest_sha`, update state if changed.
-- `--mode discover` - fetch full starred list via GitHub API, add any repo not in `tracked:` or `stubs:` as a new stub.
+- `--mode discover` - add any repo not in `tracked:` or `stubs:` as a new stub. Scoped to the `agent-skills` and `ai-helpers-and-reference` star lists (comma-separated slugs in `STAR_LIST`, fetched via GraphQL) so unrelated stars are ignored; with no `STAR_LIST` it uses every star via the REST starred endpoint. `--prune-stubs` removes stubs outside the list (never `tracked:`).
 - `--mode all` (default) runs both in one pass.
 - `--dry-run` skips writing `tracked.yml` (still writes `changes.yaml` for inspection).
 - Exit code 1 if any changes/new stars found, 0 otherwise (drives the workflow's PR step).
@@ -40,25 +41,17 @@ agent-skills-index/
 ## Workflow (`.github/workflows/sync.yml`)
 
 - Trigger: weekly cron (Mon 08:00 UTC) + `workflow_dispatch` with a `dry_run` boolean input.
-- Steps: checkout -> setup Python -> install deps -> run `sync_stars.py --mode all` -> if changed, generate PR body via `gen_pr_body.py` -> create branch (ISO datetime name) -> commit `tracked.yml` -> `gh pr create` with title showing counts, e.g. `chore(index): skills index update 2025-06-02 (3 updated, 5 new stars)` -> label `agent-skills-index`.
+- Steps: checkout -> setup uv (Python 3.14) -> `uv sync --locked` -> run `sync_stars.py --mode all` -> if changed, generate PR body via `gen_pr_body.py` -> create branch (ISO datetime name) -> commit `tracked.yml` -> `gh pr create` with title showing counts, e.g. `chore(index): skills index update 2025-06-02 (3 updated, 5 new stars)` -> label `agent-skills-index`.
 - Dry run uploads `changes.yaml` as a workflow artifact instead of opening a PR.
-- Needs secret `SKILLS_INDEX_TOKEN`: a PAT with `contents: write`, `pull-requests: write`, and `read:user` (the starred-repos endpoint requires the token belong to the starred user, i.e. bbrewington's own PAT - a repo-scoped fine-grained token alone won't work for `GET /users/{user}/starred`).
+- Needs secret `SKILLS_INDEX_TOKEN`: a fine-grained PAT with contents: write, pull requests: write, metadata: read, scoped to this repo (prefilled creation link in README Setup). Original design assumed a classic PAT with `read:user` was required for `GET /users/{user}/starred`; with a fine-grained token, verify via a dry run that discover still lists stars and fall back to classic (`repo` + `read:user`) if not.
 
-## Remaining work / open items to pick up in Claude Code
+## Remaining work
 
-1. Unzip and init git repo. Set remote, initial commit, push to GitHub.
-2. Create the PAT with the right scopes and add as `SKILLS_INDEX_TOKEN` secret.
-3. Test discover mode against real API access - prior dry runs got 403s from a sandboxed environment's network allowlist (not a code bug, just that sandbox blocking `api.github.com` broadly). Confirm real requests to `/users/bbrewington/starred` and `/repos/{owner}/{repo}` work as expected with a live token.
-4. Bootstrap `tracked.yml` state by running the workflow once manually (or `python scripts/sync_stars.py --mode all` locally with `GITHUB_TOKEN` set) to populate initial `state:` blocks for the 4 seeded `tracked:` entries.
-5. Decide on real `tracked:` list. The current 4 entries (dbt-core, dbt-utils, snowflake-connector-python, fivetran_connector_sdk) are placeholders - replace/expand based on actual starred repos worth explicit tracking, and actual skill paths once they exist in this repo.
-6. First discover run will populate `stubs:` with everything else currently starred - expect a large first PR. Consider whether to seed `stubs:` manually beforehand to avoid a huge initial diff, or just let it happen once and review.
-7. Verify YAML round-tripping. `yaml.dump` with `sort_keys=False` should preserve section order, but comments in `tracked.yml` (the header docblock) will likely get stripped on the first bot write since `sync_stars.py` re-serializes the whole file via `yaml.safe_load`/`yaml.dump`. Decide if that's acceptable or if the header should be re-injected after dump (e.g. read/prepend a static comment block before writing).
-8. Consider rate limiting for large star lists - `get_starred_repos` currently bails early if `X-RateLimit-Remaining < 10`, which could silently truncate discovery on a big backlog. May want pagination logging or a warning surfaced in the PR body itself.
-9. Test the full PR flow once with a real dummy change (e.g. manually edit a `state.latest_sha` value in `tracked.yml` to something stale) to confirm branch creation, commit, and `gh pr create` all work correctly in Actions.
+Done (originally open): repo init and push, PAT/secret, discover mode against the real API, state bootstrap, header-comment preservation (`extract_header`), rate-limit warning in the PR body, end-to-end PR flow test, first large discover PR.
 
-## Known gotcha to flag in Claude Code
+Open:
 
-The header comment block at the top of `tracked.yml` (explaining the config vs state fields) will not survive a bot-driven `yaml.dump` rewrite unless the script explicitly preserves it. Worth deciding early whether to:
-
-- move that documentation into README.md only, or
-- have `sync_stars.py` read the file as raw text, extract/preserve the leading comment block, and re-prepend it after dumping the updated YAML body.
+0. Verify star-list scoping in Actions: run the workflow with `dry_run` (GraphQL is blocked from Claude Code sessions, so this has only been tested with mocks), check `changes.yaml`, then run once with `prune_stubs` to drop out-of-list stubs.
+1. Decide the real `tracked:` list and skill paths (currently `tracked: []`; the 4 placeholders were removed).
+2. Triage the stub backlog (286 as of 2026-10-14) and decide whether unreviewed weekly PRs should be closed or merged.
+3. Token expiry: `SKILLS_INDEX_TOKEN` expired once (runs failing at checkout, 2026-10-05 to 2026-10-12). Now a 365 day fine-grained PAT; track its expiry date.

@@ -13,15 +13,18 @@ Usage:
     python scripts/sync_stars.py [--mode all|sync|discover] [--dry-run] [--output changes.yaml]
 
 Environment variables:
-    GITHUB_TOKEN   PAT with read:user scope
+    GITHUB_TOKEN   PAT (fine-grained, or classic with read:user)
     GITHUB_USER    Defaults to "bbrewington"
+    STAR_LIST      Optional comma-separated slug(s) of GitHub star lists (e.g.
+                   "agent-skills,ai-helpers-and-reference"). When set, discover mode only
+                   considers repos in those lists (via GraphQL) instead of every starred repo.
 """
 
+import argparse
 import os
 import sys
-import argparse
 from copy import deepcopy
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import requests
@@ -29,6 +32,7 @@ import yaml
 
 GITHUB_USER = os.getenv("GITHUB_USER", "bbrewington")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+STAR_LIST = os.getenv("STAR_LIST") or None
 TRACKED_FILE = Path(__file__).parent.parent / "tracked.yml"
 
 HEADERS = {
@@ -65,6 +69,55 @@ def get_starred_repos(user: str) -> tuple[list[dict], bool]:
             rate_limited = True
             break
     return repos, rate_limited
+
+
+LIST_ID_QUERY = """
+query($login: String!) {
+  user(login: $login) { lists(first: 100) { nodes { id slug } } }
+}
+"""
+
+LIST_ITEMS_QUERY = """
+query($id: ID!, $after: String) {
+  node(id: $id) {
+    ... on UserList {
+      items(first: 100, after: $after) {
+        nodes { ... on Repository { nameWithOwner } }
+        pageInfo { hasNextPage endCursor }
+      }
+    }
+  }
+}
+"""
+
+
+def graphql(query: str, variables: dict) -> dict:
+    r = requests.post(
+        "https://api.github.com/graphql",
+        headers=HEADERS,
+        json={"query": query, "variables": variables},
+    )
+    r.raise_for_status()
+    body = r.json()
+    if body.get("errors"):
+        raise requests.HTTPError(f"GraphQL errors: {body['errors']}")
+    return body["data"]
+
+
+def get_list_repos(user: str, slug: str) -> list[dict]:
+    """Repos in the user's star list `slug`, shaped like the starred endpoint ({"full_name": ...})."""
+    lists = graphql(LIST_ID_QUERY, {"login": user})["user"]["lists"]["nodes"]
+    match = next((node for node in lists if node["slug"] == slug), None)
+    if match is None:
+        raise requests.HTTPError(f"Star list '{slug}' not found for {user}; slugs: {[n['slug'] for n in lists]}")
+    repos: list[dict] = []
+    after = None
+    while True:
+        items = graphql(LIST_ITEMS_QUERY, {"id": match["id"], "after": after})["node"]["items"]
+        repos.extend({"full_name": n["nameWithOwner"]} for n in items["nodes"] if n)
+        if not items["pageInfo"]["hasNextPage"]:
+            return repos
+        after = items["pageInfo"]["endCursor"]
 
 
 def get_repo_meta(owner_repo: str) -> dict:
@@ -134,7 +187,7 @@ def save_tracked(data: dict, dry_run: bool) -> None:
 
 
 def now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def build_state(meta: dict, sha: str, existing_state: dict | None = None) -> dict:
@@ -171,7 +224,7 @@ def run_sync(data: dict, dry_run: bool) -> list[dict]:
         new_state = build_state(meta, sha, item.get("state"))
 
         if old_sha is None:
-            print(f"  -> NEW (first index)")
+            print("  -> NEW (first index)")
             item["state"] = new_state
             changes.append({"repo": repo, "reason": "new", "new_sha": sha})
         elif old_sha != sha:
@@ -179,7 +232,7 @@ def run_sync(data: dict, dry_run: bool) -> list[dict]:
             item["state"] = new_state
             changes.append({"repo": repo, "reason": "updated", "old_sha": old_sha, "new_sha": sha})
         else:
-            print(f"  -> no change")
+            print("  -> no change")
 
     return changes
 
@@ -188,14 +241,39 @@ def run_sync(data: dict, dry_run: bool) -> list[dict]:
 # Discover mode
 # -----------------------------------------------------------------------
 
-def run_discover(data: dict, dry_run: bool) -> tuple[list[dict], bool]:
-    print(f"[discover] Fetching stars for {GITHUB_USER}...")
+def fetch_candidates(star_list: str | None) -> tuple[list[dict], bool]:
+    """Repos to consider for discovery: the given star list(s) (comma-separated slugs), else every star."""
+    if star_list:
+        seen: dict[str, dict] = {}
+        for slug in (part.strip() for part in star_list.split(",") if part.strip()):
+            for repo in get_list_repos(GITHUB_USER, slug):
+                seen.setdefault(repo["full_name"], repo)
+        return list(seen.values()), False
+    return get_starred_repos(GITHUB_USER)
+
+
+def prune_stubs(data: dict, candidates: list[dict]) -> list[str]:
+    """Drop stubs not in `candidates` (never touches tracked:). Returns the removed repo names."""
+    keep = {c["full_name"] for c in candidates}
+    removed = [item["repo"] for item in data["stubs"] if item["repo"] not in keep]
+    data["stubs"] = [item for item in data["stubs"] if item["repo"] in keep]
+    return removed
+
+
+def run_discover(
+    data: dict, dry_run: bool, star_list: str | None = None, prune: bool = False
+) -> tuple[list[dict], bool, list[str]]:
+    source = f"star list(s) '{star_list}'" if star_list else "stars"
+    print(f"[discover] Fetching {source} for {GITHUB_USER}...")
     try:
-        starred, rate_limited = get_starred_repos(GITHUB_USER)
+        starred, rate_limited = fetch_candidates(star_list)
     except requests.HTTPError as e:
         print(f"  ERROR: {e}", file=sys.stderr)
-        return [], False
-    print(f"  {len(starred)} starred repos found")
+        return [], False, []
+    print(f"  {len(starred)} repos found")
+    pruned = prune_stubs(data, starred) if prune else []
+    if pruned:
+        print(f"  {len(pruned)} stub(s) not in {source} pruned")
 
     tracked_names = {item["repo"] for item in data["tracked"]}
     stub_names = {item["repo"] for item in data["stubs"]}
@@ -225,7 +303,7 @@ def run_discover(data: dict, dry_run: bool) -> tuple[list[dict], bool]:
         new_stubs.append({"repo": repo, "reason": "new_star", "state": stub["state"]})
 
     print(f"  {len(new_stubs)} new stub(s) added")
-    return new_stubs, rate_limited
+    return new_stubs, rate_limited, pruned
 
 
 # -----------------------------------------------------------------------
@@ -236,6 +314,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["all", "sync", "discover"], default="all")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--star-list", default=STAR_LIST, help="comma-separated star list slug(s) (default: $STAR_LIST)")
+    parser.add_argument(
+        "--prune-stubs",
+        action="store_true",
+        help="with --star-list, remove stubs that are not in the list (tracked: is never pruned)",
+    )
     parser.add_argument("--output", default="changes.yaml")
     args = parser.parse_args()
 
@@ -246,12 +330,18 @@ def main():
     sync_changes: list[dict] = []
     new_stars: list[dict] = []
     discover_rate_limited = False
+    pruned: list[str] = []
 
     if args.mode in ("all", "sync"):
         sync_changes = run_sync(data, dry_run=args.dry_run)
 
     if args.mode in ("all", "discover"):
-        new_stars, discover_rate_limited = run_discover(data, dry_run=args.dry_run)
+        new_stars, discover_rate_limited, pruned = run_discover(
+            data,
+            dry_run=args.dry_run,
+            star_list=args.star_list,
+            prune=args.prune_stubs and bool(args.star_list),
+        )
 
     save_tracked(data, dry_run=args.dry_run)
 
@@ -260,10 +350,12 @@ def main():
         "mode": args.mode,
         "changed_count": len(sync_changes),
         "new_stars_count": len(new_stars),
-        "total_changes": len(sync_changes) + len(new_stars),
+        "pruned_count": len(pruned),
+        "total_changes": len(sync_changes) + len(new_stars) + len(pruned),
         "discover_rate_limited": discover_rate_limited,
         "changes": sync_changes,
         "new_stars": new_stars,
+        "pruned_stubs": pruned,
     }
 
     Path(args.output).write_text(yaml.dump(summary, default_flow_style=False, sort_keys=False, allow_unicode=True))

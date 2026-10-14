@@ -21,10 +21,11 @@ uv run python scripts/sync_stars.py --mode all|sync|discover [--dry-run] [--outp
 ```
 
 - `--mode sync` checks each `tracked:` entry for upstream SHA changes.
-- `--mode discover` fetches the full starred list and adds unseen repos as `stubs:`.
+- `--mode discover` adds unseen repos as `stubs:`. With `STAR_LIST` (or `--star-list`) set to comma-separated star list slug(s), it only considers repos in those lists (GraphQL); otherwise it considers every star.
+- `--prune-stubs` (requires a star list) removes stubs that are not in the list. `tracked:` is never pruned.
 - `--mode all` (default) runs both.
 - `--dry-run` skips writing `tracked.yml` but still writes `changes.yaml`.
-- Requires env var `GITHUB_TOKEN` (PAT with `read:user` scope — must belong to the starred user, since `GET /users/{user}/starred` requires it). `GITHUB_USER` defaults to `bbrewington`.
+- Requires env var `GITHUB_TOKEN` (fine-grained PAT owned by the starred user; if `GET /users/{user}/starred` returns nothing or 403, use a classic PAT with `read:user`). `GITHUB_USER` defaults to `bbrewington`. `STAR_LIST` is `agent-skills,ai-helpers-and-reference` in the workflow.
 - Exit code is `1` if anything changed, `0` otherwise (this drives whether CI opens a PR).
 
 Render a PR body from a `changes.yaml`:
@@ -33,7 +34,14 @@ Render a PR body from a `changes.yaml`:
 uv run python scripts/gen_pr_body.py --input changes.yaml --output pr_body.md
 ```
 
-There is no test suite or lint configuration in this repo yet.
+Tests and lint (dev deps: pytest, ruff; config in `pyproject.toml`):
+
+```
+uv run pytest
+uv run ruff check .
+```
+
+Tests live in `tests/` and stub out the GitHub API; nothing hits the network. CI does not run them yet.
 
 ## Architecture
 
@@ -42,17 +50,21 @@ There is no test suite or lint configuration in this repo yet.
 - `tracked:` — repos explicitly wired to a skill. Fields `repo`, `skill`, `notes`, `watch_paths` are human-authored; `state:` (`latest_sha`, `pushed_at`, `indexed_at`, `last_changed_at`, `description`, `language`, `topics`, `license`, `stargazers_count`) is bot-written by `sync_stars.py`.
 - `stubs:` — auto-discovered stars not yet linked to a skill, same shape but with `skill`/`notes`/`watch_paths` set to `null`.
 
-`scripts/sync_stars.py` is the only writer of `tracked.yml`. It does a full `yaml.safe_load` / `yaml.dump` round-trip on every run — **this does not preserve the leading comment block** at the top of `tracked.yml` that documents the config/state field split. That's a known open issue (see `docs/skills-index-spec.md`): either move that documentation into README-only, or have the script read the file as raw text and re-prepend the header after dumping.
+`scripts/sync_stars.py` is the only writer of `tracked.yml`. It does a full `yaml.safe_load` / `yaml.dump` round-trip on every run, but `extract_header` re-prepends the leading comment block afterward, so the header documenting the config/state field split survives. Other comments in the file would not.
 
 `scripts/gen_pr_body.py` reads the `changes.yaml` emitted by `sync_stars.py` and renders a Markdown PR body with two sections: tracked repos with upstream changes (plus a review checklist), and newly discovered stars grouped by language.
 
-The intended CI wiring (`.github/workflows/sync.yml`) is **not yet implemented**. Per the design in `docs/skills-index-spec.md`, it should run on a weekly cron + `workflow_dispatch`, invoke `sync_stars.py --mode all`, and if anything changed, generate a PR body and open a PR via `gh pr create` on a branch named `agent-skills-index/update-<ISO datetime, no separators>` (e.g. `agent-skills-index/update-20250602T080012`). It needs a secret `SKILLS_INDEX_TOKEN` with `contents:write`, `pull-requests:write`, and `read:user`.
+CI is `.github/workflows/sync.yml`: weekly cron (Mon 08:00 UTC) + `workflow_dispatch` (with a `dry_run` input). It runs `sync_stars.py --mode all`, and if the exit code is 1, renders a PR body and opens a PR via `gh pr create` on a branch named `agent-skills-index/update-<ISO datetime, no separators>` (e.g. `agent-skills-index/update-20250602T080012`) with label `agent-skills-index`. Dry runs upload `changes.yaml` as an artifact instead. Actions are pinned to commit SHAs. It needs a secret `SKILLS_INDEX_TOKEN` (fine-grained PAT: contents write, pull requests write, metadata read, scoped to this repo, 365 day expiry; creation link in README Setup).
+
+If the checkout step fails with `fatal: could not read Username for 'https://github.com'`, the `SKILLS_INDEX_TOKEN` secret has expired or been revoked (this caused the failed runs of 2026-10-05 and 2026-10-12). Regenerate the PAT (README Setup has a prefilled link) and update the secret.
 
 `docs/skills-index-spec.md` has the full design rationale and a running list of remaining work — check it for context before making structural changes.
 
 ## Known gotchas
 
-- `get_starred_repos` in `scripts/sync_stars.py` bails out early once `X-RateLimit-Remaining < 10`, which can silently truncate discovery on a large star backlog.
+- GraphQL (used for star lists) is blocked from Claude Code cloud sessions, so list fetching can only be verified in Actions (use `dry_run`), not locally in a session. It is covered by mocked tests only. The fine-grained PAT's access to `user.lists` was verified in Actions on 2026-10-14.
+- `get_starred_repos` in `scripts/sync_stars.py` bails out early once `X-RateLimit-Remaining < 10`. It returns a `rate_limited` flag, written to `changes.yaml` as `discover_rate_limited`, and `gen_pr_body.py` renders a warning in the PR body when it is set.
+- Weekly PRs accumulate unreviewed stubs if not merged or closed; `tracked:` is currently empty and everything is a stub.
 
 ## Agent skills
 

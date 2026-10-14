@@ -9,6 +9,10 @@ on:
         description: "Dry run (skip writing tracked.yml and opening a PR)"
         type: boolean
         default: false
+      prune_stubs:
+        description: "Remove stubs that are not in the star list (one-off cleanup; tracked entries are never removed)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -36,11 +40,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.SKILLS_INDEX_TOKEN }}
           GITHUB_USER: bbrewington
+          STAR_LIST: agent-skills,ai-helpers-and-reference
         run: |
           set +e
           args="--mode all --output changes.yaml"
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             args="$args --dry-run"
+          fi
+          if [ "${{ github.event.inputs.prune_stubs }}" = "true" ]; then
+            args="$args --prune-stubs"
           fi
           uv run python scripts/sync_stars.py $args
           echo "exit_code=$?" >> "$GITHUB_OUTPUT"
