@@ -17,11 +17,11 @@ Environment variables:
     GITHUB_USER    Defaults to "bbrewington"
 """
 
+import argparse
 import os
 import sys
-import argparse
 from copy import deepcopy
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import requests
@@ -134,7 +134,7 @@ def save_tracked(data: dict, dry_run: bool) -> None:
 
 
 def now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def build_state(meta: dict, sha: str, existing_state: dict | None = None) -> dict:
@@ -171,7 +171,7 @@ def run_sync(data: dict, dry_run: bool) -> list[dict]:
         new_state = build_state(meta, sha, item.get("state"))
 
         if old_sha is None:
-            print(f"  -> NEW (first index)")
+            print("  -> NEW (first index)")
             item["state"] = new_state
             changes.append({"repo": repo, "reason": "new", "new_sha": sha})
         elif old_sha != sha:
@@ -179,7 +179,7 @@ def run_sync(data: dict, dry_run: bool) -> list[dict]:
             item["state"] = new_state
             changes.append({"repo": repo, "reason": "updated", "old_sha": old_sha, "new_sha": sha})
         else:
-            print(f"  -> no change")
+            print("  -> no change")
 
     return changes
 

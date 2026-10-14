@@ -33,7 +33,14 @@ Render a PR body from a `changes.yaml`:
 uv run python scripts/gen_pr_body.py --input changes.yaml --output pr_body.md
 ```
 
-There is no test suite or lint configuration in this repo yet.
+Tests and lint (dev deps: pytest, ruff; config in `pyproject.toml`):
+
+```
+uv run pytest
+uv run ruff check .
+```
+
+Tests live in `tests/` and stub out the GitHub API; nothing hits the network. CI does not run them yet.
 
 ## Architecture
 
