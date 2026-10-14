@@ -26,7 +26,7 @@ uv run python scripts/sync_stars.py --mode all|sync|discover [--dry-run] [--outp
 - `--mode all` (default) runs both.
 - `--dry-run` skips writing `tracked.yml` but still writes `changes.yaml`.
 - Requires env var `GITHUB_TOKEN` (fine-grained PAT owned by the starred user; if `GET /users/{user}/starred` returns nothing or 403, use a classic PAT with `read:user`). `GITHUB_USER` defaults to `bbrewington`. `STAR_LIST` is `agent-skills,ai-helpers-and-reference` in the workflow.
-- Exit code is `1` if anything changed, `0` otherwise (this drives whether CI opens a PR).
+- Exit code is `1` if anything changed, `0` if nothing did, `2` if `tracked.yml` fails validation. CI then applies the PR policy (see Architecture).
 
 Render a PR body from a `changes.yaml`:
 
@@ -55,7 +55,9 @@ Tests live in `tests/` and stub out the GitHub API; nothing hits the network. `.
 
 `scripts/gen_pr_body.py` reads the `changes.yaml` emitted by `sync_stars.py` and renders a Markdown PR body with two sections: tracked repos with upstream changes (plus a review checklist), and newly discovered stars grouped by language.
 
-CI is `.github/workflows/sync.yml`: weekly cron (Mon 08:00 UTC) + `workflow_dispatch` (with a `dry_run` input). It runs `sync_stars.py --mode all`, and if the exit code is 1, renders a PR body and opens a PR via `gh pr create` on a branch named `agent-skills-index/update-<ISO datetime, no separators>` (e.g. `agent-skills-index/update-20250602T080012`) with label `agent-skills-index`. Dry runs upload `changes.yaml` as an artifact instead. Actions are pinned to commit SHAs. It needs a secret `SKILLS_INDEX_TOKEN` (fine-grained PAT: contents write, pull requests write, metadata read, scoped to this repo, 365 day expiry; creation link in README Setup).
+CI is `.github/workflows/sync.yml`: weekly cron (Mon 08:00 UTC) + `workflow_dispatch` (with `dry_run` and `prune_stubs` inputs). It runs `sync_stars.py --mode all`, then `scripts/pr_policy.py` decides what to do (see the PR policy below). Dry runs upload `changes.yaml` as an artifact instead. Actions are pinned to commit SHAs. It needs a secret `SKILLS_INDEX_TOKEN` (fine-grained PAT: contents write, pull requests write, metadata read, scoped to this repo, 365 day expiry; creation link in README Setup).
+
+PR policy: at most one open bot PR (label `agent-skills-index`, branch `agent-skills-index/update-<ISO datetime, no separators>`, e.g. `agent-skills-index/update-20250602T080012`). If one is open, the run starts from that branch's `tracked.yml` (after merging main in), pushes to it, and refreshes its title and body (the new body is appended as a dated section). If none is open, a PR is opened only when the diff holds something a human decides on: today, upstream changes to curated repos (#22, #24 and #25 add changelog entries, suggestions and flags to that check in `pr_policy.needs_decision`). New and pruned stubs never open a PR alone; they ride along on the next one. If merging main into the PR branch conflicts, the run stops without touching the branch. Any failed run opens or comments on a `sync-failure` issue (using the workflow's own token, `issues: write`). A `concurrency` group serialises runs.
 
 If the checkout step fails with `fatal: could not read Username for 'https://github.com'`, the `SKILLS_INDEX_TOKEN` secret has expired or been revoked (this caused the failed runs of 2026-10-05 and 2026-10-12). Regenerate the PAT (README Setup has a prefilled link) and update the secret.
 

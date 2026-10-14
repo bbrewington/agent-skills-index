@@ -12,7 +12,7 @@ use-contexts.yml             - controlled vocabulary for `use_contexts` tags
 scripts/
   sync_stars.py              - sync + discover modes; mutates tracked.yml
   gen_pr_body.py             - renders changes.yaml into a Markdown PR description
-.github/workflows/sync.yml   - runs weekly (Mon 08:00 UTC); opens PR when anything changes
+.github/workflows/sync.yml   - runs weekly (Mon 08:00 UTC); keeps at most one open bot PR
 .github/workflows/ci.yml     - pytest + ruff on pull requests
 ```
 
@@ -68,7 +68,18 @@ the tag to that file first.
   only repos in those lists are considered, fetched via the GraphQL API. Without it,
   every starred repo is considered.
 
-### Branch naming
+### PR policy
+
+- **At most one open bot PR.** If one is open, each run starts from its branch (with
+  main merged in), pushes to it, and refreshes its title and body (new runs are
+  appended as a dated section). Merge or close it to start a fresh one.
+- **A new PR opens only when there is something to decide**, today an upstream
+  change to a curated repo. New and pruned stubs alone never open a PR; they ride
+  along on the next one.
+- **Merge conflict:** if main can't be merged into the PR branch, the run stops and
+  leaves the branch alone.
+- **Failures:** any failed run opens (or comments on) an issue labelled
+  `sync-failure` with the run link and the token-rotation steps.
 
 Branches are named `agent-skills-index/update-<ISO datetime>`, e.g.:
 `agent-skills-index/update-20250602T080012`

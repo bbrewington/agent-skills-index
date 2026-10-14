@@ -14,6 +14,7 @@ agent-skills-index/
   scripts/
     sync_stars.py                - sync + discover modes
     gen_pr_body.py                - renders changes.yaml into PR markdown
+    pr_policy.py                  - decides none/open/update for a run's changes
   .github/workflows/sync.yml     - scheduled + manual trigger workflow
   .github/workflows/ci.yml       - pytest + ruff on pull requests
   pyproject.toml / uv.lock       - dependencies (uv)
@@ -45,7 +46,9 @@ agent-skills-index/
 ## Workflow (`.github/workflows/sync.yml`)
 
 - Trigger: weekly cron (Mon 08:00 UTC) + `workflow_dispatch` with a `dry_run` boolean input.
-- Steps: checkout -> setup uv (Python 3.14) -> `uv sync --locked` -> run `sync_stars.py --mode all` -> if changed, generate PR body via `gen_pr_body.py` -> create branch (ISO datetime name) -> commit `tracked.yml` -> `gh pr create` with title showing counts, e.g. `chore(index): skills index update 2025-06-02 (3 updated, 5 new stars)` -> label `agent-skills-index`.
+- Steps: checkout -> find the open bot PR -> if one exists, check out its branch and merge main -> setup uv (Python 3.14) -> `uv sync --locked` -> run `sync_stars.py --mode all` -> `pr_policy.py` decides `none` / `open` / `update` -> generate PR body via `gen_pr_body.py` -> open a PR on a new branch (ISO datetime name, title with counts, e.g. `chore(index): skills index update 2025-06-02 (3 updated, 5 new stars)`, label `agent-skills-index`) or push to the open PR's branch and refresh its title/body.
+- PR policy: at most one open bot PR. A new one opens only if the diff holds something a human decides on (upstream changes to curated repos for now; #22, #24, #25 extend this). New and pruned stubs ride along and never open a PR alone. A merge conflict stops the run and leaves the branch alone.
+- Any failed run opens or comments on a `sync-failure` issue (workflow token, `issues: write`). A `concurrency` group serialises runs.
 - Dry run uploads `changes.yaml` as a workflow artifact instead of opening a PR.
 - Needs secret `SKILLS_INDEX_TOKEN`: a fine-grained PAT with contents: write, pull requests: write, metadata: read, scoped to this repo (prefilled creation link in README Setup). Original design assumed a classic PAT with `read:user` was required for `GET /users/{user}/starred`; with a fine-grained token, verify via a dry run that discover still lists stars and fall back to classic (`repo` + `read:user`) if not.
 
