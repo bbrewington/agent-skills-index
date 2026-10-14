@@ -19,7 +19,8 @@
 repos:
 - repo: bponzbro/swyft-sigma-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - analytics-bi
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -36,7 +37,9 @@ repos:
     last_changed_at: '2026-07-07T03:29:09.002188+00:00'
 - repo: getnao/nao
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - analytics-bi
+  - data-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -71,7 +74,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:09.559922+00:00'
 - repo: BuilderIO/skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - agent-workflow
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -87,7 +91,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:10.142682+00:00'
 - repo: dotnet/skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - software-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -103,7 +108,9 @@ repos:
     last_changed_at: '2026-07-07T03:29:10.763917+00:00'
 - repo: google/skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - infrastructure-cloud
+  - cloud-data-platforms
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -121,7 +128,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:12.142903+00:00'
 - repo: oracle/skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - cloud-data-platforms
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -139,7 +147,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:12.781881+00:00'
 - repo: camelot-dev/camelot
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - data-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -154,7 +163,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:13.343757+00:00'
 - repo: CUPIDS-Lab/data-liberation-skill
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - data-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -169,7 +179,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:13.899549+00:00'
 - repo: getsentry/skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - software-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -185,7 +196,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:14.560722+00:00'
 - repo: confident-ai/deepeval
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ml-ai-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -206,7 +218,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:15.120346+00:00'
 - repo: EveryInc/compound-engineering-plugin
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - agent-workflow
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -224,7 +237,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:16.384081+00:00'
 - repo: stripe/ai
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - software-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -247,7 +261,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:17.635119+00:00'
 - repo: CloudAI-X/threejs-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - web-frontend-design
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -261,9 +276,11 @@ repos:
     indexed_at: '2026-07-07T03:29:19.327305+00:00'
     last_changed_at: '2026-07-07T03:29:19.327324+00:00'
 - repo: mattpocock/skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: adopt
+  use_contexts:
+  - agent-workflow
+  - software-engineering
+  notes: 'Draft: already in use (this repo''s own workflow).'
   skill_or_plugin_paths: null
   state:
     latest_sha: 16a2a5cd00b4416f673f4ff38c7971a04dd708e7
@@ -277,7 +294,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:19.839722+00:00'
 - repo: anthropics/financial-services
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - business-domains
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -291,9 +309,10 @@ repos:
     indexed_at: '2026-07-07T03:29:21.690379+00:00'
     last_changed_at: '2026-07-07T03:29:21.690397+00:00'
 - repo: addyosmani/agent-skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: adopt
+  use_contexts:
+  - agent-workflow
+  notes: 'Draft: production-grade engineering skills for coding agents.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 70b7506ce90e200cb47645ddb3f6b8e84fecc047
@@ -313,7 +332,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:22.170903+00:00'
 - repo: addyosmani/web-quality-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - web-frontend-design
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -356,7 +376,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:23.660774+00:00'
 - repo: multica-ai/andrej-karpathy-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - agent-workflow
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -372,7 +393,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:24.244892+00:00'
 - repo: WordPress/agent-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - web-frontend-design
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -388,7 +410,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:26.148385+00:00'
 - repo: hesreallyhim/awesome-claude-code
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -425,9 +448,11 @@ repos:
     indexed_at: '2026-07-07T03:29:27.213409+00:00'
     last_changed_at: '2026-07-07T03:29:27.213426+00:00'
 - repo: streamlit/agent-skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - analytics-bi
+  - software-engineering
+  notes: 'Draft: official Streamlit skills.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 4b5aacdfb9b80d8215441c2500f7cb978b5e0881
@@ -441,7 +466,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:28.326089+00:00'
 - repo: techwolf-ai/ai-first-toolkit
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - agent-workflow
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -468,7 +494,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:30.019544+00:00'
 - repo: neurofoo/agent-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - agent-workflow
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -483,7 +510,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:30.531801+00:00'
 - repo: kfchou/wiki-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - content-creation
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -498,9 +526,11 @@ repos:
     indexed_at: '2026-07-07T03:29:31.013170+00:00'
     last_changed_at: '2026-07-07T03:29:31.013184+00:00'
 - repo: duckdb/duckdb-skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: adopt
+  use_contexts:
+  - data-engineering
+  - analytics-bi
+  notes: 'Draft: official DuckDB skills.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 7feda8e01e22bc0886c86123f3884947e36d8c69
@@ -513,9 +543,10 @@ repos:
     indexed_at: '2026-07-07T03:29:31.619343+00:00'
     last_changed_at: '2026-07-07T03:29:31.619368+00:00'
 - repo: mlflow/skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - ml-ai-engineering
+  notes: 'Draft: MLflow skills.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 5f561418262bdcaa9e705bdf7facc72f17b181fc
@@ -529,7 +560,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:32.686600+00:00'
 - repo: coreyhaines31/marketingskills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - business-domains
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -548,7 +580,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:33.212929+00:00'
 - repo: kepano/obsidian-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - content-creation
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -580,7 +613,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:33.705405+00:00'
 - repo: googleworkspace/cli
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - content-creation
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -613,7 +647,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:34.300365+00:00'
 - repo: block/agent-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -628,7 +663,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:34.964913+00:00'
 - repo: mlopscommunity/Coding-Agents-Conference-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - agent-workflow
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -644,7 +680,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:36.116123+00:00'
 - repo: BauplanLabs/bauplan-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - data-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -660,7 +697,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:36.709093+00:00'
 - repo: davila7/claude-code-templates
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -679,7 +717,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:37.274379+00:00'
 - repo: NTCoding/claude-skillz
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - agent-workflow
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -694,7 +733,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:37.785934+00:00'
 - repo: anthropics/claude-code-security-review
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - software-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -710,7 +750,9 @@ repos:
     last_changed_at: '2026-07-07T03:29:38.395929+00:00'
 - repo: caylent/tufte-data-viz
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - analytics-bi
+  - content-creation
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -736,7 +778,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:39.014634+00:00'
 - repo: monarch-initiative/ontogpt
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ml-ai-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -767,7 +810,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:44.085613+00:00'
 - repo: n8n-io/n8n
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -803,7 +847,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:51.735397+00:00'
 - repo: humansintheloop-dev/humansintheloop-dev-workflow-and-tools
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - agent-workflow
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -817,9 +862,10 @@ repos:
     indexed_at: '2026-07-07T03:29:52.301946+00:00'
     last_changed_at: '2026-07-07T03:29:52.301962+00:00'
 - repo: AltimateAI/data-engineering-skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - data-engineering
+  notes: 'Draft: data engineering skills.'
   skill_or_plugin_paths: null
   state:
     latest_sha: a13847e205cb61ece8d613b19fbbe1cd0ac2bfcd
@@ -837,9 +883,11 @@ repos:
     indexed_at: '2026-07-07T03:29:52.902601+00:00'
     last_changed_at: '2026-07-07T03:29:52.902614+00:00'
 - repo: AltimateAI/altimate-code
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - data-engineering
+  - ai-agent-helpers
+  notes: 'Draft: agentic data engineering harness.'
   skill_or_plugin_paths: null
   state:
     latest_sha: bf90e189a391d9a602b34de4417ddab534b31e6b
@@ -872,7 +920,8 @@ repos:
     last_changed_at: '2026-07-07T03:29:53.544557+00:00'
 - repo: MicrosoftDocs/Agent-Skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - infrastructure-cloud
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -907,7 +956,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:02.303752+00:00'
 - repo: OneWave-AI/claude-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - business-domains
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -933,7 +983,9 @@ repos:
     last_changed_at: '2026-07-07T03:30:02.873642+00:00'
 - repo: sean-zhang-dbx/prompt-to-genie
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - cloud-data-platforms
+  - analytics-bi
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -948,7 +1000,9 @@ repos:
     last_changed_at: '2026-07-07T03:30:03.914209+00:00'
 - repo: sfc-gh-dflippo/snowflake-dbt-demo
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - data-engineering
+  - cloud-data-platforms
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -964,7 +1018,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:04.404899+00:00'
 - repo: airbytehq/airbyte-agent-sdk
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - data-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -996,7 +1051,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:05.068992+00:00'
 - repo: pulumi/agent-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - infrastructure-cloud
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1011,7 +1067,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:07.437601+00:00'
 - repo: hashicorp/agent-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - infrastructure-cloud
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1027,9 +1084,11 @@ repos:
     indexed_at: '2026-07-07T03:30:08.078509+00:00'
     last_changed_at: '2026-07-07T03:30:08.078527+00:00'
 - repo: databricks/databricks-agent-skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - cloud-data-platforms
+  - data-engineering
+  notes: 'Draft: official Databricks skills.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 5be3080ae386e9c96412d082a188080dd64b7f8a
@@ -1042,9 +1101,11 @@ repos:
     indexed_at: '2026-07-07T03:30:08.698246+00:00'
     last_changed_at: '2026-07-07T03:30:08.698266+00:00'
 - repo: databricks-solutions/ai-dev-kit
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - cloud-data-platforms
+  - data-engineering
+  notes: 'Draft: Databricks toolkit for coding agents.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 5b4b26c31262c08349d5ee726815f5b2e89cb53c
@@ -1063,7 +1124,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:09.337419+00:00'
 - repo: awslabs/agent-plugins
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - infrastructure-cloud
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1085,7 +1147,9 @@ repos:
     last_changed_at: '2026-07-07T03:30:10.120227+00:00'
 - repo: microsoft/skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - software-engineering
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1108,7 +1172,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:10.782257+00:00'
 - repo: thiswillbeyourgithub/wdoc
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ml-ai-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1133,7 +1198,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:11.316846+00:00'
 - repo: meleantonio/ChernyCode
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - agent-workflow
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1148,7 +1214,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:12.527072+00:00'
 - repo: K-Dense-AI/scientific-agent-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - business-domains
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1184,7 +1251,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:13.110105+00:00'
 - repo: github/awesome-copilot
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1208,7 +1276,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:13.819207+00:00'
 - repo: lawve-ai/awesome-legal-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - business-domains
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1227,9 +1296,10 @@ repos:
     indexed_at: '2026-07-07T03:30:14.856348+00:00'
     last_changed_at: '2026-07-07T03:30:14.856381+00:00'
 - repo: agentskills/agentskills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - ai-agent-helpers
+  notes: 'Draft: the Agent Skills specification.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 0c0c5673846d0a1c983d910b189e329ef3ab8f2a
@@ -1244,7 +1314,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:16.843036+00:00'
 - repo: google/langextract
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ml-ai-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1270,9 +1341,10 @@ repos:
     indexed_at: '2026-07-07T03:30:19.713609+00:00'
     last_changed_at: '2026-07-07T03:30:19.713627+00:00'
 - repo: dbt-labs/dbt-agent-skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: adopt
+  use_contexts:
+  - data-engineering
+  notes: 'Draft: official dbt skills.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 9eee2733ed63bb26edb8fcd0237d8c4589a773e6
@@ -1287,7 +1359,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:20.455714+00:00'
 - repo: lexler/skill-factory
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1302,7 +1375,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:20.957291+00:00'
 - repo: openai/skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1317,7 +1391,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:21.584567+00:00'
 - repo: zebbern/claude-code-guide
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1353,7 +1428,9 @@ repos:
     last_changed_at: '2026-07-07T03:30:22.101361+00:00'
 - repo: jpoutrin/product-forge
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - agent-workflow
+  - product-management
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1369,7 +1446,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:22.591194+00:00'
 - repo: Dammyjay93/interface-design
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - web-frontend-design
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1385,7 +1463,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:23.100789+00:00'
 - repo: jdepoix/youtube-transcript-api
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - content-creation
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1420,7 +1499,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:24.172345+00:00'
 - repo: stravu/crystal
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1450,7 +1530,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:25.825014+00:00'
 - repo: coffeefuelbump/csv-data-summarizer-claude-skill
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - data-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1468,7 +1549,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:26.376974+00:00'
 - repo: yusufkaraaslan/Skill_Seekers
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1502,7 +1584,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:26.870136+00:00'
 - repo: omkamal/pypict-claude-skill
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - software-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1518,7 +1601,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:27.396060+00:00'
 - repo: lackeyjb/playwright-skill
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - software-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1547,9 +1631,10 @@ repos:
     indexed_at: '2026-07-07T03:30:27.990150+00:00'
     last_changed_at: '2026-07-07T03:30:27.990173+00:00'
 - repo: obra/superpowers
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - agent-workflow
+  notes: 'Draft: popular agentic workflow framework.'
   skill_or_plugin_paths: null
   state:
     latest_sha: d884ae04edebef577e82ff7c4e143debd0bbec99
@@ -1571,9 +1656,10 @@ repos:
     indexed_at: '2026-07-07T03:30:28.515982+00:00'
     last_changed_at: '2026-07-07T03:30:28.516012+00:00'
 - repo: anthropics/skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: adopt
+  use_contexts:
+  - ai-agent-helpers
+  notes: 'Draft: the reference skill catalog.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 9d2f1ae187231d8199c64b5b762e1bdf2244733d
@@ -1588,7 +1674,8 @@ repos:
     last_changed_at: '2026-07-07T03:30:29.217337+00:00'
 - repo: awslabs/hcls-agent-skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - business-domains
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1618,7 +1705,8 @@ repos:
     last_changed_at: '2026-07-13T10:57:36.577079+00:00'
 - repo: shepherd-agents/shepherd
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - ai-agent-helpers
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1643,7 +1731,8 @@ repos:
     last_changed_at: '2026-07-13T10:57:38.033628+00:00'
 - repo: pydantic/skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - software-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1658,7 +1747,8 @@ repos:
     last_changed_at: '2026-07-13T10:57:38.768804+00:00'
 - repo: columnar-tech/skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - data-engineering
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1673,7 +1763,8 @@ repos:
     last_changed_at: '2026-07-13T10:57:39.629016+00:00'
 - repo: dekart-xyz/geosql
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - analytics-bi
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1688,7 +1779,8 @@ repos:
     last_changed_at: '2026-07-13T10:57:40.297170+00:00'
 - repo: deanpeters/Product-Manager-Skills
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - product-management
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1709,7 +1801,8 @@ repos:
     last_changed_at: '2026-10-14T00:56:26.204426+00:00'
 - repo: ayghri/i-have-adhd
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - agent-workflow
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1730,9 +1823,10 @@ repos:
     indexed_at: '2026-10-14T00:56:27.993880+00:00'
     last_changed_at: '2026-10-14T00:56:27.993893+00:00'
 - repo: exploreomni/omni-agent-skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - analytics-bi
+  notes: 'Draft: Omni skills.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 3323e68bbc3da807b7f8a15c0febcbf471a7333b
@@ -1747,7 +1841,9 @@ repos:
     last_changed_at: '2026-10-14T00:56:28.569548+00:00'
 - repo: growthxai/squeaks
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - web-frontend-design
+  - product-management
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1764,7 +1860,9 @@ repos:
     last_changed_at: '2026-10-14T00:56:29.195630+00:00'
 - repo: GoogleCloudPlatform/google-cloud-storage-plugin
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - infrastructure-cloud
+  - cloud-data-platforms
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1796,9 +1894,11 @@ repos:
     indexed_at: '2026-10-14T00:56:30.579062+00:00'
     last_changed_at: '2026-10-14T00:56:30.579073+00:00'
 - repo: dlt-hub/dlthub-ai-harness
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - data-engineering
+  - ai-agent-helpers
+  notes: 'Draft: dlt AI harness.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 8eeaa327eea5ced2037ebf5dbbd9d4c428350558
@@ -1812,7 +1912,8 @@ repos:
     last_changed_at: '2026-10-14T00:56:31.797077+00:00'
 - repo: MarioLazo/agentic-coe
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - business-domains
   notes: null
   skill_or_plugin_paths: null
   state:
@@ -1833,9 +1934,10 @@ repos:
     indexed_at: '2026-10-14T00:56:32.425459+00:00'
     last_changed_at: '2026-10-14T00:56:32.425472+00:00'
 - repo: microsoft/skills-for-fabric
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - cloud-data-platforms
+  notes: 'Draft: Microsoft Fabric skills and MCP.'
   skill_or_plugin_paths: null
   state:
     latest_sha: bc42aaf734771bf752c1d7082dd91e5a6ca72b9f
@@ -1849,9 +1951,10 @@ repos:
     indexed_at: '2026-10-14T11:00:49.230039+00:00'
     last_changed_at: '2026-10-14T11:00:49.230058+00:00'
 - repo: looker-open-source/looker-skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - analytics-bi
+  notes: 'Draft: Looker skills.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 938b48562359911864d446c1db4c9101a8cc53a9
@@ -1864,9 +1967,10 @@ repos:
     indexed_at: '2026-10-14T11:00:49.789988+00:00'
     last_changed_at: '2026-10-14T11:00:49.790003+00:00'
 - repo: cube-js/cube-agent-skills
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - analytics-bi
+  notes: 'Draft: official Cube skills.'
   skill_or_plugin_paths: null
   state:
     latest_sha: 5e5ef13c40f3bfc101d575b568b5c5a3447d6fcb
@@ -1880,9 +1984,10 @@ repos:
     indexed_at: '2026-10-14T11:00:50.410562+00:00'
     last_changed_at: '2026-10-14T11:00:50.410577+00:00'
 - repo: malloydata/publisher
-  verdict: null
-  use_contexts: null
-  notes: null
+  verdict: watch
+  use_contexts:
+  - analytics-bi
+  notes: 'Draft: Malloy semantic layer engine.'
   skill_or_plugin_paths: null
   state:
     latest_sha: aae7dae32f2dfcf138442767f36726040bfd739e
@@ -1916,7 +2021,8 @@ repos:
     last_changed_at: '2026-10-14T11:00:50.897936+00:00'
 - repo: cbrock84/headcount
   verdict: null
-  use_contexts: null
+  use_contexts:
+  - business-domains
   notes: null
   skill_or_plugin_paths: null
   state:
