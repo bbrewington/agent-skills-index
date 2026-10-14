@@ -21,10 +21,11 @@ uv run python scripts/sync_stars.py --mode all|sync|discover [--dry-run] [--outp
 ```
 
 - `--mode sync` checks each `tracked:` entry for upstream SHA changes.
-- `--mode discover` fetches the full starred list and adds unseen repos as `stubs:`.
+- `--mode discover` adds unseen repos as `stubs:`. With `STAR_LIST` (or `--star-list`) set to a star list slug, it only considers repos in that list (GraphQL); otherwise it considers every star.
+- `--prune-stubs` (requires a star list) removes stubs that are not in the list. `tracked:` is never pruned.
 - `--mode all` (default) runs both.
 - `--dry-run` skips writing `tracked.yml` but still writes `changes.yaml`.
-- Requires env var `GITHUB_TOKEN` (fine-grained PAT owned by the starred user; if `GET /users/{user}/starred` returns nothing or 403, use a classic PAT with `read:user`). `GITHUB_USER` defaults to `bbrewington`.
+- Requires env var `GITHUB_TOKEN` (fine-grained PAT owned by the starred user; if `GET /users/{user}/starred` returns nothing or 403, use a classic PAT with `read:user`). `GITHUB_USER` defaults to `bbrewington`. `STAR_LIST` is `agent-skills` in the workflow.
 - Exit code is `1` if anything changed, `0` otherwise (this drives whether CI opens a PR).
 
 Render a PR body from a `changes.yaml`:
@@ -61,5 +62,6 @@ If the checkout step fails with `fatal: could not read Username for 'https://git
 
 ## Known gotchas
 
+- GraphQL (used for star lists) is blocked from Claude Code cloud sessions, so list fetching can only be verified in Actions (use `dry_run`), not locally in a session. It is covered by mocked tests only. Fine-grained PAT access to `user.lists` is unverified.
 - `get_starred_repos` in `scripts/sync_stars.py` bails out early once `X-RateLimit-Remaining < 10`. It returns a `rate_limited` flag, written to `changes.yaml` as `discover_rate_limited`, and `gen_pr_body.py` renders a warning in the PR body when it is set.
 - Weekly PRs accumulate unreviewed stubs if not merged or closed; `tracked:` is currently empty and everything is a stub.

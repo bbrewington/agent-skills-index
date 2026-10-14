@@ -102,6 +102,17 @@ def gen_body(data: dict) -> str:
                     lines.append(f"  - Topics: {topics} | Stars: {stars}")
             lines.append("")
 
+    pruned = data.get("pruned_stubs", [])
+    if pruned:
+        lines += [
+            "---",
+            "",
+            f"### Stubs removed - no longer in the star list ({len(pruned)})",
+            "",
+            *[f"- `{repo}`" for repo in pruned],
+            "",
+        ]
+
     lines += ["---", ""]
     return "\n".join(lines)
 

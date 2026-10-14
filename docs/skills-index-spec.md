@@ -33,7 +33,7 @@ agent-skills-index/
 ## Two modes (in `sync_stars.py`)
 
 - `--mode sync` - for each `tracked:` entry, fetch repo meta + latest commit SHA (scoped to `watch_paths` if set), compare against `state.latest_sha`, update state if changed.
-- `--mode discover` - fetch full starred list via GitHub API, add any repo not in `tracked:` or `stubs:` as a new stub.
+- `--mode discover` - add any repo not in `tracked:` or `stubs:` as a new stub. Scoped to the `agent-skills` star list (slug in `STAR_LIST`, fetched via GraphQL) so unrelated stars are ignored; with no `STAR_LIST` it uses every star via the REST starred endpoint. `--prune-stubs` removes stubs outside the list (never `tracked:`).
 - `--mode all` (default) runs both in one pass.
 - `--dry-run` skips writing `tracked.yml` (still writes `changes.yaml` for inspection).
 - Exit code 1 if any changes/new stars found, 0 otherwise (drives the workflow's PR step).
@@ -51,6 +51,7 @@ Done (originally open): repo init and push, PAT/secret, discover mode against th
 
 Open:
 
+0. Verify star-list scoping in Actions: run the workflow with `dry_run` (GraphQL is blocked from Claude Code sessions, so this has only been tested with mocks), check `changes.yaml`, then run once with `prune_stubs` to drop out-of-list stubs.
 1. Decide the real `tracked:` list and skill paths (currently `tracked: []`; the 4 placeholders were removed).
 2. Triage the stub backlog (286 as of 2026-10-14) and decide whether unreviewed weekly PRs should be closed or merged.
 3. Token expiry: `SKILLS_INDEX_TOKEN` expired once (runs failing at checkout, 2026-10-05 to 2026-10-12). Now a 365 day fine-grained PAT; track its expiry date.

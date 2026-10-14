@@ -51,8 +51,11 @@ for you to triage.
 
 - **sync** - for each `tracked:` entry, checks whether the latest commit SHA
   (optionally scoped to `watch_paths`) has moved since `state.latest_sha`.
-- **discover** - fetches the full star list; adds any repo not already in
-  `tracked:` or `stubs:` as a new stub entry.
+- **discover** - adds any repo not already in `tracked:` or `stubs:` as a new
+  stub entry. With `STAR_LIST` set (the workflow uses `agent-skills`, the slug of
+  [your GitHub star list](https://github.com/stars/bbrewington/lists/agent-skills)),
+  only repos in that list are considered, fetched via the GraphQL API. Without it,
+  every starred repo is considered.
 
 ### Branch naming
 
@@ -89,6 +92,10 @@ tracked:
 
 The `dry_run` input runs the full check without writing `tracked.yml` or opening
 a PR - uploads `changes.yaml` as a workflow artifact instead.
+
+The `prune_stubs` input (one-off cleanup) removes stubs that are not in the star
+list. `tracked:` entries are never removed. Removed repos are listed in the PR
+body. Run it with `dry_run` first and check `pruned_stubs` in `changes.yaml`.
 
 ## Troubleshooting
 

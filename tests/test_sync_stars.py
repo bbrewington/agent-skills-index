@@ -94,9 +94,10 @@ def test_run_discover_adds_only_unknown_stars(monkeypatch):
     monkeypatch.setattr(sync_stars, "get_repo_meta", lambda repo: meta())
     monkeypatch.setattr(sync_stars, "get_latest_commit_sha", lambda repo, paths=None: "sha")
     data = {"tracked": [{"repo": "o/tracked"}], "stubs": [{"repo": "o/stub"}]}
-    new, rate_limited = sync_stars.run_discover(data, dry_run=False)
+    new, rate_limited, pruned = sync_stars.run_discover(data, dry_run=False)
     assert [n["repo"] for n in new] == ["o/fresh"]
     assert rate_limited is True
+    assert pruned == []
     fresh = data["stubs"][-1]
     assert fresh["skill"] is None and fresh["watch_paths"] is None
 
@@ -122,3 +123,61 @@ def test_get_starred_repos_rate_limit_flag(monkeypatch, remaining, expected):
     repos, rate_limited = sync_stars.get_starred_repos("u")
     assert repos == [{"full_name": "o/a"}]
     assert rate_limited is expected
+
+
+def test_prune_stubs_removes_only_stubs_not_in_candidates():
+    data = {
+        "tracked": [{"repo": "o/tracked"}],
+        "stubs": [{"repo": "o/keep"}, {"repo": "o/drop"}],
+    }
+    removed = sync_stars.prune_stubs(data, [{"full_name": "o/keep"}])
+    assert removed == ["o/drop"]
+    assert [s["repo"] for s in data["stubs"]] == ["o/keep"]
+    assert data["tracked"] == [{"repo": "o/tracked"}]
+
+
+def test_run_discover_with_list_prunes_and_adds(monkeypatch):
+    monkeypatch.setattr(sync_stars, "get_list_repos", lambda user, slug: [{"full_name": "o/new"}, {"full_name": "o/keep"}])
+    monkeypatch.setattr(sync_stars, "get_repo_meta", lambda repo: meta())
+    monkeypatch.setattr(sync_stars, "get_latest_commit_sha", lambda repo, paths=None: "sha")
+    data = {"tracked": [], "stubs": [{"repo": "o/keep"}, {"repo": "o/drop"}]}
+    new, rate_limited, pruned = sync_stars.run_discover(data, dry_run=False, star_list="agent-skills", prune=True)
+    assert [n["repo"] for n in new] == ["o/new"]
+    assert pruned == ["o/drop"]
+    assert rate_limited is False
+    assert sorted(s["repo"] for s in data["stubs"]) == ["o/keep", "o/new"]
+
+
+def test_run_discover_without_prune_keeps_out_of_list_stubs(monkeypatch):
+    monkeypatch.setattr(sync_stars, "get_list_repos", lambda user, slug: [])
+    data = {"tracked": [], "stubs": [{"repo": "o/other"}]}
+    _, _, pruned = sync_stars.run_discover(data, dry_run=False, star_list="agent-skills")
+    assert pruned == []
+    assert len(data["stubs"]) == 1
+
+
+class FakeGraphQL:
+    def __init__(self, payloads):
+        self.payloads = iter(payloads)
+
+    def __call__(self, url, headers=None, json=None):
+        self.last = json
+        return FakeResponse({"data": next(self.payloads)})
+
+
+def test_get_list_repos_paginates_and_matches_slug(monkeypatch):
+    lists = {"user": {"lists": {"nodes": [{"id": "A", "slug": "other"}, {"id": "B", "slug": "agent-skills"}]}}}
+    page1 = {"node": {"items": {"nodes": [{"nameWithOwner": "o/a"}, None], "pageInfo": {"hasNextPage": True, "endCursor": "c1"}}}}
+    page2 = {"node": {"items": {"nodes": [{"nameWithOwner": "o/b"}], "pageInfo": {"hasNextPage": False, "endCursor": None}}}}
+    fake = FakeGraphQL([lists, page1, page2])
+    monkeypatch.setattr(sync_stars.requests, "post", fake)
+    repos = sync_stars.get_list_repos("u", "agent-skills")
+    assert [r["full_name"] for r in repos] == ["o/a", "o/b"]
+    assert fake.last["variables"] == {"id": "B", "after": "c1"}
+
+
+def test_get_list_repos_unknown_slug_raises(monkeypatch):
+    lists = {"user": {"lists": {"nodes": [{"id": "A", "slug": "other"}]}}}
+    monkeypatch.setattr(sync_stars.requests, "post", FakeGraphQL([lists]))
+    with pytest.raises(requests.HTTPError, match="not found"):
+        sync_stars.get_list_repos("u", "agent-skills")
