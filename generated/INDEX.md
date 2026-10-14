@@ -4,19 +4,61 @@
 
 Curated repos by use-context. See also the [upstream changelog](changelog/).
 
-## Stubs (91)
+## agent-workflow
+
+- [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) (adopt) - Draft: production-grade engineering skills for coding agents.
+- [mattpocock/skills](https://github.com/mattpocock/skills) (adopt) - Draft: already in use (this repo's own workflow).
+- [obra/superpowers](https://github.com/obra/superpowers) (watch) - Draft: popular agentic workflow framework.
+
+## ai-agent-helpers
+
+- [anthropics/skills](https://github.com/anthropics/skills) (adopt) - Draft: the reference skill catalog.
+- [agentskills/agentskills](https://github.com/agentskills/agentskills) (watch) - Draft: the Agent Skills specification.
+- [AltimateAI/altimate-code](https://github.com/AltimateAI/altimate-code) (watch) - Draft: agentic data engineering harness.
+- [dlt-hub/dlthub-ai-harness](https://github.com/dlt-hub/dlthub-ai-harness) (watch) - Draft: dlt AI harness.
+
+## analytics-bi
+
+- [duckdb/duckdb-skills](https://github.com/duckdb/duckdb-skills) (adopt) - Draft: official DuckDB skills.
+- [cube-js/cube-agent-skills](https://github.com/cube-js/cube-agent-skills) (watch) - Draft: official Cube skills.
+- [exploreomni/omni-agent-skills](https://github.com/exploreomni/omni-agent-skills) (watch) - Draft: Omni skills.
+- [looker-open-source/looker-skills](https://github.com/looker-open-source/looker-skills) (watch) - Draft: Looker skills.
+- [malloydata/publisher](https://github.com/malloydata/publisher) (watch) - Draft: Malloy semantic layer engine.
+- [streamlit/agent-skills](https://github.com/streamlit/agent-skills) (watch) - Draft: official Streamlit skills.
+
+## cloud-data-platforms
+
+- [databricks-solutions/ai-dev-kit](https://github.com/databricks-solutions/ai-dev-kit) (watch) - Draft: Databricks toolkit for coding agents.
+- [databricks/databricks-agent-skills](https://github.com/databricks/databricks-agent-skills) (watch) - Draft: official Databricks skills.
+- [microsoft/skills-for-fabric](https://github.com/microsoft/skills-for-fabric) (watch) - Draft: Microsoft Fabric skills and MCP.
+
+## data-engineering
+
+- [dbt-labs/dbt-agent-skills](https://github.com/dbt-labs/dbt-agent-skills) (adopt) - Draft: official dbt skills.
+- [duckdb/duckdb-skills](https://github.com/duckdb/duckdb-skills) (adopt) - Draft: official DuckDB skills.
+- [AltimateAI/altimate-code](https://github.com/AltimateAI/altimate-code) (watch) - Draft: agentic data engineering harness.
+- [AltimateAI/data-engineering-skills](https://github.com/AltimateAI/data-engineering-skills) (watch) - Draft: data engineering skills.
+- [databricks-solutions/ai-dev-kit](https://github.com/databricks-solutions/ai-dev-kit) (watch) - Draft: Databricks toolkit for coding agents.
+- [databricks/databricks-agent-skills](https://github.com/databricks/databricks-agent-skills) (watch) - Draft: official Databricks skills.
+- [dlt-hub/dlthub-ai-harness](https://github.com/dlt-hub/dlthub-ai-harness) (watch) - Draft: dlt AI harness.
+
+## ml-ai-engineering
+
+- [mlflow/skills](https://github.com/mlflow/skills) (watch) - Draft: MLflow skills.
+
+## software-engineering
+
+- [mattpocock/skills](https://github.com/mattpocock/skills) (adopt) - Draft: already in use (this repo's own workflow).
+- [streamlit/agent-skills](https://github.com/streamlit/agent-skills) (watch) - Draft: official Streamlit skills.
+
+## Stubs (72)
 
 Starred, not yet reviewed.
 
-- addyosmani/agent-skills
 - addyosmani/web-quality-skills
-- agentskills/agentskills
 - airbytehq/airbyte-agent-sdk
-- AltimateAI/altimate-code
-- AltimateAI/data-engineering-skills
 - anthropics/claude-code-security-review
 - anthropics/financial-services
-- anthropics/skills
 - awslabs/agent-plugins
 - awslabs/hcls-agent-skills
 - ayghri/i-have-adhd
@@ -32,21 +74,14 @@ Starred, not yet reviewed.
 - columnar-tech/skills
 - confident-ai/deepeval
 - coreyhaines31/marketingskills
-- cube-js/cube-agent-skills
 - CUPIDS-Lab/data-liberation-skill
 - Dammyjay93/interface-design
 - danielmiessler/LifeOS
-- databricks-solutions/ai-dev-kit
-- databricks/databricks-agent-skills
 - davila7/claude-code-templates
-- dbt-labs/dbt-agent-skills
 - deanpeters/Product-Manager-Skills
 - dekart-xyz/geosql
-- dlt-hub/dlthub-ai-harness
 - dotnet/skills
-- duckdb/duckdb-skills
 - EveryInc/compound-engineering-plugin
-- exploreomni/omni-agent-skills
 - getnao/nao
 - getsentry/skills
 - github/awesome-copilot
@@ -66,22 +101,16 @@ Starred, not yet reviewed.
 - lackeyjb/playwright-skill
 - lawve-ai/awesome-legal-skills
 - lexler/skill-factory
-- looker-open-source/looker-skills
-- malloydata/publisher
 - MarioLazo/agentic-coe
-- mattpocock/skills
 - meleantonio/ChernyCode
 - microsoft/skills
-- microsoft/skills-for-fabric
 - MicrosoftDocs/Agent-Skills
-- mlflow/skills
 - mlopscommunity/Coding-Agents-Conference-skills
 - monarch-initiative/ontogpt
 - multica-ai/andrej-karpathy-skills
 - n8n-io/n8n
 - neurofoo/agent-skills
 - NTCoding/claude-skillz
-- obra/superpowers
 - omkamal/pypict-claude-skill
 - OneWave-AI/claude-skills
 - openai/skills
@@ -92,7 +121,6 @@ Starred, not yet reviewed.
 - sfc-gh-dflippo/snowflake-dbt-demo
 - shepherd-agents/shepherd
 - stravu/crystal
-- streamlit/agent-skills
 - stripe/ai
 - techwolf-ai/ai-first-toolkit
 - thiswillbeyourgithub/wdoc
