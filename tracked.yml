@@ -5445,3 +5445,256 @@ stubs:
     stargazers_count: 599
     indexed_at: '2026-07-13T10:57:42.505972+00:00'
     last_changed_at: '2026-07-13T10:57:42.505984+00:00'
+- repo: deanpeters/Product-Manager-Skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1b5a524ebb95e9497fa3f25002d8b8ec528d4444
+    pushed_at: '2026-09-01T22:34:38Z'
+    description: Product Management skills framework built on battle-tested methods
+      for Claude Code, Cowork, Codex, and AI agents.
+    language: Shell
+    topics:
+    - ai-agents
+    - ai-product-management
+    - claude-skills
+    - pm-frameworks
+    - product-management
+    license: NOASSERTION
+    stargazers_count: 7343
+    indexed_at: '2026-10-14T00:56:26.204411+00:00'
+    last_changed_at: '2026-10-14T00:56:26.204426+00:00'
+- repo: dbt-labs/dbt-context-engineering
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 3fe361b8f9fa5c8fc803b8b5077472a953d34436
+    pushed_at: '2026-10-06T18:17:03Z'
+    description: A package to aid in performing context engineering work within dbt.
+    language: Python
+    topics: []
+    license: Apache-2.0
+    stargazers_count: 30
+    indexed_at: '2026-10-14T00:56:26.830939+00:00'
+    last_changed_at: '2026-10-14T00:56:26.830952+00:00'
+- repo: eitsupi/dlin
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: dedf828806dfa077c11377ec415ff268f2a7bc62
+    pushed_at: '2026-10-10T04:33:48Z'
+    description: Give coding agents instant dbt lineage — no dbt compile, no Python,
+      no grep.
+    language: Rust
+    topics:
+    - cli
+    - dbt
+    - dbt-core
+    - rust
+    license: MIT
+    stargazers_count: 16
+    indexed_at: '2026-10-14T00:56:27.413977+00:00'
+    last_changed_at: '2026-10-14T00:56:27.413990+00:00'
+- repo: ayghri/i-have-adhd
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1ecea1993b7fce257ffbd686c070948b5e07eda6
+    pushed_at: '2026-10-11T16:03:54Z'
+    description: A skill to stop your coding agent from burying the answer. ADHD-friendly
+      output.
+    language: Python
+    topics:
+    - adhd
+    - claude-
+    - claude-code-plugin
+    - claude-skills
+    - developer-tools
+    - productivity
+    license: MIT
+    stargazers_count: 56938
+    indexed_at: '2026-10-14T00:56:27.993880+00:00'
+    last_changed_at: '2026-10-14T00:56:27.993893+00:00'
+- repo: exploreomni/omni-agent-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 3323e68bbc3da807b7f8a15c0febcbf471a7333b
+    pushed_at: '2026-10-12T16:14:55Z'
+    description: A collection of skill for working with Omni. These skills help AI
+      agents understand and execute Omni workflows more effectively.
+    language: Python
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 42
+    indexed_at: '2026-10-14T00:56:28.569535+00:00'
+    last_changed_at: '2026-10-14T00:56:28.569548+00:00'
+- repo: growthxai/squeaks
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 1be5c034accd49958c8e34e75d2b2d54beaf57b7
+    pushed_at: '2026-03-04T02:40:43Z'
+    description: Copy-first Prototyping with Claude. Whiteboard sketches can't be
+      clicked, Figma looks finished before the thinking is finished. Vibe-coding skips
+      the thinking entirely.
+    language: TypeScript
+    topics: []
+    license: MIT
+    stargazers_count: 54
+    indexed_at: '2026-10-14T00:56:29.195616+00:00'
+    last_changed_at: '2026-10-14T00:56:29.195630+00:00'
+- repo: dbt-labs/agents_schema
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: a0bc90498302c8abb15a5e98a54c8c94df5a52f8
+    pushed_at: '2026-09-25T13:16:26Z'
+    description: null
+    language: Python
+    topics: []
+    license: MIT
+    stargazers_count: 66
+    indexed_at: '2026-10-14T00:56:29.841713+00:00'
+    last_changed_at: '2026-10-14T00:56:29.841726+00:00'
+- repo: GoogleCloudPlatform/google-cloud-storage-plugin
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 701fcaee68a6005e3fcbfa2bdb684f02592a2bcb
+    pushed_at: '2026-10-09T20:32:34Z'
+    description: Official Google Cloud Storage (GCS) agent skills — manage buckets
+      and objects, transfer data, and configure MCP, IAM, security, lifecycle, gcsfuse,
+      and Terraform from any coding agent.
+    language: Python
+    topics:
+    - antigravity
+    - claude-code
+    - codex
+    - error-diagnosis
+    - gcs
+    - gcs-bucket-creation
+    - gcs-fus
+    - gcs-fuse
+    - gemini-cli
+    - gemini-cli-extension
+    - google
+    - google-cloud
+    - google-cloud-storage
+    - google-skills
+    - secure-storage
+    - skills
+    license: Apache-2.0
+    stargazers_count: 31
+    indexed_at: '2026-10-14T00:56:30.579062+00:00'
+    last_changed_at: '2026-10-14T00:56:30.579073+00:00'
+- repo: composio-community/awesome-codex-skills
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 0930e1373789d2eda449039f7ac154b33031de89
+    pushed_at: '2026-07-26T01:14:54Z'
+    description: A curated list of practical Codex skills for automating workflows
+      across the Codex CLI and API.
+    language: Python
+    topics:
+    - awesome
+    - awesome-lists
+    - awesome-resources
+    - codex
+    - codex-cli
+    - codex-skills
+    - coding-agent-skills
+    - coding-agents
+    - gpt-5-1-codex
+    - gpt-5-codex
+    - llm
+    - skills
+    license: null
+    stargazers_count: 16891
+    indexed_at: '2026-10-14T00:56:31.235681+00:00'
+    last_changed_at: '2026-10-14T00:56:31.235694+00:00'
+- repo: dlt-hub/dlthub-ai-harness
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 8eeaa327eea5ced2037ebf5dbbd9d4c428350558
+    pushed_at: '2026-10-08T14:26:29Z'
+    description: null
+    language: Python
+    topics: []
+    license: NOASSERTION
+    stargazers_count: 60
+    indexed_at: '2026-10-14T00:56:31.797064+00:00'
+    last_changed_at: '2026-10-14T00:56:31.797077+00:00'
+- repo: MarioLazo/agentic-coe
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 9ebce09ce3334e1b07a9ead5de0805a3ed59030a
+    pushed_at: '2026-08-25T17:38:48Z'
+    description: Building the Agentic Center of Excellence — the operating model,
+      governance, and quality gates that move AI agents from pilots to production.
+      Tools, frameworks, and field notes from production experience.
+    language: null
+    topics:
+    - agentic-ai
+    - ai-governance
+    - enterprise-ai
+    - operating-model
+    - responsible-ai
+    license: CC-BY-4.0
+    stargazers_count: 16
+    indexed_at: '2026-10-14T00:56:32.425459+00:00'
+    last_changed_at: '2026-10-14T00:56:32.425472+00:00'
+- repo: apache/ossie
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 74968116780058f42d678cba3594e35390b5be12
+    pushed_at: '2026-10-13T15:29:52Z'
+    description: Apache Ossie, industry wide specification effort to standardize how
+      we exchange semantic metadata across analytics, AI and BI platforms, providing
+      a vendor neutral, single source of truth for semantic data
+    language: Python
+    topics:
+    - metadata
+    - semantic
+    license: Apache-2.0
+    stargazers_count: 2459
+    indexed_at: '2026-10-14T00:56:33.187199+00:00'
+    last_changed_at: '2026-10-14T00:56:33.187212+00:00'
+- repo: dbt-labs/dbt
+  skill: null
+  notes: null
+  watch_paths: null
+  state:
+    latest_sha: 5d4db373204391d18c4a2c3262696adfcd407e08
+    pushed_at: '2026-10-14T00:12:53Z'
+    description: dbt enables data analysts and engineers to transform their data using
+      the same practices that software engineers use to build applications.
+    language: Rust
+    topics:
+    - analytics
+    - business-intelligence
+    - data-modeling
+    - dbt-viewpoint
+    - elt
+    - pypa
+    - slack
+    license: Apache-2.0
+    stargazers_count: 14011
+    indexed_at: '2026-10-14T00:56:33.838727+00:00'
+    last_changed_at: '2026-10-14T00:56:33.838740+00:00'
