@@ -53,3 +53,17 @@ The intended CI wiring (`.github/workflows/sync.yml`) is **not yet implemented**
 ## Known gotchas
 
 - `get_starred_repos` in `scripts/sync_stars.py` bails out early once `X-RateLimit-Remaining < 10`, which can silently truncate discovery on a large star backlog.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues for bbrewington/agent-skills-index (via `gh`). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Uses the default five-label vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
